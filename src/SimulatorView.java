@@ -1,6 +1,9 @@
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
+import javax.swing.border.EtchedBorder;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -26,6 +29,10 @@ public class SimulatorView extends JFrame
     private final String POPULATION_PREFIX = "Population: ";
     private JLabel stepLabel, population;
     private FieldView fieldView;
+    private JButton[] buttonList = {new JButton("One step"),
+    								new JButton("Run"),
+    								new JButton("Pause"),
+    								new JButton("Stop")};
     
     // A map for storing colors for participants in the simulation
     private Map<Class, Color> colors;
@@ -39,6 +46,25 @@ public class SimulatorView extends JFrame
      */
     public SimulatorView(int height, int width)
     {
+    	JMenuBar menuBar = new JMenuBar();
+    	
+    	JMenu[] menus = {new JMenu("Menu 1"),
+    						new JMenu("Menu 2"),
+    						new JMenu("Help")};
+    	
+    	for(int i = 0; i < menus.length; i++) {
+    		menuBar.add(menus[i]);
+    	}
+    	
+    	JPanel panel = new JPanel(new GridLayout(0, 1));
+    	for (int i = 0; i < buttonList.length; i++) {
+    		buttonList[i].setSize(180, 40);
+    		panel.add(buttonList[i]);
+    	}
+    	
+    	JPanel flow = new JPanel();
+    	flow.add(panel);
+    	
         stats = new FieldStats();
         colors = new LinkedHashMap<Class, Color>();
 
@@ -49,13 +75,23 @@ public class SimulatorView extends JFrame
         setLocation(100, 50);
         
         fieldView = new FieldView(height, width);
-
+        
+        JPanel simPanel = new JPanel(new BorderLayout(6, 6));
+        simPanel.setBorder(new EtchedBorder());
+        simPanel.add(stepLabel, BorderLayout.NORTH);
+        simPanel.add(fieldView, BorderLayout.CENTER);
+        simPanel.add(population, BorderLayout.SOUTH);
+        
         Container contents = getContentPane();
-        contents.add(stepLabel, BorderLayout.NORTH);
-        contents.add(fieldView, BorderLayout.CENTER);
-        contents.add(population, BorderLayout.SOUTH);
-        pack();
+        contents.setLayout(new BorderLayout(6, 6));
+        contents.add(flow, BorderLayout.WEST);
+        contents.add(simPanel, BorderLayout.CENTER);
+
+        setJMenuBar(menuBar);
+    	setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
+        setResizable(false);
+        pack();
     }
     
     /**
@@ -211,5 +247,9 @@ public class SimulatorView extends JFrame
                 }
             }
         }
+    }
+    
+    public JButton[] getButtonList() {
+    	return buttonList;
     }
 }

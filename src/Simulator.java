@@ -2,18 +2,25 @@ import java.util.Random;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.awt.Color;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 
 /**
  * A simple predator-prey simulator, based on a rectangular field
  * containing rabbits and foxes.
  * 
- * @author David J. Barnes and Michael Kölling
- * @version 2011.07.31
+ * @author Jan A. Germeraad
+ * @version 22-01-2015
  */
-public class Simulator
+public class Simulator extends Thread
 {
     // Constants representing configuration information for the simulation.
+	private Object lock = new Object();
+	// Whether the thread was suspended or not.
+	private boolean suspended;
+	// Whether the thread was started or not.
+	private boolean started;
     // The default width for the grid.
     private static final int DEFAULT_WIDTH = 120;
     // The default depth of the grid.
@@ -54,6 +61,9 @@ public class Simulator
             width = DEFAULT_WIDTH;
         }
         
+        started = false;
+        suspended = false;
+        
         animals = new ArrayList<Animal>();
         field = new Field(depth, width);
 
@@ -62,17 +72,75 @@ public class Simulator
         view.setColor(Rabbit.class, Color.orange);
         view.setColor(Fox.class, Color.blue);
         
+        // Add functionality to buttons.
+        view.getButtonList()[0].addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if((started && interrupted()) || suspended || !started) {
+					simulateOneStep();
+				} else {
+					return;
+				}
+			}
+        });
+        view.getButtonList()[1].addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(!started) {
+					start();
+				} else {
+					return;
+				}
+			}
+        });
+        view.getButtonList()[2].addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(interrupted()) {
+					return;
+				}
+				if(suspended) {
+					suspended = false;
+					synchronized(lock) {
+						lock.notifyAll();
+					}
+				} else {
+					suspended = true;
+				}
+			}
+        });
+        view.getButtonList()[3].addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				interrupt();
+			}
+        });
         // Setup a valid starting point.
         reset();
+    }
+    
+    /**
+     * Main method
+     */
+    public static void main(String[] args) {
+    	new Simulator();
     }
     
     /**
      * Run the simulation from its current state for a reasonably long period,
      * (4000 steps).
      */
-    public void runLongSimulation()
+    public void run()
     {
-        simulate(4000);
+    	started = true;
+    	try{
+	    	while(!interrupted()) {
+	    		while(suspended) {
+	    			synchronized(lock) {
+	    				lock.wait();
+	    			}
+	    		}
+	    		simulateOneStep();
+	    	}
+    	} catch(InterruptedException interruptedException) {
+    		System.err.println(interruptedException);
+    	}
     }
     
     /**
