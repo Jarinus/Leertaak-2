@@ -29,6 +29,10 @@ public class SimulatorView extends JFrame
     private final String POPULATION_PREFIX = "Population: ";
     private JLabel stepLabel, population;
     private FieldView fieldView;
+    private static final String VERSION = "0.0";
+    private JButton oneStep;
+    private JButton runLong;
+    private JButton stop;
     
     // A map for storing colors for participants in the simulation
     private Map<Class, Color> colors;
@@ -49,21 +53,32 @@ public class SimulatorView extends JFrame
     	JMenu menu1 = new JMenu("Menu 1");
     	JMenu menu2 = new JMenu("Menu 2");
     	JMenu help = new JMenu("Help");
+    	JMenuItem helpItem = new JMenuItem("show about");
+    	helpItem.addActionListener(new ActionListener(){
+    		public void actionPerformed(ActionEvent e){ showAbout(); } 
+    	});
     	
     	menuBar.add(menu1);
     	menuBar.add(menu2);
     	menuBar.add(help);
+    	help.add(helpItem);
     	
     	JPanel panel = new JPanel(new GridLayout(0, 1));
-    	JButton oneStep = new JButton("One step");
+    			oneStep = new JButton("One step");
     		oneStep.setSize(180, 40);
     		panel.add(oneStep);
-    	JButton runLong = new JButton("Run long");	
+    			runLong = new JButton("Run long");	
     		runLong.setSize(180, 40);
     		panel.add(runLong);
+    			stop = new JButton("Stop");
+    		stop.setSize(180, 40);
+    		panel.add(stop);
+    	
+    	// Spacing view
     	JPanel flow = new JPanel();
     	flow.add(panel);
-        stats = new FieldStats();
+        
+    	stats = new FieldStats();
         colors = new LinkedHashMap<Class, Color>();
 
         setTitle("Fox and Rabbit Simulation");
@@ -84,10 +99,19 @@ public class SimulatorView extends JFrame
         contents.setLayout(new BorderLayout(6, 6));
         contents.add(flow, BorderLayout.WEST);
         contents.add(simulationPanel, BorderLayout.CENTER);
-    	setJMenuBar(menuBar);
+    	
+        setJMenuBar(menuBar);
         setResizable(false);
         pack();
         setVisible(true);
+    }
+    
+    /**
+     * Show About 
+     * show the version.
+     */
+    public void showAbout(){
+    	JOptionPane.showMessageDialog(null, "Simulator\n" + VERSION, "About Simulator", JOptionPane.INFORMATION_MESSAGE);
     }
     
     /**
@@ -242,6 +266,30 @@ public class SimulatorView extends JFrame
                     g.drawImage(fieldImage, 0, 0, currentSize.width, currentSize.height, null);
                 }
             }
-        }
+        }  
+    }
+    
+    /**
+     * getter oneStep
+     * @return
+     */
+    public JButton getOneStepButton() {
+    	return oneStep;
+    }
+    
+    /**
+     * getter runLong button 
+     * @return
+     */
+    public JButton getRunLongButton(){
+    	return runLong;
+    }
+    
+    /**
+     * getter stop button
+     * @return
+     */
+    public JButton getStopButton(){
+    	return stop;
     }
 }
