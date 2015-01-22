@@ -75,7 +75,7 @@ public class Simulator extends Thread
         // Add functionality to buttons.
         view.getButtonList()[0].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if((started && interrupted()) || suspended || !started) {
+				if(suspended || !started) {
 					simulateOneStep();
 				} else {
 					return;
@@ -86,14 +86,6 @@ public class Simulator extends Thread
 			public void actionPerformed(ActionEvent e) {
 				if(!started) {
 					start();
-				} else {
-					return;
-				}
-			}
-        });
-        view.getButtonList()[2].addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(interrupted()) {
 					return;
 				}
 				if(suspended) {
@@ -102,13 +94,24 @@ public class Simulator extends Thread
 						lock.notifyAll();
 					}
 				} else {
+					return;
+				}
+			}
+        });
+        view.getButtonList()[2].addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(!suspended) {
 					suspended = true;
 				}
 			}
         });
         view.getButtonList()[3].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				interrupt();
+				if(suspended) {
+					reset();
+				} else {
+					return;
+				}
 			}
         });
         // Setup a valid starting point.

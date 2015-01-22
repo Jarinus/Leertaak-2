@@ -32,7 +32,7 @@ public class SimulatorView extends JFrame
     private JButton[] buttonList = {new JButton("One step"),
     								new JButton("Run"),
     								new JButton("Pause"),
-    								new JButton("Stop")};
+    								new JButton("Reset")};
     
     // A map for storing colors for participants in the simulation
     private Map<Class, Color> colors;
