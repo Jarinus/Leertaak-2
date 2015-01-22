@@ -1,58 +1,42 @@
-import java.util.List;
 import java.util.Iterator;
-import java.util.Random;
+import java.util.List;
 
-/**
- * A simple model of a fox.
- * Foxes age, move, eat rabbits, and die.
- * 
- * @author David J. Barnes and Michael Kölling
- * @version 2011.07.31
- */
-public class Fox extends Predator
-{
-    /**
-     * Create a fox. A fox can be created as a new born (age zero
-     * and not hungry) or with a random age and food level.
-     * 
-     * @param randomAge If true, the fox will have random age.
-     * @param field The field currently occupied.
-     * @param location The location within the field.
-     */
-    public Fox(boolean randomAge, Field field, Location location)
-    {
-        super(field, location);
-        setChanceOfKillingHunter(0.01);
-        setBreedingAge(15);
-        setMaxAge(150);
-        setBreedingProbability(0.08);
-        setMaxLitterSize(2);
-        if(randomAge) {
-            setAge(rand.nextInt(getMaxAge()));
-            setFoodLevel(9);
-        }
-    }
-    
-    public boolean canEat(Object object) {
-    	if(object instanceof Rabbit) {
-    		return true;
-    	}
-    	return false;
-    }
+
+public class Wolf extends Predator {
+
+	protected Wolf(boolean randomAge, Field field, Location location) {
+		super(field, location);
+		setChanceOfKillingHunter(0.10);
+        setBreedingAge(30);
+        setMaxAge(90);
+        setBreedingProbability(0.06);
+        setMaxLitterSize(4);
+		if(randomAge) {
+			setAge(rand.nextInt(getMaxAge()));
+		}
+	}
+
+	@Override
+	public boolean canEat(Object object) {
+		if(object instanceof Rabbit) {
+			return true;
+		}
+		return false;
+	}
     
     /**
-     * This is what the fox does most of the time: it hunts for
+     * This is what the wolf does most of the time: it hunts for
      * rabbits. In the process, it might breed, die of hunger,
      * or die of old age.
      * @param field The field currently occupied.
-     * @param newFoxes A list to return newly born foxes.
+     * @param newWolves A list to return newly born wolves.
      */
-    public void act(List<Animal> newFoxes)
+    public void act(List<Animal> newWolves)
     {
         incrementAge();
         incrementHunger();
         if(isAlive()) {
-            giveBirth(newFoxes);            
+            giveBirth(newWolves);            
             // Move towards a source of food if found.
             Location newLocation = findFood();
             if(newLocation == null) { 
@@ -97,11 +81,11 @@ public class Fox extends Predator
     }
     
     /**
-     * Check whether or not this fox is to give birth at this step.
+     * Check whether or not this wolf is to give birth at this step.
      * New births will be made into free adjacent locations.
-     * @param newFoxes A list to return newly born foxes.
+     * @param newWolves A list to return newly born wolves.
      */
-    private void giveBirth(List<Animal> newFoxes)
+    private void giveBirth(List<Animal> newWolves)
     {
         // New foxes are born into adjacent locations.
         // Get a list of adjacent free locations.
@@ -110,8 +94,8 @@ public class Fox extends Predator
         int births = breed();
         for(int b = 0; b < births && free.size() > 0; b++) {
             Location loc = free.remove(0);
-            Fox young = new Fox(false, field, loc);
-            newFoxes.add(young);
+            Wolf young = new Wolf(false, field, loc);
+            newWolves.add(young);
         }
     }
 }

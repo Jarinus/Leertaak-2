@@ -1,6 +1,9 @@
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
+import javax.swing.border.EtchedBorder;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -39,6 +42,27 @@ public class SimulatorView extends JFrame
      */
     public SimulatorView(int height, int width)
     {
+    	// Create new JMenuBar to contain Menu 1, Menu 2 and Help.
+    	JMenuBar menuBar = new JMenuBar();
+    	
+    	// Create new JMenu's.
+    	JMenu menu1 = new JMenu("Menu 1");
+    	JMenu menu2 = new JMenu("Menu 2");
+    	JMenu help = new JMenu("Help");
+    	
+    	menuBar.add(menu1);
+    	menuBar.add(menu2);
+    	menuBar.add(help);
+    	
+    	JPanel panel = new JPanel(new GridLayout(0, 1));
+    	JButton oneStep = new JButton("One step");
+    		oneStep.setSize(180, 40);
+    		panel.add(oneStep);
+    	JButton runLong = new JButton("Run long");	
+    		runLong.setSize(180, 40);
+    		panel.add(runLong);
+    	JPanel flow = new JPanel();
+    	flow.add(panel);
         stats = new FieldStats();
         colors = new LinkedHashMap<Class, Color>();
 
@@ -49,11 +73,19 @@ public class SimulatorView extends JFrame
         setLocation(100, 50);
         
         fieldView = new FieldView(height, width);
+        
+        JPanel simulationPanel = new JPanel(new BorderLayout(6, 6));
+        simulationPanel.setBorder(new EtchedBorder());
+        simulationPanel.add(stepLabel, BorderLayout.NORTH);
+        simulationPanel.add(fieldView, BorderLayout.CENTER);
+        simulationPanel.add(population, BorderLayout.SOUTH);
 
         Container contents = getContentPane();
-        contents.add(stepLabel, BorderLayout.NORTH);
-        contents.add(fieldView, BorderLayout.CENTER);
-        contents.add(population, BorderLayout.SOUTH);
+        contents.setLayout(new BorderLayout(6, 6));
+        contents.add(flow, BorderLayout.WEST);
+        contents.add(simulationPanel, BorderLayout.CENTER);
+    	setJMenuBar(menuBar);
+        setResizable(false);
         pack();
         setVisible(true);
     }

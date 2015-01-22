@@ -11,7 +11,7 @@ import java.awt.Color;
  * @author David J. Barnes and Michael Kölling
  * @version 2011.07.31
  */
-public class Simulator
+public class Simulator extends Thread
 {
     // Constants representing configuration information for the simulation.
     // The default width for the grid.
@@ -21,8 +21,12 @@ public class Simulator
     // The probability that a fox will be created in any given grid position.
     private static final double FOX_CREATION_PROBABILITY = 0.02;
     // The probability that a rabbit will be created in any given grid position.
-    private static final double RABBIT_CREATION_PROBABILITY = 0.08;    
+    private static final double RABBIT_CREATION_PROBABILITY = 0.08;  
+    // The probability that a wolf will be created in any given grid position.
+    private static final double WOLF_CREATION_PROBABILITY = 0.01;
 
+    // List of hunters in the field
+    private List<Hunter> hunters;
     // List of animals in the field.
     private List<Animal> animals;
     // The current state of the field.
@@ -31,6 +35,10 @@ public class Simulator
     private int step;
     // A graphical view of the simulation.
     private SimulatorView view;
+    
+    public static void main(String[] args) {
+    	Simulator simulator = new Simulator();
+    }
     
     /**
      * Construct a simulation field with default size.
@@ -55,12 +63,15 @@ public class Simulator
         }
         
         animals = new ArrayList<Animal>();
+        hunters = new ArrayList<Hunter>();
         field = new Field(depth, width);
 
         // Create a view of the state of each location in the field.
         view = new SimulatorView(depth, width);
         view.setColor(Rabbit.class, Color.orange);
         view.setColor(Fox.class, Color.blue);
+        view.setColor(Wolf.class, Color.cyan);
+        view.setColor(Hunter.class, Color.green);
         
         // Setup a valid starting point.
         reset();
@@ -70,9 +81,16 @@ public class Simulator
      * Run the simulation from its current state for a reasonably long period,
      * (4000 steps).
      */
-    public void runLongSimulation()
+    public void run()
     {
-        simulate(4000);
+    	try {
+	        for(int i = 0; i < 4000; i++) {
+	        	sleep(1);
+	        	simulateOneStep();
+	        }
+    	} catch (InterruptedException interruptedException) {
+    		System.err.println(interruptedException);
+    	}
     }
     
     /**
@@ -82,9 +100,9 @@ public class Simulator
      */
     public void simulate(int numSteps)
     {
-        for(int step = 1; step <= numSteps && view.isViable(field); step++) {
-            simulateOneStep();
-        }
+    	for(int i = 0; i < numSteps; i++) {
+    		simulateOneStep();
+    	}
     }
     
     /**
@@ -96,20 +114,31 @@ public class Simulator
     {
         step++;
 
+        // Provide space for newly hired hunters.
+        List<Hunter> newHunters = new ArrayList<Hunter>();
         // Provide space for newborn animals.
         List<Animal> newAnimals = new ArrayList<Animal>();        
         // Let all rabbits act.
-        for(Iterator<Animal> it = animals.iterator(); it.hasNext(); ) {
-            Animal animal = it.next();
+        for(Iterator<Animal> it1 = animals.iterator(); it1.hasNext(); ) {
+            Animal animal = it1.next();
             animal.act(newAnimals);
             if(! animal.isAlive()) {
-                it.remove();
+                it1.remove();
             }
         }
+        
+        // Let all hunters act.
+        for(Iterator<Hunter> it2 = hunters.iterator(); it2.hasNext(); ) {
+        	Hunter hunter = it2.next();
+        	hunter.act(newHunters);
+        	if(!hunter.isAlive()) {
+        		it2.remove();
+        	}
+        }
                
-        // Add the newly born foxes and rabbits to the main lists.
+        // Add the newly born animals to the main lists.
         animals.addAll(newAnimals);
-
+        hunters.addAll(newHunters);
         view.showStatus(step, field);
     }
         
@@ -135,7 +164,12 @@ public class Simulator
         field.clear();
         for(int row = 0; row < field.getDepth(); row++) {
             for(int col = 0; col < field.getWidth(); col++) {
-                if(rand.nextDouble() <= FOX_CREATION_PROBABILITY) {
+                if(rand.nextDouble() <= WOLF_CREATION_PROBABILITY) {
+                    Location location = new Location(row, col);
+                    Wolf wolf = new Wolf(true, field, location);
+                    animals.add(wolf);
+                }
+                else if(rand.nextDouble() <= FOX_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
                     Fox fox = new Fox(true, field, location);
                     animals.add(fox);
