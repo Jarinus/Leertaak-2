@@ -8,7 +8,7 @@ import javax.swing.*;
 
 /**
  * A simple predator-prey simulator, based on a rectangular field
- * containing rabbits and foxes.
+ * containing rabbits and wolves.
  * 
  * @author Jan A. Germeraad
  * @version 22-01-2015
@@ -25,10 +25,16 @@ public class Simulator extends Thread
     private static final int DEFAULT_WIDTH = 120;
     // The default depth of the grid.
     private static final int DEFAULT_DEPTH = 80;
-    // The probability that a fox will be created in any given grid position.
-    private static final double FOX_CREATION_PROBABILITY = 0.02;
+    // The probability that a wolf will be created in any given grid position.
+    private static final double WOLF_CREATION_PROBABILITY = 0.002;
     // The probability that a rabbit will be created in any given grid position.
-    private static final double RABBIT_CREATION_PROBABILITY = 0.08;    
+    private static final double RABBIT_CREATION_PROBABILITY = 0.01;
+    // The probability that a snake will be created in any given grid position.
+    private static final double SNAKE_CREATION_PROBABILITY = 0.004;
+    // The probability that a hawk will be created in any given grid position.
+    private static final double HAWK_CREATION_PROBABILITY = 0.005;
+    // The probability that a rat will be created in any given grid position.
+    private static final double RAT_CREATION_PROBABILITY = 0.006;
 
     // List of animals in the field.
     private List<Animal> animals;
@@ -38,6 +44,12 @@ public class Simulator extends Thread
     private int step;
     // A graphical view of the simulation.
     private SimulatorView view;
+    
+    private String[] animalNames = {"Wolf", "Rabbit"};
+    private boolean[] isPredator = {true, false};
+    private int[] animalBreedingAge = {15, 5}, animalMaxAge = {150, 40}, animalMaxLitterSize = {2, 4};
+    private double[] animalBreedingProbability = {0.08, 0.12};
+    private int animalSpeciesCount = 2;
     
     /**
      * Construct a simulation field with default size.
@@ -70,7 +82,9 @@ public class Simulator extends Thread
         // Create a view of the state of each location in the field.
         view = new SimulatorView(depth, width);
         view.setColor(Rabbit.class, Color.orange);
-        view.setColor(Fox.class, Color.blue);
+        view.setColor(Wolf.class, Color.blue);
+        view.setColor(Snake.class, Color.green);
+        view.setColor(Rat.class, Color.yellow);
         
         // Add functionality to buttons.
         view.getButtonList()[0].addActionListener(new ActionListener() {
@@ -140,6 +154,7 @@ public class Simulator extends Thread
 	    			}
 	    		}
 	    		simulateOneStep();
+	    		sleep(20);
 	    	}
     	} catch(InterruptedException interruptedException) {
     		System.err.println(interruptedException);
@@ -147,21 +162,9 @@ public class Simulator extends Thread
     }
     
     /**
-     * Run the simulation from its current state for the given number of steps.
-     * Stop before the given number of steps if it ceases to be viable.
-     * @param numSteps The number of steps to run for.
-     */
-    public void simulate(int numSteps)
-    {
-        for(int step = 1; step <= numSteps && view.isViable(field); step++) {
-            simulateOneStep();
-        }
-    }
-    
-    /**
      * Run the simulation from its current state for a single step.
      * Iterate over the whole field updating the state of each
-     * fox and rabbit.
+     * wolf and rabbit.
      */
     public void simulateOneStep()
     {
@@ -178,7 +181,7 @@ public class Simulator extends Thread
             }
         }
                
-        // Add the newly born foxes and rabbits to the main lists.
+        // Add the newly born wolves and rabbits to the main lists.
         animals.addAll(newAnimals);
 
         view.showStatus(step, field);
@@ -198,7 +201,7 @@ public class Simulator extends Thread
     }
     
     /**
-     * Randomly populate the field with foxes and rabbits.
+     * Randomly populate the field with wolves and rabbits.
      */
     private void populate()
     {
@@ -206,17 +209,38 @@ public class Simulator extends Thread
         field.clear();
         for(int row = 0; row < field.getDepth(); row++) {
             for(int col = 0; col < field.getWidth(); col++) {
-                if(rand.nextDouble() <= FOX_CREATION_PROBABILITY) {
-                    Location location = new Location(row, col);
-                    Fox fox = new Fox(true, field, location);
-                    animals.add(fox);
-                }
-                else if(rand.nextDouble() <= RABBIT_CREATION_PROBABILITY) {
+                if(rand.nextDouble() <= RABBIT_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
                     Rabbit rabbit = new Rabbit(true, field, location);
                     animals.add(rabbit);
                 }
+                else if(rand.nextDouble() <= RAT_CREATION_PROBABILITY) {
+                	Location location = new Location(row, col);
+                	Rat rat = new Rat(true, field, location);
+                	animals.add(rat);
+                }
+                else if(rand.nextDouble() <= SNAKE_CREATION_PROBABILITY) {
+                	Location location = new Location(row, col);
+                	Snake snake = new Snake(true, field, location);
+                	animals.add(snake);
+                }
+                else if(rand.nextDouble() <= WOLF_CREATION_PROBABILITY) {
+                    Location location = new Location(row, col);
+                    Wolf wolf = new Wolf(true, field, location);
+                    animals.add(wolf);
+                }
                 // else leave the location empty.
+            }
+        }
+    }
+    
+    public void addAnimalsToMenu() {
+        ArrayList<JMenuItem> menuItems = new ArrayList<JMenuItem>();
+        
+        if(menuItems != null && menuItems.size() > 0) {
+        	view.getMenuList()[2].removeAll();
+            for(int i = 0; i < menuItems.size(); i++) {
+                view.getMenuList()[2].add(menuItems.get(i));
             }
         }
     }

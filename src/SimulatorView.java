@@ -14,8 +14,8 @@ import java.util.Map;
  * Colors for each type of species can be defined using the
  * setColor method.
  * 
- * @author David J. Barnes and Michael Kölling
- * @version 2011.07.31
+ * @author Jan A. Germeraad
+ * @version 22-01-2015
  */
 public class SimulatorView extends JFrame
 {
@@ -28,12 +28,26 @@ public class SimulatorView extends JFrame
     private final String STEP_PREFIX = "Step: ";
     private final String POPULATION_PREFIX = "Population: ";
     private JLabel stepLabel, population;
+    
+    private StatView animalsAlive;
+    private StatView animalsDeceased;
+    
     private FieldView fieldView;
+    // A list of all the buttons.
     private JButton[] buttonList = {new JButton("One step"),
     								new JButton("Run"),
     								new JButton("Pause"),
     								new JButton("Reset")};
-    
+    // A list of all the menus.
+	private JMenu[] menus = {	new JMenu("Menu 1"),
+								new JMenu("Menu 2"),
+								new JMenu("Animals"),
+								new JMenu("Help")};
+	private JMenuItem[] animalItems = {	new JMenuItem("Rat"),
+										new JMenuItem("Rabbit"),
+										new JMenuItem("Snake"),
+										new JMenuItem("Hawk"),
+										new JMenuItem("Wolf")};
     // A map for storing colors for participants in the simulation
     private Map<Class, Color> colors;
     // A statistics object computing and storing simulation information
@@ -48,9 +62,9 @@ public class SimulatorView extends JFrame
     {
     	JMenuBar menuBar = new JMenuBar();
     	
-    	JMenu[] menus = {new JMenu("Menu 1"),
-    						new JMenu("Menu 2"),
-    						new JMenu("Help")};
+    	for(JMenuItem item : animalItems) {
+    		menus[2].add(item);
+    	}
     	
     	for(int i = 0; i < menus.length; i++) {
     		menuBar.add(menus[i]);
@@ -68,13 +82,20 @@ public class SimulatorView extends JFrame
         stats = new FieldStats();
         colors = new LinkedHashMap<Class, Color>();
 
-        setTitle("Fox and Rabbit Simulation");
+        setTitle("Wolf and Rabbit Simulation");
         stepLabel = new JLabel(STEP_PREFIX, JLabel.CENTER);
         population = new JLabel(POPULATION_PREFIX, JLabel.CENTER);
         
         setLocation(100, 50);
         
         fieldView = new FieldView(height, width);
+        
+        animalsAlive = new StatView(200, 200, colors);
+        animalsDeceased = new StatView(200, 200, colors);
+        
+        JPanel statView = new JPanel(new BorderLayout(6, 6));
+        statView.add(animalsAlive, BorderLayout.NORTH);
+        statView.add(animalsDeceased, BorderLayout.SOUTH);
         
         JPanel simPanel = new JPanel(new BorderLayout(6, 6));
         simPanel.setBorder(new EtchedBorder());
@@ -85,7 +106,8 @@ public class SimulatorView extends JFrame
         Container contents = getContentPane();
         contents.setLayout(new BorderLayout(6, 6));
         contents.add(flow, BorderLayout.WEST);
-        contents.add(simPanel, BorderLayout.CENTER);
+        contents.add(statView, BorderLayout.CENTER);
+        contents.add(simPanel, BorderLayout.EAST);
 
         setJMenuBar(menuBar);
     	setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -251,5 +273,9 @@ public class SimulatorView extends JFrame
     
     public JButton[] getButtonList() {
     	return buttonList;
+    }
+    
+    public JMenu[] getMenuList() {
+    	return menus;
     }
 }
