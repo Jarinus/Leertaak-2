@@ -3,10 +3,12 @@ package nl.hanze.sjet.model;
 import java.util.List;
 
 public class Egg extends Animal {
+	private static int foodValue = 3;
 	Animal animal;
 	
 	public Egg(Animal animal, Field field, Location location) {
 		super(field, location);
+		setPrey(true);
 		if(!(/*animal instanceof Hawk || */animal instanceof Snake)) {
 			return;
 		}
@@ -27,5 +29,21 @@ public class Egg extends Animal {
 			}
 			newAnimals.remove(this);
 		}
+	}
+	
+	/**
+	 * Get the food value when this animal is killed.
+	 * @return foodValue
+	 */
+	public int getFoodValue() {
+		return foodValue;
+	}
+	
+	/**
+	 * Edit the current food value
+	 * @param foodValue The amount of foodlevel the animal restores when killed.
+	 */
+	public void setFoodValue(int foodValue) {
+		Egg.foodValue = foodValue;
 	}
 }

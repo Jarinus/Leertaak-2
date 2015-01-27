@@ -11,18 +11,13 @@ import java.util.Random;
 public abstract class Animal
 {
 	public static final Random rand = Randomizer.getRandom();
-	public static final int WOLF_INDEX = 0;
-	public static final int HAWK_INDEX = 1;
-	public static final int SNAKE_INDEX = 2;
-	public static final int RABBIT_INDEX = 3;
-	public static final int RAT_INDEX = 4;
-	public static final int DEFAULT_STEPS_UNTIL_DEFECATING = 3;;
+	public static final int DEFAULT_STEPS_UNTIL_DEFECATING = 3;
+	// Whether the animal is edible.
+	private boolean prey;
+	// The animal's age.
+	private int age;
+	// The amount of steps until the animal defecates again.
 	private int stepsUntilDefecating;
-	// The animal's minimum age before it can breed, the animal's maximum
-	// achievable age, the maximum litter size and its age.
-	private int breedingAge, maxAge, maxLitterSize, age;
-	// The variable which signifies how big the chance is that the animal will breed.
-	private double breedingProbability;
     // Whether the animal is alive or not.
     private boolean alive;
     // Whether the animal is diseased or not.
@@ -66,25 +61,19 @@ public abstract class Animal
     }
     
     /**
-     * Sets the values of the given parameters. This is used to
-     * edit the default values for all animals. This method will
-     * be called after creation of an animal.
-     * 
-     * @param maxAge The maximum age achievable for the animal.
-     * @param breedingAge The age from which on the animal breeds.
-     * @param breedingProbability The chance that the animal will
-     * 			breed.
-     * @param maxLitterSize The maximum amount of new animals can
-     * 			come from this one.
+     * Check whether the animal is prey or not.
+     * @return true if the animal is indeed prey.
      */
-    public void setValues(	int maxAge,
-    						int breedingAge,
-    						double breedingProbability,
-    						int maxLitterSize) {
-    	setMaxAge(maxAge);
-    	setBreedingAge(breedingAge);
-    	setBreedingProbability(breedingProbability);
-    	setMaxLitterSize(maxLitterSize);
+    public boolean isPrey() {
+    	return prey;
+    }
+    
+    /**
+     * Sets if the animal is prey.
+     * @param prey Boolean to check if animal is prey.
+     */
+    public void setPrey(boolean prey) {
+    	this.prey = prey;
     }
 
     /**
@@ -113,41 +102,6 @@ public abstract class Animal
     	}
     	stepsUntilDefecating--;
     	return false;
-    }
-
-    /**
-     * Increase the age.
-     * This could result in the rabbit's death.
-     */
-    protected void incrementAge()
-    {
-        age++;
-        if(age > maxAge) {
-            setDead();
-        }
-    }
-    
-	/**
-	 * Generate a number representing the number of births,
-	 * if it can breed.
-	 * @return The number of births (may be zero).
-	 */
-	protected int breed()
-	{
-	    int births = 0;
-	    if(canBreed() && rand.nextDouble() <= getBreedingProbability()) {
-	        births = rand.nextInt(getMaxLitterSize()) + 1;
-	    }
-	    return births;
-	}
-
-    /**
-     * A rabbit can breed if it has reached the breeding age.
-     * @return true if the rabbit can breed, false otherwise.
-     */
-    protected boolean canBreed()
-    {
-        return age >= breedingAge;
     }
 
     /**
@@ -180,62 +134,6 @@ public abstract class Animal
     {
         return field;
     }
-
-	/**
-	 * @return the breedingAge
-	 */
-	public int getBreedingAge() {
-		return breedingAge;
-	}
-
-	/**
-	 * @param breedingAge the breedingAge to set
-	 */
-	public void setBreedingAge(int breedingAge) {
-		this.breedingAge = breedingAge;
-	}
-
-	/**
-	 * @return the maxAge
-	 */
-	public int getMaxAge() {
-		return maxAge;
-	}
-
-	/**
-	 * @param maxAge the maxAge to set
-	 */
-	public void setMaxAge(int maxAge) {
-		this.maxAge = maxAge;
-	}
-
-	/**
-	 * @return the maxLitterSize
-	 */
-	public int getMaxLitterSize() {
-		return maxLitterSize;
-	}
-
-	/**
-	 * @param maxLitterSize the maxLitterSize to set
-	 */
-	public void setMaxLitterSize(int maxLitterSize) {
-		this.maxLitterSize = maxLitterSize;
-	}
-
-	/**
-	 * @return the breedingProbability
-	 */
-	public double getBreedingProbability() {
-		return breedingProbability;
-	}
-
-	/**
-	 * @param breedingProbability the breedingProbability to set
-	 */
-	public void setBreedingProbability(double breedingProbability) {
-		this.breedingProbability = breedingProbability;
-	}
 
 	/**
 	 * @return the age

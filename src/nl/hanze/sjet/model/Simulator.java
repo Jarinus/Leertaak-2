@@ -7,6 +7,8 @@ import java.awt.*;
 
 import javax.swing.*;
 
+import nl.hanze.sjet.controller.ButtonFunctions;
+import nl.hanze.sjet.view.ButtonView;
 import nl.hanze.sjet.view.SimulatorView;
 
 /**
@@ -70,6 +72,13 @@ public class Simulator extends Thread
             depth = DEFAULT_DEPTH;
             width = DEFAULT_WIDTH;
         }
+        
+        ButtonView buttonView = new ButtonView();
+        ButtonFunctions buttonFunctions = new ButtonFunctions(this);
+        buttonFunctions.addFunctionOneStep(buttonView.getOneStepButton());
+        buttonFunctions.addFunctionRun(buttonView.getRunButton());
+        buttonFunctions.addFunctionPause(buttonView.getPauseButton());
+        buttonFunctions.addFunctionReset(buttonView.getResetButton());
         
         started = false;
         suspended = true;

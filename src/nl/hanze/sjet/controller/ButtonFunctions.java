@@ -5,58 +5,60 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
-import nl.hanze.sjet.model.Simulator;
-import nl.hanze.sjet.view.SimulatorView;
+import nl.hanze.sjet.model.Simulator;;
 
 public class ButtonFunctions {
-	Simulator simulator;
-	SimulatorView view;
+	Simulator sim;
 	
-	public ButtonFunctions(Simulator simulator, JButton[] buttons) {
-		this.simulator = simulator;
-		view = simulator.getSimulatorView();
-		
-	    // Add functionality to buttons.
-	    view.getButtonList()[0].addActionListener(new ActionListener() {
+	public ButtonFunctions(Simulator sim) {
+		this.sim = sim;
+	}
+	
+	public void addFunctionOneStep(JButton button) {
+		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(simulator.getSuspended()) {
-					simulator.simulateOneStep();
-				} else {
-					return;
+				if(sim.getSuspended()) {
+					sim.simulateOneStep();
+					System.err.println("One step button was pressed and should work.");
 				}
 			}
-	    });
-	    view.getButtonList()[1].addActionListener(new ActionListener() {
+		});
+	}
+	
+	public void addFunctionRun(JButton button) {
+		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(!simulator.getStarted()) {
-					simulator.start();
+				if(!sim.getStarted()) {
+					sim.start();
 					return;
 				}
-				if(simulator.getSuspended()) {
-					simulator.setSuspended(false);
-					synchronized(simulator.lock) {
-						simulator.lock.notifyAll();
-					}
-				} else {
-					return;
+				if(sim.getSuspended()) {
+					sim.setSuspended(false);
 				}
+				System.err.println("Run button was pressed and something should have happened.");
 			}
-	    });
-	    view.getButtonList()[2].addActionListener(new ActionListener() {
+		});
+	}
+	
+	public void addFunctionPause(JButton button) {
+		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(!simulator.getSuspended()) {
-					simulator.setSuspended(true);
+				if(!sim.getSuspended()) {
+					sim.setSuspended(true);
 				}
+				System.err.println("The pause button was pressed.");
 			}
-	    });
-	    view.getButtonList()[3].addActionListener(new ActionListener() {
+		});
+	}
+	
+	public void addFunctionReset(JButton button) {
+		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(simulator.getSuspended()) {
-					simulator.reset();
-				} else {
-					return;
+				if(sim.getSuspended()) {
+					sim.reset();
 				}
+				System.err.println("The program should be reset.");
 			}
-	    });
+		});
 	}
 }
