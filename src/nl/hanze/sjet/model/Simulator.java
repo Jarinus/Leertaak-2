@@ -26,10 +26,6 @@ public class Simulator extends Thread
 	private boolean suspended;
 	// Whether the thread was started or not.
 	private boolean started;
-    // The default width for the grid.
-    private static final int DEFAULT_WIDTH = 120;
-    // The default depth of the grid.
-    private static final int DEFAULT_DEPTH = 80;
     // The probability that a wolf will be created in any given grid position.
     private static final double WOLF_CREATION_PROBABILITY = 0.002;
     // The probability that a rabbit will be created in any given grid position.
@@ -48,15 +44,15 @@ public class Simulator extends Thread
     private Field field;
     // The current step of the simulation.
     private int step;
-    // A graphical view of the simulation.
-    private SimulatorView view;
+    // The SimulatorView Object
+    public SimulatorView view;
     
     /**
      * Construct a simulation field with default size.
      */
-    public Simulator()
+    public Simulator(SimulatorView view)
     {
-        this(DEFAULT_DEPTH, DEFAULT_WIDTH);
+        this(120, 80, view);
     }
     
     /**
@@ -64,21 +60,16 @@ public class Simulator extends Thread
      * @param depth Depth of the field. Must be greater than zero.
      * @param width Width of the field. Must be greater than zero.
      */
-    public Simulator(int depth, int width)
+    public Simulator(int depth, int width, SimulatorView view)
     {
         if(width <= 0 || depth <= 0) {
             System.out.println("The dimensions must be greater than zero.");
             System.out.println("Using default values.");
-            depth = DEFAULT_DEPTH;
-            width = DEFAULT_WIDTH;
+            depth = 120;
+            width = 80;
         }
         
-        ButtonView buttonView = new ButtonView();
-        ButtonFunctions buttonFunctions = new ButtonFunctions(this);
-        buttonFunctions.addFunctionOneStep(buttonView.getOneStepButton());
-        buttonFunctions.addFunctionRun(buttonView.getRunButton());
-        buttonFunctions.addFunctionPause(buttonView.getPauseButton());
-        buttonFunctions.addFunctionReset(buttonView.getResetButton());
+        this.view = view;
         
         started = false;
         suspended = true;
@@ -86,21 +77,8 @@ public class Simulator extends Thread
         animals = new ArrayList<Animal>();
         field = new Field(depth, width);
 
-        // Create a view of the state of each location in the field.
-        view = new SimulatorView(depth, width);
-        view.setColor(Egg.class, Color.darkGray);
-        view.setColor(Rabbit.class, Color.orange);
-        view.setColor(Wolf.class, Color.blue);
-        view.setColor(Snake.class, Color.green);
-        view.setColor(Ferret.class, Color.yellow);
-        
-
         // Setup a valid starting point.
         reset();
-    }
-    
-    public SimulatorView getSimulatorView() {
-    	return view;
     }
     
     public boolean getSuspended() {
@@ -207,17 +185,6 @@ public class Simulator extends Thread
                     animals.add(wolf);
                 }
                 // else leave the location empty.
-            }
-        }
-    }
-    
-    public void addAnimalsToMenu() {
-        ArrayList<JMenuItem> menuItems = new ArrayList<JMenuItem>();
-        
-        if(menuItems != null && menuItems.size() > 0) {
-        	view.getMenuList()[2].removeAll();
-            for(int i = 0; i < menuItems.size(); i++) {
-                view.getMenuList()[2].add(menuItems.get(i));
             }
         }
     }

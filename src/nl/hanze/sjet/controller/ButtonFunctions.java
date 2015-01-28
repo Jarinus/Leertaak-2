@@ -10,10 +10,6 @@ import nl.hanze.sjet.model.Simulator;;
 public class ButtonFunctions {
 	Simulator sim;
 	
-	public ButtonFunctions(Simulator sim) {
-		this.sim = sim;
-	}
-	
 	public void addFunctionOneStep(JButton button) {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

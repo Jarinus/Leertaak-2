@@ -4,8 +4,13 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 
+import nl.hanze.sjet.model.Egg;
+import nl.hanze.sjet.model.Ferret;
 import nl.hanze.sjet.model.Field;
 import nl.hanze.sjet.model.FieldStats;
+import nl.hanze.sjet.model.Rabbit;
+import nl.hanze.sjet.model.Snake;
+import nl.hanze.sjet.model.Wolf;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -33,25 +38,7 @@ public class SimulatorView extends JFrame
     private final String POPULATION_PREFIX = "Population: ";
     private JLabel stepLabel, population;
     
-    private StatView animalsAlive;
-    private StatView animalsDeceased;
-    
     private FieldView fieldView;
-    // A list of all the buttons.
-    private JButton[] buttonList = {new JButton("One step"),
-    								new JButton("Run"),
-    								new JButton("Pause"),
-    								new JButton("Reset")};
-    // A list of all the menus.
-	private JMenu[] menus = {	new JMenu("Menu 1"),
-								new JMenu("Menu 2"),
-								new JMenu("Animals"),
-								new JMenu("Help")};
-	private JMenuItem[] animalItems = {	new JMenuItem("Rat"),
-										new JMenuItem("Rabbit"),
-										new JMenuItem("Snake"),
-										new JMenuItem("Hawk"),
-										new JMenuItem("Wolf")};
     // A map for storing colors for participants in the simulation
     @SuppressWarnings("rawtypes")
 	private Map<Class, Color> colors;
@@ -66,42 +53,17 @@ public class SimulatorView extends JFrame
     @SuppressWarnings("rawtypes")
 	public SimulatorView(int height, int width)
     {
-    	JMenuBar menuBar = new JMenuBar();
-    	
-    	for(JMenuItem item : animalItems) {
-    		menus[2].add(item);
-    	}
-    	
-    	for(int i = 0; i < menus.length; i++) {
-    		menuBar.add(menus[i]);
-    	}
-    	
-    	JPanel panel = new JPanel(new GridLayout(0, 1));
-    	for (int i = 0; i < buttonList.length; i++) {
-    		buttonList[i].setSize(180, 40);
-    		panel.add(buttonList[i]);
-    	}
-    	
-    	JPanel flow = new JPanel();
-    	flow.add(panel);
-    	
         stats = new FieldStats();
         colors = new LinkedHashMap<Class, Color>();
-
-        setTitle("Wolf and Rabbit Simulation");
         stepLabel = new JLabel(STEP_PREFIX, JLabel.CENTER);
         population = new JLabel(POPULATION_PREFIX, JLabel.CENTER);
-        
-        setLocation(100, 50);
-        
         fieldView = new FieldView(height, width);
         
-        animalsAlive = new StatView(200, 200, colors);
-        animalsDeceased = new StatView(200, 200, colors);
-        
-        JPanel statView = new JPanel(new BorderLayout(6, 6));
-        statView.add(animalsAlive, BorderLayout.NORTH);
-        statView.add(animalsDeceased, BorderLayout.SOUTH);
+        setTitle("Wolf and Rabbit Simulation");
+        setColors(colors);
+        setLocation(100, 50);
+        setJMenuBar(new MenuView());
+        setButtons(new ButtonView());
         
         JPanel simPanel = new JPanel(new BorderLayout(6, 6));
         simPanel.setBorder(new EtchedBorder());
@@ -111,26 +73,32 @@ public class SimulatorView extends JFrame
         
         Container contents = getContentPane();
         contents.setLayout(new BorderLayout(6, 6));
-        contents.add(flow, BorderLayout.WEST);
-        contents.add(statView, BorderLayout.CENTER);
-        contents.add(simPanel, BorderLayout.EAST);
-
-        setJMenuBar(menuBar);
+        contents.add(simPanel, BorderLayout.CENTER);
+        
     	setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
         setResizable(false);
         pack();
     }
     
-    /**
+    private void setButtons(ButtonView buttonView) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/**
      * Define a color to be used for a given class of animal.
      * @param animalClass The animal's Class object.
      * @param color The color to be used for the given class.
      */
     @SuppressWarnings("rawtypes")
-    public void setColor(Class animalClass, Color color)
+    public void setColors(Map<Class, Color> colors2)
     {
-        colors.put(animalClass, color);
+        colors2.put(Egg.class, Color.darkGray);
+        colors2.put(Rabbit.class, Color.orange);
+        colors2.put(Wolf.class, Color.blue);
+        colors2.put(Snake.class, Color.green);
+        colors2.put(Ferret.class, Color.yellow);
     }
 
     /**
@@ -277,13 +245,5 @@ public class SimulatorView extends JFrame
                 }
             }
         }
-    }
-    
-    public JButton[] getButtonList() {
-    	return buttonList;
-    }
-    
-    public JMenu[] getMenuList() {
-    	return menus;
     }
 }

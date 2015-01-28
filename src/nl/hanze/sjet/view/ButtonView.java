@@ -5,6 +5,8 @@ import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import nl.hanze.sjet.controller.ButtonFunctions;
+
 @SuppressWarnings("serial")
 public class ButtonView extends JPanel {
 	// The button to perform one step.
@@ -15,6 +17,8 @@ public class ButtonView extends JPanel {
 	private JButton pauseButton;
 	// The button to reset the current situation.
 	private JButton resetButton;
+	// 
+	private ButtonFunctions buttonFunctions;
 	
 	/**
 	 * Constructor for ButtonView.
@@ -22,6 +26,8 @@ public class ButtonView extends JPanel {
 	 */
 	public ButtonView() {
 		setLayout(new GridLayout(0, 1));
+		
+		buttonFunctions = new ButtonFunctions();
 		
 		oneStepButton = new JButton("One step");
 		runButton = new JButton("Run");
@@ -34,35 +40,10 @@ public class ButtonView extends JPanel {
 		add(resetButton);
 	}
 	
-	/**
-	 * Getter for the oneStepButton.
-	 * @return oneStepButton
-	 */
-	public JButton getOneStepButton() {
-		return oneStepButton;
-	}
-
-	/**
-	 * Getter for the runButton.
-	 * @return runButton
-	 */
-	public JButton getRunButton() {
-		return runButton;
-	}
-
-	/**
-	 * Getter for the pauseButton.
-	 * @return pauseButton
-	 */
-	public JButton getPauseButton() {
-		return pauseButton;
-	}
-
-	/**
-	 * Getter for the resetButton.
-	 * @return resetButton
-	 */
-	public JButton getResetButton() {
-		return resetButton;
+	public void addButtonFunctions() {
+		buttonFunctions.addFunctionOneStep(oneStepButton);
+		buttonFunctions.addFunctionRun(runButton);
+		buttonFunctions.addFunctionPause(pauseButton);
+		buttonFunctions.addFunctionReset(resetButton);
 	}
 }
