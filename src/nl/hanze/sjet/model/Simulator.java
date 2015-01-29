@@ -52,7 +52,7 @@ public class Simulator extends Thread
      */
     public Simulator(SimulatorView view)
     {
-        this(120, 80, view);
+        this(100, 100, view);
     }
     
     /**
@@ -65,8 +65,8 @@ public class Simulator extends Thread
         if(width <= 0 || depth <= 0) {
             System.out.println("The dimensions must be greater than zero.");
             System.out.println("Using default values.");
-            depth = 120;
-            width = 80;
+            depth = 100;
+            width = 100;
         }
         
         this.view = view;

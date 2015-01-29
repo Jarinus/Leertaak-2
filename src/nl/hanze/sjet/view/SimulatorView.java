@@ -60,6 +60,7 @@ public class SimulatorView extends JFrame
         stepLabel = new JLabel(STEP_PREFIX, JLabel.CENTER);
         population = new JLabel(POPULATION_PREFIX, JLabel.CENTER);
         fieldView = new FieldView(height, width);
+        JLabel version = new JLabel("Version 0.0");
         
         setTitle("Wolf and Rabbit Simulation");
         setColors(colors);
@@ -76,6 +77,7 @@ public class SimulatorView extends JFrame
         contents = getContentPane();
         contents.setLayout(new BorderLayout(6, 6));
         contents.add(simPanel, BorderLayout.CENTER);
+        contents.add(version, BorderLayout.SOUTH);
         //contents.add(buttonView,BorderLayout.WEST);
         //contents.add(new StatView(200, 200, colors), BorderLayout.EAST);
         
