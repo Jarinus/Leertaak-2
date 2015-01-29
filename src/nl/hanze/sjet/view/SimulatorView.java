@@ -11,6 +11,7 @@ import nl.hanze.sjet.model.FieldStats;
 import nl.hanze.sjet.model.Rabbit;
 import nl.hanze.sjet.model.Snake;
 import nl.hanze.sjet.model.Wolf;
+import nl.hanze.sjet.model.Simulator;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -44,6 +45,7 @@ public class SimulatorView extends JFrame
 	private Map<Class, Color> colors;
     // A statistics object computing and storing simulation information
     private FieldStats stats;
+    private Container contents;
 
     /**
      * Create a view of the given width and height.
@@ -61,9 +63,9 @@ public class SimulatorView extends JFrame
         
         setTitle("Wolf and Rabbit Simulation");
         setColors(colors);
-        setLocation(100, 50);
+        setLocation(450, 100);
         setJMenuBar(new MenuView());
-        setButtons(new ButtonView());
+        //setButtons(buttonView);
         
         JPanel simPanel = new JPanel(new BorderLayout(6, 6));
         simPanel.setBorder(new EtchedBorder());
@@ -71,9 +73,11 @@ public class SimulatorView extends JFrame
         simPanel.add(fieldView, BorderLayout.CENTER);
         simPanel.add(population, BorderLayout.SOUTH);
         
-        Container contents = getContentPane();
+        contents = getContentPane();
         contents.setLayout(new BorderLayout(6, 6));
         contents.add(simPanel, BorderLayout.CENTER);
+        //contents.add(buttonView,BorderLayout.WEST);
+        //contents.add(new StatView(200, 200, colors), BorderLayout.EAST);
         
     	setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
@@ -246,4 +250,8 @@ public class SimulatorView extends JFrame
             }
         }
     }
+    public void addButtonView(ButtonView buttonView){
+    	contents.add(buttonView,BorderLayout.WEST);
+    }
+    
 }

@@ -6,6 +6,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import nl.hanze.sjet.controller.ButtonFunctions;
+import nl.hanze.sjet.model.Simulator;
 
 @SuppressWarnings("serial")
 public class ButtonView extends JPanel {
@@ -24,20 +25,24 @@ public class ButtonView extends JPanel {
 	 * Constructor for ButtonView.
 	 * Makes buttons and adds them to the JPanel.
 	 */
-	public ButtonView() {
-		setLayout(new GridLayout(0, 1));
+	public ButtonView(ButtonFunctions buttonFunctions) {
+		this.buttonFunctions = buttonFunctions;
 		
-		buttonFunctions = new ButtonFunctions();
+		JPanel panel = new JPanel();
+		panel.setLayout(new GridLayout(0,1));
 		
 		oneStepButton = new JButton("One step");
 		runButton = new JButton("Run");
 		pauseButton = new JButton("Pause");
 		resetButton = new JButton("Reset");
 		
-		add(oneStepButton);
-		add(runButton);
-		add(pauseButton);
-		add(resetButton);
+		panel.add(oneStepButton);
+		panel.add(runButton);
+		panel.add(pauseButton);
+		panel.add(resetButton);
+		
+		add(panel);
+		addButtonFunctions();
 	}
 	
 	public void addButtonFunctions() {

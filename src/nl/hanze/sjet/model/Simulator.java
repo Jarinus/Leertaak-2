@@ -188,4 +188,7 @@ public class Simulator extends Thread
             }
         }
     }
+    public Simulator getSimulator(){
+    	return this;
+    }
 }
