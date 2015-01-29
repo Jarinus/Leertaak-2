@@ -29,7 +29,7 @@ public class ButtonView extends JPanel {
 		this.buttonFunctions = buttonFunctions;
 		
 		JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(0,1));
+		panel.setLayout(new GridLayout(0,1,0,6));
 		
 		oneStepButton = new JButton("One step");
 		runButton = new JButton("Run");
