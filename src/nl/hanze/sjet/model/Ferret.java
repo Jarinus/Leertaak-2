@@ -20,7 +20,7 @@ public class Ferret extends Animal {
 	
 
 	@Override
-	public void act(List<Animal> newFerrets) {
+	public void act(List<Actor> newFerrets) {
 		incrementAge();
 		if(isAlive()) {
 			checkDefecate();
@@ -46,7 +46,7 @@ public class Ferret extends Animal {
 		}
 	}
 
-	private void giveBirth(List<Animal> newFerrets) {
+	private void giveBirth(List<Actor> newFerrets) {
 		Field field = getField();
 		List<Location> free = field.getFreeAdjacentLocations(getLocation());
 		int births = breed();

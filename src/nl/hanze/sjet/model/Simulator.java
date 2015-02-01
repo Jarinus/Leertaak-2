@@ -3,12 +3,6 @@ import java.util.Random;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.awt.*;
-
-import javax.swing.*;
-
-import nl.hanze.sjet.controller.ButtonFunctions;
-import nl.hanze.sjet.view.ButtonView;
 import nl.hanze.sjet.view.SimulatorView;
 
 /**
@@ -39,7 +33,7 @@ public class Simulator extends Thread
     private static final double RAT_CREATION_PROBABILITY = 0.006;
 
     // List of animals in the field.
-    private List<Animal> animals;
+    private List<Actor> actors;
     // The current state of the field.
     private Field field;
     // The current step of the simulation.
@@ -74,7 +68,7 @@ public class Simulator extends Thread
         started = false;
         suspended = true;
         
-        animals = new ArrayList<Animal>();
+        actors = new ArrayList<Actor>();
         field = new Field(depth, width);
 
         // Setup a valid starting point.
@@ -126,10 +120,10 @@ public class Simulator extends Thread
         step++;
 
         // Provide space for newborn animals.
-        List<Animal> newAnimals = new ArrayList<Animal>();        
+        List<Actor> newAnimals = new ArrayList<Actor>();        
         // Let all rabbits act.
-        for(Iterator<Animal> it = animals.iterator(); it.hasNext(); ) {
-            Animal animal = it.next();
+        for(Iterator<Actor> it = actors.iterator(); it.hasNext(); ) {
+            Animal animal = (Animal) it.next();
             animal.act(newAnimals);
             if(! animal.isAlive()) {
                 it.remove();
@@ -137,7 +131,7 @@ public class Simulator extends Thread
         }
                
         // Add the newly born wolves and rabbits to the main lists.
-        animals.addAll(newAnimals);
+        actors.addAll(newAnimals);
 
         view.showStatus(step, field);
     }
@@ -148,7 +142,7 @@ public class Simulator extends Thread
     public void reset()
     {
         step = 0;
-        animals.clear();
+        actors.clear();
         populate();
         
         // Show the starting state in the view.
@@ -167,22 +161,22 @@ public class Simulator extends Thread
                 if(rand.nextDouble() <= RABBIT_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
                     Rabbit rabbit = new Rabbit(true, field, location);
-                    animals.add(rabbit);
+                    actors.add(rabbit);
                 }
                 else if(rand.nextDouble() <= RAT_CREATION_PROBABILITY) {
                 	Location location = new Location(row, col);
                 	Ferret ferret = new Ferret(true, field, location);
-                	animals.add(ferret);
+                	actors.add(ferret);
                 }
                 else if(rand.nextDouble() <= SNAKE_CREATION_PROBABILITY) {
                 	Location location = new Location(row, col);
                 	Snake snake = new Snake(true, field, location);
-                	animals.add(snake);
+                	actors.add(snake);
                 }
                 else if(rand.nextDouble() <= WOLF_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
                     Wolf wolf = new Wolf(true, field, location);
-                    animals.add(wolf);
+                    actors.add(wolf);
                 }
                 // else leave the location empty.
             }

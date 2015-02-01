@@ -3,7 +3,6 @@ package nl.hanze.sjet.view;
 import java.awt.BorderLayout;
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.border.EtchedBorder;
 
 @SuppressWarnings("serial")
 public class AnimalEditingFrame extends JFrame {
@@ -22,11 +21,11 @@ public class AnimalEditingFrame extends JFrame {
 		
 		//make image labels
 		//TODO add images to JLabels
-		JLabel ferretImg = new JLabel(new ImageIcon("image.png"));
+		JLabel ferretImg = new JLabel(new ImageIcon("image.png"));/*
 		JLabel rabbitImg = new JLabel(new ImageIcon("image.png"));
 		JLabel snakeImg = new JLabel(new ImageIcon("image.png"));
 		JLabel hawkImg = new JLabel(new ImageIcon("image.png"));
-		JLabel wolfImg = new JLabel(new ImageIcon("image.png"));
+		JLabel wolfImg = new JLabel(new ImageIcon("image.png"));*/
 		
 		//make buttons
 		JButton ferretBut = new JButton("Ferret");

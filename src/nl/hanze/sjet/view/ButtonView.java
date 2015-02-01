@@ -6,7 +6,6 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import nl.hanze.sjet.controller.ButtonFunctions;
-import nl.hanze.sjet.model.Simulator;
 
 @SuppressWarnings("serial")
 public class ButtonView extends JPanel {

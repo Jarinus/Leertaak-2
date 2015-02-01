@@ -19,7 +19,6 @@ public class ButtonFunctions {
 			public void actionPerformed(ActionEvent e) {
 				if(sim.getSuspended()) {
 					sim.simulateOneStep();
-					System.err.println("One step button was pressed and should work.");
 				}
 			}
 		});
@@ -35,7 +34,6 @@ public class ButtonFunctions {
 				if(sim.getSuspended()) {
 					sim.setSuspended(false);
 				}
-				System.err.println("Run button was pressed and something should have happened.");
 			}
 		});
 	}
@@ -46,7 +44,6 @@ public class ButtonFunctions {
 				if(!sim.getSuspended()) {
 					sim.setSuspended(true);
 				}
-				System.err.println("The pause button was pressed.");
 			}
 		});
 	}
@@ -57,7 +54,6 @@ public class ButtonFunctions {
 				if(sim.getSuspended()) {
 					sim.reset();
 				}
-				System.err.println("The program should be reset.");
 			}
 		});
 	}
