@@ -11,7 +11,6 @@ import nl.hanze.sjet.model.FieldStats;
 import nl.hanze.sjet.model.Rabbit;
 import nl.hanze.sjet.model.Snake;
 import nl.hanze.sjet.model.Wolf;
-import nl.hanze.sjet.model.Simulator;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -86,11 +85,6 @@ public class SimulatorView extends JFrame
         setResizable(false);
         pack();
     }
-    
-    private void setButtons(ButtonView buttonView) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	/**
      * Define a color to be used for a given class of animal.

@@ -1,4 +1,4 @@
-package nl.hanze.sjet.main;
+/*package nl.hanze.sjet.main;
 import nl.hanze.sjet.model.Location;
 import nl.hanze.sjet.model.Simulator;
 
@@ -23,3 +23,4 @@ public class Test {
 	}
 
 }
+*/

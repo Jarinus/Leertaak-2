@@ -17,7 +17,7 @@ public class Egg extends Animal {
 	}
 
 	@Override
-	public void act(List<Animal> newAnimals) {
+	public void act(List<Actor> newAnimals) {
 		if(getAge() > 0) {
 			setAge(getAge() - 1);
 		} else if(getAge() == 0) {

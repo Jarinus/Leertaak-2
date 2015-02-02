@@ -22,7 +22,7 @@ public class Snake extends Animal {
 	}
 
 	@Override
-	public void act(List<Animal> newSnakes) {
+	public void act(List<Actor> newSnakes) {
 		incrementAge();
 		incrementHunger();
 		if(isAlive()) {
@@ -47,7 +47,7 @@ public class Snake extends Animal {
 		}
 	}
 	
-	private void giveBirth(List<Animal> newSnakes) {
+	private void giveBirth(List<Actor> newSnakes) {
 		// New snakes are born into adjacent locations.
 		// Get a list of adjacent free locations.
 		Field field = getField();
