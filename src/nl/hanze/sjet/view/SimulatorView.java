@@ -69,7 +69,7 @@ public class SimulatorView extends JFrame
         
         setTitle("Wolf and Rabbit Simulation");
         setColors(colors);
-        setJMenuBar(new MenuView());
+        //setJMenuBar(new MenuView());
         center();
         
         JPanel simPanel = new JPanel(new BorderLayout(6, 6));
@@ -282,4 +282,13 @@ public class SimulatorView extends JFrame
 	public void setButtonView(ButtonView buttonView) {
 		this.buttonView = buttonView;
 	}
+	/**
+	 * set the menuview
+	 * @param menuView
+	 */
+	public void setMenuView(MenuView menuView){
+		setJMenuBar(menuView);
+		pack();
+	}
+	
 }

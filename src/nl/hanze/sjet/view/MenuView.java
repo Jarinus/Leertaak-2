@@ -5,6 +5,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 import nl.hanze.sjet.controller.MenuFunctions;
+import nl.hanze.sjet.model.Simulator;
 
 @SuppressWarnings("serial")
 public class MenuView extends JMenuBar {
@@ -12,18 +13,18 @@ public class MenuView extends JMenuBar {
 	JMenuItem 	animalsFerret, animalsRabbit, animalsSnake, animalsHawk, animalsWolf,
 				legendFerret, legendRabbit, legendSnake, legendHawk, legendWolf;
 	
-	public MenuView() {
+	public MenuView(Simulator simulator) {
 		MenuFunctions menuFunctions = new MenuFunctions();
 		
 		animals = new JMenu("Animals");
 		legend = new JMenu("Legend");
 		about = new JMenu("About");
 
-		animals.add(menuFunctions.makeNewEditable("Ferret"));
-		animals.add(menuFunctions.makeNewEditable("Rabbit"));
-		animals.add(menuFunctions.makeNewEditable("Snake"));
-		animals.add(menuFunctions.makeNewEditable("Hawk"));
-		animals.add(menuFunctions.makeNewEditable("Wolf"));
+		animals.add(menuFunctions.makeNewEditable("Ferret", simulator));
+		animals.add(menuFunctions.makeNewEditable("Rabbit", simulator));
+		animals.add(menuFunctions.makeNewEditable("Snake", simulator));
+		animals.add(menuFunctions.makeNewEditable("Hawk", simulator));
+		animals.add(menuFunctions.makeNewEditable("Wolf", simulator));
 		
 		legendFerret = new JMenuItem("Ferret");
 		legendRabbit = new JMenuItem("Rabbit");

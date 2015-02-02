@@ -4,6 +4,7 @@ import java.util.Map;
 
 import javax.swing.JPanel;
 
+import nl.hanze.sjet.model.Hawk;
 import nl.hanze.sjet.model.Rabbit;
 import nl.hanze.sjet.model.Ferret;
 import nl.hanze.sjet.model.Snake;
@@ -28,7 +29,7 @@ public class StatView extends JPanel {
 		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, x, y);
 		int[] animals = {100, 80, 120, 80};
-		Class[] animalClasses = {Ferret.class, Rabbit.class, Snake.class, /*Hawk.class, */Wolf.class};
+		Class[] animalClasses = {Ferret.class, Rabbit.class, Snake.class, Hawk.class, Wolf.class};
 		int angle = 0;
 		int total = 0;
 		

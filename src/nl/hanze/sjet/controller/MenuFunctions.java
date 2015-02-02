@@ -5,14 +5,15 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JMenuItem;
 
+import nl.hanze.sjet.model.Simulator;
 import nl.hanze.sjet.view.AnimalEditingFrame;
 
 public class MenuFunctions {
-	public JMenuItem makeNewEditable(String string) {
+	public JMenuItem makeNewEditable(String string, Simulator simulator) {
 		JMenuItem item = new JMenuItem(string);
 		item.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new AnimalEditingFrame(string);
+				new AnimalEditingFrame(string, simulator);
 			}
 		});
 		return item;

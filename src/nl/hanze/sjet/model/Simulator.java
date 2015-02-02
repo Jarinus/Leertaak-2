@@ -41,6 +41,12 @@ public class Simulator extends Thread
     private int step;
     // The SimulatorView Object
     private SimulatorView view;
+    private Rabbit rabbit;
+	private Ferret ferret;
+    private Snake snake;
+    private Wolf wolf;
+    private Hawk hawk;
+    private Hunter hunter;
     
     /**
      * Construct a simulation field with default size.
@@ -169,32 +175,32 @@ public class Simulator extends Thread
             for(int col = 0; col < field.getWidth(); col++) {
                 if(rand.nextDouble() <= RABBIT_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
-                    Rabbit rabbit = new Rabbit(true, field, location);
+                    rabbit = new Rabbit(true, field, location);
                     actors.add(rabbit);
                 }
                 else if(rand.nextDouble() <= FERRET_CREATION_PROBABILITY) {
                 	Location location = new Location(row, col);
-                	Ferret ferret = new Ferret(true, field, location);
+                	ferret = new Ferret(true, field, location);
                 	actors.add(ferret);
                 }
                 else if(rand.nextDouble() <= SNAKE_CREATION_PROBABILITY) {
                 	Location location = new Location(row, col);
-                	Snake snake = new Snake(true, field, location);
+                	snake = new Snake(true, field, location);
                 	actors.add(snake);
                 }
                 else if(rand.nextDouble() <= WOLF_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
-                    Wolf wolf = new Wolf(true, field, location);
+                    wolf = new Wolf(true, field, location);
                     actors.add(wolf);
                 }
                 else if(rand.nextDouble() <= HAWK_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
-                    Hawk hawk = new Hawk(true, field, location);
+                    hawk = new Hawk(true, field, location);
                     actors.add(hawk);
                 }
                 else if(rand.nextDouble() <= HUNTER_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
-                    Hunter hunter = new Hunter(field, location);
+                    hunter = new Hunter(field, location);
                     actors.add(hunter);
                 }
                 // else leave the location empty.
@@ -207,4 +213,27 @@ public class Simulator extends Thread
     public SimulatorView getSimulatorView() {
     	return view;
     }
+    public Rabbit getRabbit() {
+		return rabbit;
+	}
+
+	public Ferret getFerret() {
+		return ferret;
+	}
+
+	public Snake getSnake() {
+		return snake;
+	}
+
+	public Wolf getWolf() {
+		return wolf;
+	}
+
+	public Hawk getHawk() {
+		return hawk;
+	}
+
+	public Hunter getHunter() {
+		return hunter;
+	}
 }
