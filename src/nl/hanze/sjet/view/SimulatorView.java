@@ -82,7 +82,7 @@ public class SimulatorView extends JFrame
         contents.setLayout(new BorderLayout(6, 6));
         contents.add(simPanel, BorderLayout.CENTER);
         contents.add(version, BorderLayout.SOUTH);
-        //contents.add(new StatView(200, 200, colors), BorderLayout.EAST);
+        contents.add(new StatView(200, 200, colors), BorderLayout.EAST);
         
     	setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);

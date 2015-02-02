@@ -14,13 +14,25 @@ public class AnimalEditingFrame extends JFrame {
 	private static final int TEXTFIELD_LENGHT = 11;
 	private AnimalEditingFrameHandler animalEditFrameHandler;
 	private Simulator sim;
-	
+	private JButton cancel;
+	private JButton defaultBut;
+	private JButton submitBut;
+	private String animalName;
 	private int breedingAgeAni, maxAgeAni, maxLitterSizeAni, foodValueAni;
 	private double breedingProbability;
 	
+	private JTextField maxAgeField;
+	private JTextField breedingAgeField;
+	private JTextField breedingProbField;
+	private JTextField maxLitterSizeField;
+	private JTextField foodValueField;
+	
 	public AnimalEditingFrame(String string, Simulator simulator) {
+		animalName = string;
 		sim = simulator;
-		setJTextFieldVariables(string);
+		animalEditFrameHandler = new AnimalEditingFrameHandler(this);
+		getJTextFieldVariables();
+		
 		//TODO add action listeners in new class AnimalEditingFunctions
 		//make labels
 		JLabel dierNaam = new JLabel(string);
@@ -43,17 +55,16 @@ public class AnimalEditingFrame extends JFrame {
 		JButton snakeBut = new JButton("Snake");
 		JButton hawkBut = new JButton("Hawk");
 		JButton wolfBut = new JButton("Wolf");*/
-		JButton cancel = new JButton("Cancel");
-		JButton defaultBut = new JButton("Default");
-		JButton submitBut = new JButton("Submit");
+		cancel = new JButton("Cancel");
+		defaultBut = new JButton("Default");
+		submitBut = new JButton("Submit");
 		
 		//make textfields
-		//TODO variables in the JTextField("Variable")
-		JTextField maxAgeField = new JTextField("" + maxAgeAni,TEXTFIELD_LENGHT);
-		JTextField breedingAgeField = new JTextField("" + breedingAgeAni,TEXTFIELD_LENGHT);
-		JTextField breedingProbField = new JTextField("" + breedingProbability,TEXTFIELD_LENGHT);
-		JTextField maxLitterSizeField = new JTextField("" + maxLitterSizeAni,TEXTFIELD_LENGHT);
-		JTextField foodValueField = new JTextField("" + foodValueAni,TEXTFIELD_LENGHT);
+		maxAgeField = new JTextField("" + maxAgeAni,TEXTFIELD_LENGHT);
+		breedingAgeField = new JTextField("" + breedingAgeAni,TEXTFIELD_LENGHT);
+		breedingProbField = new JTextField("" + breedingProbability,TEXTFIELD_LENGHT);
+		maxLitterSizeField = new JTextField("" + maxLitterSizeAni,TEXTFIELD_LENGHT);
+		foodValueField = new JTextField("" + foodValueAni,TEXTFIELD_LENGHT);
 		
 		//make the upper set
 		JPanel upper = new JPanel();
@@ -121,20 +132,26 @@ public class AnimalEditingFrame extends JFrame {
 		contents.add(center,BorderLayout.CENTER);
 		contents.add(bottomFlow,BorderLayout.SOUTH);
 		
+		addFunctions();
 		setTitle("Animalediting frame");
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		//TODO set size
         setVisible(true);
         setResizable(false);
         pack();
 	}
 	
 	public void addFunctions(){
-		
+		animalEditFrameHandler.addCancelButton(cancel);
+		animalEditFrameHandler.addDefaultButton(defaultBut);
+		animalEditFrameHandler.addMaxAgeField(maxAgeField);
+		animalEditFrameHandler.addBreedingAgeField(breedingAgeField);
+		animalEditFrameHandler.addBreedingProbField(breedingProbField);
+		animalEditFrameHandler.addMaxLitterSizeField(maxLitterSizeField);
+		animalEditFrameHandler.addFoodValueField(foodValueField);
 	}
 	
-	private void setJTextFieldVariables(String string){
-		switch(string){
+	public void getJTextFieldVariables(){
+		switch(animalName){
 		case "Ferret": 
 			maxAgeAni = sim.getFerret().getMaxAge();
 			breedingAgeAni = sim.getFerret().getBreedingAge();
@@ -172,5 +189,103 @@ public class AnimalEditingFrame extends JFrame {
 			break;
 		}
 	}
+	public void setBreedingAgeAni(int newBreedingAge){
+		switch(animalName){
+		case "Ferret":
+			sim.getFerret().setBreedingAge(newBreedingAge);
+			break;
+		case "Rabbit":
+			sim.getRabbit().setBreedingAge(newBreedingAge);
+			break;
+		case "Snake":
+			sim.getSnake().setBreedingAge(newBreedingAge);
+			break;
+		case "Hawk":
+			sim.getHawk().setBreedingAge(newBreedingAge);
+			break;
+		case "Wolf":
+			sim.getWolf().setBreedingAge(newBreedingAge);
+			break;
+		}
+	}
 	
+	public void setMaxAgeAni(int newMaxAge){
+		switch(animalName){
+		case "Ferret":
+			sim.getFerret().setMaxAge(newMaxAge);
+			break;
+		case "Rabbit":
+			sim.getRabbit().setMaxAge(newMaxAge);
+			break;
+		case "Snake":
+			sim.getSnake().setMaxAge(newMaxAge);
+			break;
+		case "Hawk":
+			sim.getHawk().setMaxAge(newMaxAge);
+			break;
+		case "Wolf":
+			sim.getWolf().setMaxAge(newMaxAge);
+			break;
+		}
+	}
+	
+	public void setBreedingProbAni(double newBreedingProb){
+		switch(animalName){
+		case "Ferret":
+			sim.getFerret().setBreedingProbability(newBreedingProb);
+			break;
+		case "Rabbit":
+			sim.getRabbit().setBreedingProbability(newBreedingProb);
+			break;
+		case "Snake":
+			sim.getSnake().setBreedingProbability(newBreedingProb);
+			break;
+		case "Hawk":
+			sim.getHawk().setBreedingProbability(newBreedingProb);
+			break;
+		case "Wolf":
+			sim.getWolf().setBreedingProbability(newBreedingProb);
+			break;
+		}
+	}
+	
+	public void setMaxLitterSize(int newMaxLitterSize){
+		switch(animalName){
+		case "Ferret":
+			sim.getFerret().setMaxLitterSize(newMaxLitterSize);
+			break;
+		case "Rabbit":
+			sim.getRabbit().setMaxLitterSize(newMaxLitterSize);
+			break;
+		case "Snake":
+			sim.getSnake().setMaxLitterSize(newMaxLitterSize);
+			break;
+		case "Hawk":
+			sim.getHawk().setMaxLitterSize(newMaxLitterSize);
+			break;
+		case "Wolf":
+			sim.getWolf().setMaxLitterSize(newMaxLitterSize);
+			break;
+		}
+	}
+	
+	public void setFoodValueAni(int newFoodValue){
+		switch(animalName){
+		case "Ferret":
+			sim.getFerret().setFoodValue(newFoodValue);
+			break;
+		case "Rabbit":
+			sim.getRabbit().setFoodValue(newFoodValue);
+			break;
+		case "Snake":
+			sim.getSnake().setFoodValue(newFoodValue);
+			break;
+		case "Hawk":
+			sim.getHawk().setFoodValue(newFoodValue);
+			break;
+		case "Wolf":
+			sim.getWolf().setFoodValue(newFoodValue);
+			break;
+		}
+	}
 }
