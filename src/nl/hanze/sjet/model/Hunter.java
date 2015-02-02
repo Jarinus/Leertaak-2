@@ -31,7 +31,7 @@ public class Hunter implements Actor {
 				Object actor = (Actor) field.getObjectAt(loc);
 				if(actor instanceof Animal) {
 					Animal animal = (Animal) actor;
-					if(/*animal instanceof Hawk || */animal instanceof Wolf) {// TODO: Add Hawk
+					if(animal instanceof Hawk || animal instanceof Wolf) {
 						newLocation = animal.getLocation();
 						animal.setDead();
 					}
@@ -54,9 +54,13 @@ public class Hunter implements Actor {
 	/**
 	 * Kills the Hunter and clears the location.
 	 */
-	private void setDead() {
+	public void setDead() {
 		alive = false;
 		field.clear(location);
+	}
+
+	public boolean isAlive() {
+		return alive;
 	}
 
 }

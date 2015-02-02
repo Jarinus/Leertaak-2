@@ -3,13 +3,12 @@ package nl.hanze.sjet.model;
 import java.util.List;
 
 public class Egg extends Animal {
-	private static int foodValue = 3;
+	private static int foodValue = 5;
 	Animal animal;
 	
 	public Egg(Animal animal, Field field, Location location) {
 		super(field, location);
-		setPrey(true);
-		if(!(/*animal instanceof Hawk || */animal instanceof Snake)) {
+		if(!(animal instanceof Hawk || animal instanceof Snake)) {
 			return;
 		}
 		this.animal = animal;
@@ -21,10 +20,9 @@ public class Egg extends Animal {
 		if(getAge() > 0) {
 			setAge(getAge() - 1);
 		} else if(getAge() == 0) {
-			//TODO: Add the hawk if the egg is of type Hawk.
-			/*if(animal instanceof Hawk) {
+			if(animal instanceof Hawk) {
 				newAnimals.add(new Hawk(false, getField(), getLocation()));
-			} else*/ if(animal instanceof Snake) {
+			} else if(animal instanceof Snake) {
 				newAnimals.add(new Snake(false, getField(), getLocation()));
 			}
 			newAnimals.remove(this);

@@ -12,8 +12,6 @@ public abstract class Animal implements Actor
 {
 	public static final Random rand = Randomizer.getRandom();
 	public static final int DEFAULT_STEPS_UNTIL_DEFECATING = 3;
-	// Whether the animal is edible.
-	private boolean prey;
 	// The animal's age.
 	private int age;
 	// The amount of steps until the animal defecates again.
@@ -59,22 +57,6 @@ public abstract class Animal implements Actor
     {
         return alive;
     }
-    
-    /**
-     * Check whether the animal is prey or not.
-     * @return true if the animal is indeed prey.
-     */
-    public boolean isPrey() {
-    	return prey;
-    }
-    
-    /**
-     * Sets if the animal is prey.
-     * @param prey Boolean to check if animal is prey.
-     */
-    public void setPrey(boolean prey) {
-    	this.prey = prey;
-    }
 
     /**
      * Indicate that the animal is no longer alive.
@@ -119,11 +101,18 @@ public abstract class Animal implements Actor
      */
     protected void setLocation(Location newLocation)
     {
+    	Field field2 = field;
         if(location != null) {
-            field.clear(location);
+            field2.clear(location);
         }
         location = newLocation;
-        field.place(this, newLocation);
+        if(newLocation == null) {
+        	return;
+        }
+        if(field2 == null) {
+        	return;
+        }
+        field2.place(this, newLocation);
     }
     
     /**

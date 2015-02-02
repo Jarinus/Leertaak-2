@@ -4,15 +4,14 @@ import java.util.List;
 public class Ferret extends Animal {
 	// The animal's minimum age before it can breed, the animal's maximum
 	// achievable age, the maximum litter size and its age.
-	private static int breedingAge = 8, maxAge = 20, maxLitterSize = 3;
+	private static int breedingAge = 2, maxAge = 24, maxLitterSize = 2;
 	// The variable which signifies how big the chance is that the animal will breed.
 	private static double breedingProbability = 0.006;
-	private static int foodValue;
+	private static int foodValue = 12;
 	
 	public Ferret(boolean randomAge, Field field, Location location) {
 		super(field, location);
 		setAge(0);
-		setPrey(true);
 		if(randomAge) {
 			setAge(rand.nextInt(getMaxAge()));
 		}
@@ -22,28 +21,48 @@ public class Ferret extends Animal {
 	@Override
 	public void act(List<Actor> newFerrets) {
 		incrementAge();
+		Field field = getField();
 		if(isAlive()) {
 			checkDefecate();
-			if(!isDiseased()) {
-				setDiseased(rand.nextDouble() > 0.99);
-			}/*
-			if(isDiseased()) {
-				List<Location> nearby = getField().adjacentLocations(getLocation());
-				for(Location loc : nearby) {
-					Animal animal = (Animal) getField().getObjectAt(loc);
-					if(animal != null) {
-						animal.setDiseased(true);
-					}
-				}
-			}*/
 			giveBirth(newFerrets);
-			Location newLocation = getField().freeAdjacentLocation(getLocation());
+			Location newLocation = null;
+			newLocation = findFood();
+			if(newLocation == null) {
+				newLocation = field.freeAdjacentLocation(getLocation());
+			}
 			if(newLocation != null) {
 				setLocation(newLocation);
 			} else {
 				setDead();
+				return;
 			}
 		}
+	}
+	
+	private Location findFood() {
+		Field field = getField();
+		Location location = null;
+		List<Location> adjacent = field.adjacentLocations(getLocation());
+		for(Location loc : adjacent) {
+			Animal animal = null;
+			if(field.getObjectAt(loc) instanceof Animal) {
+				animal = (Animal) field.getObjectAt(loc);
+				if(	animal instanceof Rabbit) {
+					location = loc;
+					animal.setDead();
+					break;
+				} else if(animal instanceof Snake) {
+					if(rand.nextDouble() > 0.1) {
+						location = loc;
+						animal.setDead();
+						break;
+					} else {
+						setDead();
+					}
+				}
+			}
+		}
+		return location;
 	}
 
 	private void giveBirth(List<Actor> newFerrets) {

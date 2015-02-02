@@ -21,16 +21,17 @@ public class Simulator extends Thread
 	// Whether the thread was started or not.
 	private boolean started;
     // The probability that a wolf will be created in any given grid position.
-    private static final double WOLF_CREATION_PROBABILITY = 0.002;
+    private static final double WOLF_CREATION_PROBABILITY = 0.02;
     // The probability that a rabbit will be created in any given grid position.
-    private static final double RABBIT_CREATION_PROBABILITY = 0.01;
+    private static final double RABBIT_CREATION_PROBABILITY = 0.1;
     // The probability that a snake will be created in any given grid position.
-    private static final double SNAKE_CREATION_PROBABILITY = 0.004;
+    private static final double SNAKE_CREATION_PROBABILITY = 0.04;
     // The probability that a hawk will be created in any given grid position.
-    // private static final double HAWK_CREATION_PROBABILITY = 0.005;
-    // TODO: Add Hawk
-    // The probability that a rat will be created in any given grid position.
-    private static final double RAT_CREATION_PROBABILITY = 0.006;
+    private static final double HAWK_CREATION_PROBABILITY = 0.05;
+    // The probability that a ferret will be created in any given grid position.
+    private static final double FERRET_CREATION_PROBABILITY = 0.06;
+    // The probability that a hunter will be crated in any given grid position.
+    private static final double HUNTER_CREATION_PROBABILITY = 0.01;
 
     // List of animals in the field.
     private List<Actor> actors;
@@ -39,7 +40,7 @@ public class Simulator extends Thread
     // The current step of the simulation.
     private int step;
     // The SimulatorView Object
-    public SimulatorView view;
+    private SimulatorView view;
     
     /**
      * Construct a simulation field with default size.
@@ -83,8 +84,8 @@ public class Simulator extends Thread
     	return started;
     }
     
-    public void setSuspended(boolean suspended) {
-    	this.suspended = suspended;
+    public void switchSuspended() {
+    	suspended = !suspended;
     }
     
     /**
@@ -123,10 +124,18 @@ public class Simulator extends Thread
         List<Actor> newAnimals = new ArrayList<Actor>();        
         // Let all rabbits act.
         for(Iterator<Actor> it = actors.iterator(); it.hasNext(); ) {
-            Animal animal = (Animal) it.next();
-            animal.act(newAnimals);
-            if(! animal.isAlive()) {
-                it.remove();
+            Actor actor = (Actor) it.next();
+            actor.act(newAnimals);
+            if(actor instanceof Hunter) {
+            	Hunter hunter = (Hunter) actor;
+            	if(!hunter.isAlive()) {
+            		it.remove();
+            	}
+            } else if(actor instanceof Animal) {
+            	Animal animal = (Animal) actor;
+            	if(!animal.isAlive()) {
+            		it.remove();
+            	}
             }
         }
                
@@ -163,7 +172,7 @@ public class Simulator extends Thread
                     Rabbit rabbit = new Rabbit(true, field, location);
                     actors.add(rabbit);
                 }
-                else if(rand.nextDouble() <= RAT_CREATION_PROBABILITY) {
+                else if(rand.nextDouble() <= FERRET_CREATION_PROBABILITY) {
                 	Location location = new Location(row, col);
                 	Ferret ferret = new Ferret(true, field, location);
                 	actors.add(ferret);
@@ -178,11 +187,24 @@ public class Simulator extends Thread
                     Wolf wolf = new Wolf(true, field, location);
                     actors.add(wolf);
                 }
+                else if(rand.nextDouble() <= HAWK_CREATION_PROBABILITY) {
+                    Location location = new Location(row, col);
+                    Hawk hawk = new Hawk(true, field, location);
+                    actors.add(hawk);
+                }
+                else if(rand.nextDouble() <= HUNTER_CREATION_PROBABILITY) {
+                    Location location = new Location(row, col);
+                    Hunter hunter = new Hunter(field, location);
+                    actors.add(hunter);
+                }
                 // else leave the location empty.
             }
         }
     }
     public Simulator getSimulator(){
     	return this;
+    }
+    public SimulatorView getSimulatorView() {
+    	return view;
     }
 }

@@ -1,20 +1,18 @@
 package nl.hanze.sjet.model;
-import java.util.Iterator;
 import java.util.List;
 
 public class Snake extends Animal {
 	// The animal's minimum age before it can breed, the animal's maximum
 	// achievable age, the maximum litter size and its age.
-	private static int breedingAge = 8, maxAge = 20, maxLitterSize = 3;
+	private static int breedingAge = 11, maxAge = 68, maxLitterSize = 3;
 	// The variable which signifies how big the chance is that the animal will breed.
 	private static double breedingProbability = 0.006;
-	private static int foodValue;
+	private static int foodValue = 12;
 	private int foodLevel;
 	
 	public Snake(boolean randomAge, Field field, Location location) {
 		super(field, location);
 		setAge(0);
-		setPrey(true);
 		foodLevel = 10;
 		if(randomAge) {
 			setAge(rand.nextInt(getMaxAge()));
@@ -25,17 +23,15 @@ public class Snake extends Animal {
 	public void act(List<Actor> newSnakes) {
 		incrementAge();
 		incrementHunger();
+		Field field = getField();
 		if(isAlive()) {
 			checkDefecate();
-        	if(isDiseased() && !isImmune()) {
-        		setDead();
-        	}
 			giveBirth(newSnakes);
 			// Try to move into a free location.
 			Location newLocation = findFood();
 			if(newLocation == null) {
 				// No food found - try to move.
-				newLocation = getField().freeAdjacentLocation(getLocation());
+				newLocation = field.freeAdjacentLocation(getLocation());
 			}
 			// Check if it could move.
 			if(newLocation != null) {
@@ -47,6 +43,43 @@ public class Snake extends Animal {
 		}
 	}
 	
+	private Location findFood() {
+		Field field = getField();
+		List<Location> adjacent = field.adjacentLocations(getLocation());
+		for(Location location : adjacent) {
+			Object obj = field.getObjectAt(location);
+			if(obj instanceof Animal) {
+				Animal animal = (Animal) obj;
+				if(animal instanceof Egg) {
+					Egg egg = (Egg) animal;
+					if(egg.animal instanceof Hawk) {
+						eat(egg, egg.getFoodValue());
+						return location;
+					}
+				} else if(animal instanceof Rabbit) {
+					eat(animal, ((Rabbit) animal).getFoodValue());
+					return location;
+				} else if(animal instanceof Ferret) {
+					if(rand.nextDouble() > 0.9) {
+						eat(animal, ((Ferret) animal).getFoodValue());
+						return location;
+					} else {
+						setDead();
+					}
+				}
+			}
+		}
+		return null;
+	}
+	
+	private void eat(Actor actor, int foodValue) {
+		if(actor instanceof Animal) {
+			Animal animal = (Animal) actor;
+			foodLevel += foodValue;
+			animal.setDead();
+		}
+	}
+
 	private void giveBirth(List<Actor> newSnakes) {
 		// New snakes are born into adjacent locations.
 		// Get a list of adjacent free locations.
@@ -63,35 +96,9 @@ public class Snake extends Animal {
 		}
 	}
     
-    /**
-     * Look for rabbits adjacent to the current location.
-     * Only the first live rabbit is eaten.
-     * @return Where food was found, or null if it wasn't.
-     */
-    private Location findFood()
-    {
-        Field field = getField();
-        List<Location> adjacent = field.adjacentLocations(getLocation());
-        Iterator<Location> it = adjacent.iterator();
-        while(it.hasNext()) {
-            Location where = it.next();
-            Object animal = field.getObjectAt(where);
-            if(animal instanceof Rabbit) {
-                Rabbit rabbit = (Rabbit) animal;
-                if(rabbit.isAlive()) { 
-                    rabbit.setDead();
-                    foodLevel += rabbit.getFoodValue();
-                    // Remove the dead rabbit from the field.
-                    return where;
-                }
-            }
-        }
-        return null;
-    }
-    
     private void incrementHunger() {
     	foodLevel--;
-    	if(foodLevel == 0) {
+    	if(foodLevel <= 0) {
     		setDead();
     	}
     }

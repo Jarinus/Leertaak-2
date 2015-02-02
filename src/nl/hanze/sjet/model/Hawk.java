@@ -1,67 +1,46 @@
 package nl.hanze.sjet.model;
+
 import java.util.List;
 
-/**
- * A simple model of a fox.
- * Foxes age, move, eat rabbits, and die.
- * 
- * @author Jan A. Germeraad
- * @version 22-01-2015
- */
-public class Wolf extends Animal
-{
+public class Hawk extends Animal {
 	// The animal's minimum age before it can breed, the animal's maximum
 	// achievable age, the maximum litter size and its age.
-	private static int breedingAge = 3, maxAge = 70, maxLitterSize = 2;
+	private static int breedingAge = 8, maxAge = 80, maxLitterSize = 2;
 	// The variable which signifies how big the chance is that the animal will breed.
 	private static double breedingProbability = 0.006;
-	private static int foodValue = 24;
-    // The wolf's food level, which is increased by eating.
-    private int foodLevel;
+	private static int foodValue = 16;
+	private int foodLevel;
 
-    /**
-     * Create a fox. A fox can be created as a new born (age zero
-     * and not hungry) or with a random age and food level.
-     * 
-     * @param randomAge If true, the fox will have random age and hunger level.
-     * @param field The field currently occupied.
-     * @param location The location within the field.
-     */
-    public Wolf(boolean randomAge, Field field, Location location)
-    {
-        super(field, location);
-        setAge(0);
-        foodLevel = 9;
-        if(randomAge) {
-            setAge(rand.nextInt(getMaxAge()));
-            foodLevel = rand.nextInt(9);
-        }
-    }
+	public Hawk(boolean randomAge, Field field, Location location) {
+		super(field, location);
+		setAge(0);
+		foodLevel = 6;
+		if(randomAge) {
+			setAge(rand.nextInt(getMaxAge()));
+		}
+	}
     
     /**
-     * This is what the fox does most of the time: it hunts for
-     * rabbits. In the process, it might breed, die of hunger,
-     * or die of old age.
-     * @param field The field currently occupied.
-     * @param newFoxes A list to return newly born foxes.
+     * This is what the rabbit does most of the time - it runs 
+     * around. Sometimes it will breed or die of old age.
+     * @param newRabbits A list to return newly born rabbits.
      */
-    public void act(List<Actor> newFoxes)
+    public void act(List<Actor> newHawks)
     {
         incrementAge();
-        incrementHunger();
         if(isAlive()) {
         	checkDefecate();
         	if(isDiseased() && !isImmune()) {
         		setDead();
         	}
-            giveBirth(newFoxes);            
-            // Move towards a source of food if found.
+            giveBirth(newHawks);  
             Location newLocation = findFood();
-            if(newLocation == null) { 
-                // No food found - try to move to a free location.
-                newLocation = getField().freeAdjacentLocation(getLocation());
+            if(newLocation != null) {
+            	setLocation(newLocation);
+            	return;
             }
-            // See if it was possible to move.
+            // Try to move into a free location.
+            newLocation = getField().freeAdjacentLocation(getLocation());
             if(newLocation != null) {
                 setLocation(newLocation);
             }
@@ -73,35 +52,33 @@ public class Wolf extends Animal
     }
     
     /**
-     * Make this fox more hungry. This could result in the fox's death.
+     * Check whether or not this rabbit is to give birth at this step.
+     * New births will be made into free adjacent locations.
+     * @param newRabbits A list to return newly born rabbits.
      */
-    private void incrementHunger()
+    private void giveBirth(List<Actor> newHawks)
     {
-        foodLevel--;
-        if(foodLevel <= 0) {
-            setDead();
+        // New rabbits are born into adjacent locations.
+        // Get a list of adjacent free locations.
+        Field field = getField();
+        List<Location> free = field.getFreeAdjacentLocations(getLocation());
+        int births = breed();
+        for(int b = 0; b < births && free.size() > 0; b++) {
+            Location loc = free.remove(0);
+            Hawk young = new Hawk(false, field, loc);
+            if(this.isImmune()) {
+            	young.setImmunity(true);
+            }
+            newHawks.add(young);
         }
     }
     
-    /**
-     * Look for rabbits adjacent to the current location.
-     * Only the first live rabbit is eaten.
-     * @return Where food was found, or null if it wasn't.
-     */
-    private Location findFood()
-    {
+    private Location findFood() {
     	Field field = getField();
     	List<Location> adjacent = field.adjacentLocations(getLocation());
     	for(Location location : adjacent) {
     		Object obj = field.getObjectAt(location);
-    		if(obj instanceof Hunter) {
-    			if(rand.nextDouble() > 0.95) {
-    				Hunter hunter = (Hunter) obj;
-    				hunter.setDead();
-    				foodLevel += 20;
-    				return location;
-    			}
-    		} else if(obj instanceof Ferret) {
+    		if(obj instanceof Ferret) {
     			Ferret ferret = (Ferret) obj;
     			eat(ferret, ferret.getFoodValue());
     			return location;
@@ -109,31 +86,13 @@ public class Wolf extends Animal
     			Rabbit rabbit = (Rabbit) obj;
     			eat(rabbit, rabbit.getFoodValue());
     			return location;
+    		} else if(obj instanceof Snake) {
+    			Snake snake = (Snake) obj;
+    			eat(snake, snake.getFoodValue());
+    			return location;
     		}
     	}
     	return null;
-    }
-    
-    /**
-     * Check whether or not this fox is to give birth at this step.
-     * New births will be made into free adjacent locations.
-     * @param newFoxes A list to return newly born foxes.
-     */
-    private void giveBirth(List<Actor> newFoxes)
-    {
-        // New foxes are born into adjacent locations.
-        // Get a list of adjacent free locations.
-        Field field = getField();
-        List<Location> free = field.getFreeAdjacentLocations(getLocation());
-        int births = breed();
-        for(int b = 0; b < births && free.size() > 0; b++) {
-            Location loc = free.remove(0);
-            Wolf young = new Wolf(false, field, loc);
-            if(this.isImmune()) {
-            	young.setImmunity(true);
-            }
-            newFoxes.add(young);
-        }
     }
     
     private void eat(Animal animal, int foodValue) {
@@ -165,6 +124,9 @@ public class Wolf extends Animal
         if(getAge() > maxAge) {
             setDead();
         }
+        if(foodLevel <= 0) {
+        	setDead();
+        }
     }
 
     /**
@@ -187,7 +149,7 @@ public class Wolf extends Animal
 	 * @param breedingAge the breedingAge to set
 	 */
 	public void setBreedingAge(int breedingAge) {
-		Wolf.breedingAge = breedingAge;
+		Hawk.breedingAge = breedingAge;
 	}
 
 	/**
@@ -201,7 +163,7 @@ public class Wolf extends Animal
 	 * @param maxAge the maxAge to set
 	 */
 	public void setMaxAge(int maxAge) {
-		Wolf.maxAge = maxAge;
+		Hawk.maxAge = maxAge;
 	}
 
 	/**
@@ -215,7 +177,7 @@ public class Wolf extends Animal
 	 * @param maxLitterSize the maxLitterSize to set
 	 */
 	public void setMaxLitterSize(int maxLitterSize) {
-		Wolf.maxLitterSize = maxLitterSize;
+		Hawk.maxLitterSize = maxLitterSize;
 	}
 
 	/**
@@ -229,7 +191,7 @@ public class Wolf extends Animal
 	 * @param breedingProbability the breedingProbability to set
 	 */
 	public void setBreedingProbability(double breedingProbability) {
-		Wolf.breedingProbability = breedingProbability;
+		Hawk.breedingProbability = breedingProbability;
 	}
 	
 	/**
@@ -245,6 +207,6 @@ public class Wolf extends Animal
 	 * @param foodValue The amount of foodlevel the animal restores when killed.
 	 */
 	public void setFoodValue(int foodValue) {
-		Wolf.foodValue = foodValue;
+		Hawk.foodValue = foodValue;
 	}
 }

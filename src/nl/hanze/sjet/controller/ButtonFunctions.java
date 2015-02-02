@@ -32,7 +32,7 @@ public class ButtonFunctions {
 					return;
 				}
 				if(sim.getSuspended()) {
-					sim.setSuspended(false);
+					sim.switchSuspended();;
 				}
 			}
 		});
@@ -42,7 +42,7 @@ public class ButtonFunctions {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(!sim.getSuspended()) {
-					sim.setSuspended(true);
+					sim.switchSuspended();
 				}
 			}
 		});

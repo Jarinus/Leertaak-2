@@ -12,7 +12,7 @@ public class Rabbit extends Animal
 {
 	// The animal's minimum age before it can breed, the animal's maximum
 	// achievable age, the maximum litter size and its age.
-	private static int breedingAge = 8, maxAge = 20, maxLitterSize = 3;
+	private static int breedingAge = 1, maxAge = 24, maxLitterSize = 3;
 	// The variable which signifies how big the chance is that the animal will breed.
 	private static double breedingProbability = 0.006;
 	private static int foodValue = 9;
@@ -29,7 +29,6 @@ public class Rabbit extends Animal
     {
         super(field, location);
         setAge(0);
-        setPrey(true);
         if(randomAge) {
             setAge(rand.nextInt(getMaxAge()));
         }
@@ -45,19 +44,21 @@ public class Rabbit extends Animal
         incrementAge();
         if(isAlive()) {
         	checkDefecate();
-        	if(isDiseased() && !isImmune()) {
+        	if(getLocation().eatGrass()) {
+	            giveBirth(newRabbits);            
+	            // Try to move into a free location.
+	            Location newLocation = getField().freeAdjacentLocation(getLocation());
+	            if(newLocation != null) {
+	                setLocation(newLocation);
+	            }
+	            else {
+	                // Overcrowding...
+	                setDead();
+	            }
+        	} else {
+        		// Starved...
         		setDead();
         	}
-            giveBirth(newRabbits);            
-            // Try to move into a free location.
-            Location newLocation = getField().freeAdjacentLocation(getLocation());
-            if(newLocation != null) {
-                setLocation(newLocation);
-            }
-            else {
-                // Overcrowding.
-                setDead();
-            }
         }
     }
     

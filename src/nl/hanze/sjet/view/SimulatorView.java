@@ -4,11 +4,15 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 
+import nl.hanze.sjet.controller.ButtonFunctions;
 import nl.hanze.sjet.model.Egg;
 import nl.hanze.sjet.model.Ferret;
 import nl.hanze.sjet.model.Field;
 import nl.hanze.sjet.model.FieldStats;
+import nl.hanze.sjet.model.Hawk;
+import nl.hanze.sjet.model.Hunter;
 import nl.hanze.sjet.model.Rabbit;
+import nl.hanze.sjet.model.Simulator;
 import nl.hanze.sjet.model.Snake;
 import nl.hanze.sjet.model.Wolf;
 
@@ -45,6 +49,8 @@ public class SimulatorView extends JFrame
     // A statistics object computing and storing simulation information
     private FieldStats stats;
     private Container contents;
+    
+    private ButtonView buttonView;
 
     /**
      * Create a view of the given width and height.
@@ -63,9 +69,8 @@ public class SimulatorView extends JFrame
         
         setTitle("Wolf and Rabbit Simulation");
         setColors(colors);
-        setLocation(450, 100);
         setJMenuBar(new MenuView());
-        //setButtons(buttonView);
+        center();
         
         JPanel simPanel = new JPanel(new BorderLayout(6, 6));
         simPanel.setBorder(new EtchedBorder());
@@ -77,7 +82,6 @@ public class SimulatorView extends JFrame
         contents.setLayout(new BorderLayout(6, 6));
         contents.add(simPanel, BorderLayout.CENTER);
         contents.add(version, BorderLayout.SOUTH);
-        //contents.add(buttonView,BorderLayout.WEST);
         //contents.add(new StatView(200, 200, colors), BorderLayout.EAST);
         
     	setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -86,6 +90,12 @@ public class SimulatorView extends JFrame
         pack();
     }
 
+    public void setButtons(Simulator sim) {
+    	setButtonView(new ButtonView(new ButtonFunctions(sim)));
+        contents.add(buttonView,BorderLayout.WEST);
+        pack();
+    }
+    
 	/**
      * Define a color to be used for a given class of animal.
      * @param animalClass The animal's Class object.
@@ -99,6 +109,8 @@ public class SimulatorView extends JFrame
         colors2.put(Wolf.class, Color.blue);
         colors2.put(Snake.class, Color.green);
         colors2.put(Ferret.class, Color.yellow);
+        colors2.put(Hawk.class, Color.magenta);
+        colors2.put(Hunter.class, Color.cyan);
     }
 
     /**
@@ -250,4 +262,24 @@ public class SimulatorView extends JFrame
     	contents.add(buttonView,BorderLayout.WEST);
     }
     
+    private void center() {
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);
+        int y = (int) ((dimension.getHeight() - this.getHeight()) / 2);
+        this.setLocation(x, y);
+    }
+
+	/**
+	 * @return the buttonView
+	 */
+	public ButtonView getButtonView() {
+		return buttonView;
+	}
+
+	/**
+	 * @param buttonView the buttonView to set
+	 */
+	public void setButtonView(ButtonView buttonView) {
+		this.buttonView = buttonView;
+	}
 }
