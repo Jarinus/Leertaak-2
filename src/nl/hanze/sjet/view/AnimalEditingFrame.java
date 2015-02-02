@@ -1,14 +1,17 @@
 package nl.hanze.sjet.view;
 
-import java.awt.BorderLayout;
 import java.awt.*;
+
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
+
+import nl.hanze.sjet.controller.AnimalEditingFunctions;
 
 @SuppressWarnings("serial")
 public class AnimalEditingFrame extends JFrame {
 	private Container contents;
 	private static final int TEXTFIELD_LENGHT = 11;
+	private AnimalEditingFunctions animalEditFunc;
 	
 	public AnimalEditingFrame(String string) {
 		//TODO add action listeners in new class AnimalEditingFunctions
@@ -105,11 +108,16 @@ public class AnimalEditingFrame extends JFrame {
 		contents.add(center,BorderLayout.CENTER);
 		contents.add(bottomFlow,BorderLayout.SOUTH);
 		
+		setTitle("Animalediting frame");
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		//TODO set size
         setVisible(true);
         setResizable(false);
         pack();
+	}
+	
+	public void addFunctions(){
+		
 	}
 	
 }
