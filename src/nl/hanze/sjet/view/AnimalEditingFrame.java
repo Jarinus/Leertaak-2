@@ -4,38 +4,42 @@ import java.awt.*;
 
 import javax.swing.*;
 
-import nl.hanze.sjet.controller.AnimalEditingFunctions;
+import nl.hanze.sjet.controller.AnimalEditingFrameHandler;
+import nl.hanze.sjet.model.Rabbit;
+import nl.hanze.sjet.model.Simulator;
 
 @SuppressWarnings("serial")
 public class AnimalEditingFrame extends JFrame {
 	private Container contents;
 	private static final int TEXTFIELD_LENGHT = 11;
-	private AnimalEditingFunctions animalEditFunc;
+	private AnimalEditingFrameHandler animalEditFrameHandler;
 	
 	public AnimalEditingFrame(String string) {
 		//TODO add action listeners in new class AnimalEditingFunctions
 		//make labels
-		/*JLabel dierNaam = new JLabel("Diernaam");*/
+		JLabel dierNaam = new JLabel(string);
 		JLabel maxAge = new JLabel("Maximum Age:");
 		JLabel breedingAge = new JLabel("Breeding Age:");
 		JLabel breedingProb = new JLabel("Breeding Prob.:");
 		JLabel maxLitterSize = new JLabel("Max Litter Size:");
 		JLabel foodValue = new JLabel("Food Value:");
 		
+		int i = ((Rabbit) new Object()).getMaxAge();
+		
 		//make image labels
 		//TODO add images to JLabels
-		JLabel ferretImg = new JLabel(new ImageIcon("image.png"));/*
-		JLabel rabbitImg = new JLabel(new ImageIcon("image.png"));
-		JLabel snakeImg = new JLabel(new ImageIcon("image.png"));
-		JLabel hawkImg = new JLabel(new ImageIcon("image.png"));
-		JLabel wolfImg = new JLabel(new ImageIcon("image.png"));*/
+		JLabel ferretImg = new JLabel(new ImageIcon("images/ferret.jpg"));
+		JLabel rabbitImg = new JLabel(new ImageIcon("images/Rabbit.jpg"));
+		JLabel snakeImg = new JLabel(new ImageIcon("images/cobra.jpg"));
+		JLabel hawkImg = new JLabel(new ImageIcon("images/hawk.jpg"));
+		JLabel wolfImg = new JLabel(new ImageIcon("images/wolf.jpg"));
 		
 		//make buttons
-		JButton ferretBut = new JButton("Ferret");
+		/*JButton ferretBut = new JButton("Ferret");
 		JButton rabbitBut = new JButton("Rabbit");
 		JButton snakeBut = new JButton("Snake");
 		JButton hawkBut = new JButton("Hawk");
-		JButton wolfBut = new JButton("Wolf");
+		JButton wolfBut = new JButton("Wolf");*/
 		JButton cancel = new JButton("Cancel");
 		JButton defaultBut = new JButton("Default");
 		JButton submitBut = new JButton("Submit");
@@ -43,7 +47,7 @@ public class AnimalEditingFrame extends JFrame {
 		//make textfields
 		//TODO variables in the JTextField("Variable")
 		JTextField maxAgeField = new JTextField("poep",TEXTFIELD_LENGHT);
-		JTextField breedingAgeField = new JTextField(TEXTFIELD_LENGHT);
+		JTextField breedingAgeField = new JTextField("" + i, TEXTFIELD_LENGHT);
 		JTextField breedingProbField = new JTextField(TEXTFIELD_LENGHT);
 		JTextField maxLitterSizeField = new JTextField(TEXTFIELD_LENGHT);
 		JTextField foodValueField = new JTextField(TEXTFIELD_LENGHT);
@@ -51,12 +55,19 @@ public class AnimalEditingFrame extends JFrame {
 		//make the upper set
 		JPanel upper = new JPanel();
 		upper.setLayout(new GridLayout(1,6,4,0));
-		upper.add(ferretImg);
-		upper.add(ferretBut);
-		upper.add(rabbitBut);
-		upper.add(snakeBut);
-		upper.add(hawkBut);
-		upper.add(wolfBut);
+		switch(string){
+		case "Ferret": upper.add(ferretImg);
+		break;
+		case "Rabbit": upper.add(rabbitImg);
+		break;
+		case "Snake": upper.add(snakeImg);
+		break;
+		case "Hawk": upper.add(hawkImg);
+		break;
+		case "Wolf": upper.add(wolfImg);
+		break;
+		};
+		upper.add(dierNaam);
 		JPanel upperFlow = new JPanel();
 		upperFlow.add(upper);
 		
