@@ -6,7 +6,7 @@ import java.util.List;
  * Rabbits age, move, breed, and die.
  * 
  * @author Jan A. Germeraad
- * @version 22-01-2015
+ * @version 03-02-2015
  */
 public class Rabbit extends Animal
 {
@@ -15,6 +15,7 @@ public class Rabbit extends Animal
 	private static int breedingAge = 1, maxAge = 24, maxLitterSize = 3;
 	// The variable which signifies how big the chance is that the animal will breed.
 	private static double breedingProbability = 0.006;
+	// The amount of foodLevel the Rabbit restores when killed.
 	private static int foodValue = 9;
 	
     /**

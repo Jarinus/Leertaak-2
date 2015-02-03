@@ -5,7 +5,6 @@ import java.awt.*;
 import javax.swing.*;
 
 import nl.hanze.sjet.controller.AnimalEditingFrameHandler;
-import nl.hanze.sjet.model.Rabbit;
 import nl.hanze.sjet.model.Simulator;
 
 @SuppressWarnings("serial")
@@ -33,7 +32,6 @@ public class AnimalEditingFrame extends JFrame {
 		animalEditFrameHandler = new AnimalEditingFrameHandler(this);
 		getJTextFieldVariables();
 		
-		//TODO add action listeners in new class AnimalEditingFunctions
 		//make labels
 		JLabel dierNaam = new JLabel(string);
 		JLabel maxAge = new JLabel("Maximum Age:");

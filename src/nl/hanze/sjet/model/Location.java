@@ -5,8 +5,8 @@ import java.util.Random;
 /**
  * Represent a location in a rectangular grid.
  * 
- * @author David J. Barnes and Michael Kölling
- * @version 2011.07.31
+ * @author David J. Barnes, Michael Kölling and Jan A. Germeraad
+ * @version 03-02-2015
  */
 public class Location
 {
@@ -42,11 +42,19 @@ public class Location
         }
     }
     
+    /**
+     * Increases the foodValue for the Location.
+     */
     public void incrementFoodValue() {
     	int temp = (int) (1 + (2 * rand.nextDouble()));
     	foodValue += temp;
     }
     
+    /**
+     * Signifies an Animal eating grass.
+     * Thus, reducing the location's foodValue and return whether it succeeded
+     * @return Whether the animal succeeded in eating from the location.
+     */
     public boolean eatGrass() {
     	if(foodValue > 0) {
     		foodValue--;

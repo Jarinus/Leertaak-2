@@ -15,15 +15,16 @@ public class Wolf extends Animal
 	private static int breedingAge = 3, maxAge = 70, maxLitterSize = 2;
 	// The variable which signifies how big the chance is that the animal will breed.
 	private static double breedingProbability = 0.006;
+	// The value of the foodLevel that this animal will increase when killed by another animal.
 	private static int foodValue = 24;
     // The wolf's food level, which is increased by eating.
     private int foodLevel;
 
     /**
-     * Create a fox. A fox can be created as a new born (age zero
+     * Create a wolf. A wolf can be created as a new born (age zero
      * and not hungry) or with a random age and food level.
      * 
-     * @param randomAge If true, the fox will have random age and hunger level.
+     * @param randomAge If true, the wolf will have random age and hunger level.
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
@@ -39,13 +40,11 @@ public class Wolf extends Animal
     }
     
     /**
-     * This is what the fox does most of the time: it hunts for
-     * rabbits. In the process, it might breed, die of hunger,
-     * or die of old age.
+     * Lets the wolf act. It ages, gets hungry, may give birth and tries to hunt.
      * @param field The field currently occupied.
-     * @param newFoxes A list to return newly born foxes.
+     * @param newWolves A list to return newly born wolves.
      */
-    public void act(List<Actor> newFoxes)
+    public void act(List<Actor> newWolves)
     {
         incrementAge();
         incrementHunger();
@@ -54,7 +53,7 @@ public class Wolf extends Animal
         	if(isDiseased() && !isImmune()) {
         		setDead();
         	}
-            giveBirth(newFoxes);            
+            giveBirth(newWolves);            
             // Move towards a source of food if found.
             Location newLocation = findFood();
             if(newLocation == null) { 
@@ -73,7 +72,7 @@ public class Wolf extends Animal
     }
     
     /**
-     * Make this fox more hungry. This could result in the fox's death.
+     * Make this wolf more hungry. This could result in the wolf's death.
      */
     private void incrementHunger()
     {
@@ -84,8 +83,7 @@ public class Wolf extends Animal
     }
     
     /**
-     * Look for rabbits adjacent to the current location.
-     * Only the first live rabbit is eaten.
+     * Look for prey in adjacent locations.
      * @return Where food was found, or null if it wasn't.
      */
     private Location findFood()
@@ -115,11 +113,11 @@ public class Wolf extends Animal
     }
     
     /**
-     * Check whether or not this fox is to give birth at this step.
+     * Check whether or not this wolf is to give birth at this step.
      * New births will be made into free adjacent locations.
-     * @param newFoxes A list to return newly born foxes.
+     * @param newWolves A list to return newly born wolves.
      */
-    private void giveBirth(List<Actor> newFoxes)
+    private void giveBirth(List<Actor> newWolves)
     {
         // New foxes are born into adjacent locations.
         // Get a list of adjacent free locations.
@@ -132,10 +130,15 @@ public class Wolf extends Animal
             if(this.isImmune()) {
             	young.setImmunity(true);
             }
-            newFoxes.add(young);
+            newWolves.add(young);
         }
     }
     
+    /**
+	 * Eats given animal object.
+     * @param animal The animal to be removed.
+     * @param foodValue The animal's foodValue, to be added to the Wolf's foodLevel.
+     */
     private void eat(Animal animal, int foodValue) {
     	animal.setDead();
     	foodLevel += foodValue;
@@ -157,7 +160,7 @@ public class Wolf extends Animal
 
     /**
      * Increase the age.
-     * This could result in the rabbit's death.
+     * This could result in the wolf's death.
      */
     protected void incrementAge()
     {
@@ -168,8 +171,8 @@ public class Wolf extends Animal
     }
 
     /**
-     * A rabbit can breed if it has reached the breeding age.
-     * @return true if the rabbit can breed, false otherwise.
+     * A wolf can breed if it has reached the breeding age.
+     * @return true if the wolf can breed, false otherwise.
      */
     protected boolean canBreed()
     {

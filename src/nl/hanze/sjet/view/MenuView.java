@@ -7,9 +7,16 @@ import javax.swing.JMenuItem;
 import nl.hanze.sjet.controller.MenuFunctions;
 import nl.hanze.sjet.model.Simulator;
 
+/**
+ * Creates new menus.
+ * @author Jari
+ * @version 03-02-2015
+ */
 @SuppressWarnings("serial")
 public class MenuView extends JMenuBar {
+	// The JMenus
 	JMenu animals, legend, about;
+	// The JMenuItems
 	JMenuItem 	animalsFerret, animalsRabbit, animalsSnake, animalsHawk, animalsWolf,
 				legendFerret, legendRabbit, legendSnake, legendHawk, legendWolf;
 	

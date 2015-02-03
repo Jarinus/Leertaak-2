@@ -7,9 +7,17 @@ public class Snake extends Animal {
 	private static int breedingAge = 11, maxAge = 68, maxLitterSize = 3;
 	// The variable which signifies how big the chance is that the animal will breed.
 	private static double breedingProbability = 0.006;
+	// The amount of foodLevel the snake restores when killed.
 	private static int foodValue = 12;
+	// The snake's foodLevel.
 	private int foodLevel;
 	
+	/**
+	 * Constructor for Snake.
+	 * @param randomAge Signifies if the animal should be of random age or not.
+	 * @param field The field in which this Snake is created.
+	 * @param location The location occupied by the Snake.
+	 */
 	public Snake(boolean randomAge, Field field, Location location) {
 		super(field, location);
 		setAge(0);
@@ -19,6 +27,10 @@ public class Snake extends Animal {
 		}
 	}
 
+	/**
+	 * Lets the Snake act: age, get hungry, defecate, give birth and try to hunt.
+	 * @param newSnakes The list of Snakes to which new Snakes may be added.
+	 */
 	@Override
 	public void act(List<Actor> newSnakes) {
 		incrementAge();
@@ -43,6 +55,10 @@ public class Snake extends Animal {
 		}
 	}
 	
+	/**
+	 * Tries to find food, returns null if no food was found or the location of the animal if food was found.
+	 * @return Location of eaten animal or null.
+	 */
 	private Location findFood() {
 		Field field = getField();
 		List<Location> adjacent = field.adjacentLocations(getLocation());
@@ -72,6 +88,11 @@ public class Snake extends Animal {
 		return null;
 	}
 	
+	/**
+	 * Eats given animal.
+	 * @param actor The actor, when an instance of Animal, to be removed.
+	 * @param foodValue The amount with which the Snake's foodLevel should be increased.
+	 */
 	private void eat(Actor actor, int foodValue) {
 		if(actor instanceof Animal) {
 			Animal animal = (Animal) actor;
@@ -79,7 +100,11 @@ public class Snake extends Animal {
 			animal.setDead();
 		}
 	}
-
+	
+	/**
+	 * Creates new Snakes if the snake can breed.
+	 * @param newSnakes The list of Actors to which new Snakes may be added.
+	 */
 	private void giveBirth(List<Actor> newSnakes) {
 		// New snakes are born into adjacent locations.
 		// Get a list of adjacent free locations.
@@ -96,6 +121,9 @@ public class Snake extends Animal {
 		}
 	}
     
+	/**
+	 * Reduces the snake's foodLevel, so that it may either die or simply grow hungrier.
+	 */
     private void incrementHunger() {
     	foodLevel--;
     	if(foodLevel <= 0) {
@@ -119,7 +147,7 @@ public class Snake extends Animal {
 
     /**
      * Increase the age.
-     * This could result in the rabbit's death.
+     * This could result in the snake's death.
      */
     protected void incrementAge()
     {
@@ -130,8 +158,8 @@ public class Snake extends Animal {
     }
 
     /**
-     * A rabbit can breed if it has reached the breeding age.
-     * @return true if the rabbit can breed, false otherwise.
+     * A snake can breed if it has reached the breeding age.
+     * @return true if the snake can breed, false otherwise.
      */
     protected boolean canBreed()
     {

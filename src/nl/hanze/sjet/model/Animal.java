@@ -6,11 +6,13 @@ import java.util.Random;
  * A class representing shared characteristics of animals.
  * 
  * @author Jan A. Germeraad
- * @version 22-01-2015
+ * @version 03-02-2015
  */
 public abstract class Animal implements Actor
 {
+	// The randomizer for all Animals.
 	public static final Random rand = Randomizer.getRandom();
+	// The default steps before the Animal defecates.
 	public static final int DEFAULT_STEPS_UNTIL_DEFECATING = 3;
 	// The animal's age.
 	private int age;
@@ -72,6 +74,10 @@ public abstract class Animal implements Actor
         }
     }
     
+    /**
+     * Checks if the Animal should be defecating.
+     * @return Whether the animal should be defecating.
+     */
     protected boolean checkDefecate() {
     	if(stepsUntilDefecating < 0) {
     		stepsUntilDefecating = DEFAULT_STEPS_UNTIL_DEFECATING;

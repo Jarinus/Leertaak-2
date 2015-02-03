@@ -3,18 +3,30 @@ package nl.hanze.sjet.controller;
 import javax.swing.JButton;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.*;
 import nl.hanze.sjet.view.AnimalEditingFrame;
 import javax.swing.*;
-import nl.hanze.sjet.model.Simulator;
 
+/**
+ * Handles the functionality of the AnimalEditingFrame.
+ * @author Jan A. Germeraad, S. Orhan
+ * @version 03-02-2015
+ */
 public class AnimalEditingFrameHandler {
+	// The AnimalEditingFrame which is to be used.
 	private AnimalEditingFrame animaleditFrame;
 	
+	/**
+	 * Constructor for AnimalEditingFrameHandler
+	 * @param animaleditFrame The frame which is to be used.
+	 */
 	public AnimalEditingFrameHandler(AnimalEditingFrame animaleditFrame){
 		this.animaleditFrame = animaleditFrame;
 	}
 	
+	/**
+	 * Adds the cancel function to a specified button.
+	 * @param button The button that uses this functionality
+	 */
 	public void addCancelButton(JButton button){
 		button.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
@@ -23,6 +35,10 @@ public class AnimalEditingFrameHandler {
 		});
 	}
 	
+	/**
+	 * Adds the default function to a specified button.
+	 * @param button The button that uses this functionality
+	 */
 	public void addDefaultButton(JButton button){
 		button.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
@@ -30,7 +46,11 @@ public class AnimalEditingFrameHandler {
 			}
 		});
 	}
-	
+
+	/**
+	 * Adds the submit function to a specified button.
+	 * @param button The button that uses this functionality
+	 */
 	public void addSubmitButton(JButton button){
 		button.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
@@ -38,7 +58,11 @@ public class AnimalEditingFrameHandler {
 			}
 		});
 	}
-	
+
+	/**
+	 * Adds an ActionListener to edit MaxAge.
+	 * @param textField The textfield used.
+	 */
 	public void addMaxAgeField(JTextField textField){
 		textField.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
@@ -46,7 +70,11 @@ public class AnimalEditingFrameHandler {
 			}
 		});
 	}
-	
+
+	/**
+	 * Adds an ActionListener to edit BreedingAge.
+	 * @param textField The textfield used.
+	 */
 	public void addBreedingAgeField(JTextField textField){
 		textField.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
@@ -54,6 +82,11 @@ public class AnimalEditingFrameHandler {
 			}
 		});
 	}
+
+	/**
+	 * Adds an ActionListener to edit BreedingProbability.
+	 * @param textField The textfield used.
+	 */
 	public void addBreedingProbField(JTextField textField){
 		textField.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
@@ -61,6 +94,11 @@ public class AnimalEditingFrameHandler {
 			}
 		});
 	}
+
+	/**
+	 * Adds an ActionListener to edit MaxLitterSize.
+	 * @param textField The textfield used.
+	 */
 	public void addMaxLitterSizeField(JTextField textField){
 		textField.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
@@ -68,6 +106,11 @@ public class AnimalEditingFrameHandler {
 			}
 		});
 	}
+
+	/**
+	 * Adds an ActionListener to edit FoodValue.
+	 * @param textField The textfield used.
+	 */
 	public void addFoodValueField(JTextField textField){
 		textField.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){

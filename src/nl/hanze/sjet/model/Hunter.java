@@ -2,6 +2,12 @@ package nl.hanze.sjet.model;
 
 import java.util.List;
 
+/**
+ * The Hunter object. The Hunter hunts for animals like Wolves and Hawks.
+ * @author Jan A. Germeraad
+ * @version 03-02-2015
+ */
+
 public class Hunter implements Actor {
 	private Field field;
 	private Location location;
@@ -59,6 +65,10 @@ public class Hunter implements Actor {
 		field.clear(location);
 	}
 
+	/**
+	 * Returns the alive boolean.
+	 * @return alive
+	 */
 	public boolean isAlive() {
 		return alive;
 	}

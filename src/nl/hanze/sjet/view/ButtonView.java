@@ -7,6 +7,11 @@ import javax.swing.JPanel;
 
 import nl.hanze.sjet.controller.ButtonFunctions;
 
+/**
+ * Creates buttons and uses ButtonFunctions to add functionality.
+ * @author Jan A. Germeraad
+ * @version 03-02-2015
+ */
 @SuppressWarnings("serial")
 public class ButtonView extends JPanel {
 	// The button to perform one step.
@@ -17,7 +22,7 @@ public class ButtonView extends JPanel {
 	private JButton pauseButton;
 	// The button to reset the current situation.
 	private JButton resetButton;
-	// 
+	// The button functions used.
 	private ButtonFunctions buttonFunctions;
 	
 	/**
@@ -44,6 +49,9 @@ public class ButtonView extends JPanel {
 		addButtonFunctions();
 	}
 	
+	/**
+	 * Adds the functionality to the buttons.
+	 */
 	public void addButtonFunctions() {
 		buttonFunctions.addFunctionOneStep(oneStepButton);
 		buttonFunctions.addFunctionRun(runButton);

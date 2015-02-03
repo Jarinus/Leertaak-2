@@ -8,9 +8,17 @@ public class Hawk extends Animal {
 	private static int breedingAge = 8, maxAge = 80, maxLitterSize = 2;
 	// The variable which signifies how big the chance is that the animal will breed.
 	private static double breedingProbability = 0.006;
+	// The amount of foodLevel this animal restores when killed.
 	private static int foodValue = 16;
+	// The amount of steps this animal can survive without eating.
 	private int foodLevel;
 
+	/**
+	 * The constructor for a Hawk.
+	 * @param randomAge Whether this Hawk should have a random age or not.
+	 * @param field The field in which the Hawk is created.
+	 * @param location The location occupied by the Hawk.
+	 */
 	public Hawk(boolean randomAge, Field field, Location location) {
 		super(field, location);
 		setAge(0);
@@ -21,9 +29,9 @@ public class Hawk extends Animal {
 	}
     
     /**
-     * This is what the rabbit does most of the time - it runs 
+     * This is what the hawk does most of the time - it runs 
      * around. Sometimes it will breed or die of old age.
-     * @param newRabbits A list to return newly born rabbits.
+     * @param newHawks A list to return newly born eggs (hawks).
      */
     public void act(List<Actor> newHawks)
     {
@@ -52,9 +60,9 @@ public class Hawk extends Animal {
     }
     
     /**
-     * Check whether or not this rabbit is to give birth at this step.
+     * Check whether or not this hawk is to give birth at this step.
      * New births will be made into free adjacent locations.
-     * @param newRabbits A list to return newly born rabbits.
+     * @param newHawks A list to return newly born eggs (hawks).
      */
     private void giveBirth(List<Actor> newHawks)
     {
@@ -73,6 +81,10 @@ public class Hawk extends Animal {
         }
     }
     
+    /**
+     * Tries to find a killable object in adjacent locations and returns the location or null if none were found.
+     * @return The location of the killed animal or null.
+     */
     private Location findFood() {
     	Field field = getField();
     	List<Location> adjacent = field.adjacentLocations(getLocation());
@@ -95,6 +107,11 @@ public class Hawk extends Animal {
     	return null;
     }
     
+    /**
+     * Eats the animal and restores foodLevel.
+     * @param animal The animal to be killed.
+     * @param foodValue The amount of foodLevel to be restored.
+     */
     private void eat(Animal animal, int foodValue) {
     	animal.setDead();
     	foodLevel += foodValue;
@@ -116,7 +133,7 @@ public class Hawk extends Animal {
 
     /**
      * Increase the age.
-     * This could result in the rabbit's death.
+     * This could result in the hawk's death.
      */
     protected void incrementAge()
     {
@@ -132,7 +149,7 @@ public class Hawk extends Animal {
 
     /**
      * A rabbit can breed if it has reached the breeding age.
-     * @return true if the rabbit can breed, false otherwise.
+     * @return true if the hawk can breed, false otherwise.
      */
     protected boolean canBreed()
     {

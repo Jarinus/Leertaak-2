@@ -7,8 +7,15 @@ public class Ferret extends Animal {
 	private static int breedingAge = 2, maxAge = 24, maxLitterSize = 2;
 	// The variable which signifies how big the chance is that the animal will breed.
 	private static double breedingProbability = 0.006;
+	// The amount of foodLevel restored when this ferret is killed.
 	private static int foodValue = 12;
 	
+	/**
+	 * The constructor for the Ferret object.
+	 * @param randomAge Whether the ferret should have a random age.
+	 * @param field The field in which the ferret is created.
+	 * @param location The location occupied by the ferret.
+	 */
 	public Ferret(boolean randomAge, Field field, Location location) {
 		super(field, location);
 		setAge(0);
@@ -17,7 +24,10 @@ public class Ferret extends Animal {
 		}
 	}
 	
-
+	/**
+	 * Lets the ferret act.
+	 * @param newFerrets The list in which new Ferrets may be added.
+	 */
 	@Override
 	public void act(List<Actor> newFerrets) {
 		incrementAge();
@@ -39,6 +49,10 @@ public class Ferret extends Animal {
 		}
 	}
 	
+	/**
+	 * Tries to find killable animals in adjacent locations.
+	 * @return The location of a killable animal or null.
+	 */
 	private Location findFood() {
 		Field field = getField();
 		Location location = null;
@@ -65,6 +79,10 @@ public class Ferret extends Animal {
 		return location;
 	}
 
+	/**
+	 * Tries to give birth to new Ferrets.
+	 * @param newFerrets The list to which new Ferrets are added.
+	 */
 	private void giveBirth(List<Actor> newFerrets) {
 		Field field = getField();
 		List<Location> free = field.getFreeAdjacentLocations(getLocation());
@@ -95,7 +113,7 @@ public class Ferret extends Animal {
 
     /**
      * Increase the age.
-     * This could result in the rabbit's death.
+     * This could result in the ferret's death.
      */
     protected void incrementAge()
     {
@@ -106,8 +124,8 @@ public class Ferret extends Animal {
     }
 
     /**
-     * A rabbit can breed if it has reached the breeding age.
-     * @return true if the rabbit can breed, false otherwise.
+     * A ferret can breed if it has reached the breeding age.
+     * @return true if the ferret can breed, false otherwise.
      */
     protected boolean canBreed()
     {

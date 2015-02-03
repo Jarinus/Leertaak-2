@@ -41,11 +41,17 @@ public class Simulator extends Thread
     private int step;
     // The SimulatorView Object
     private SimulatorView view;
+    // A rabbit object.
     private Rabbit rabbit;
+    // A ferret object.
 	private Ferret ferret;
+	// A snake object.
     private Snake snake;
+    // A wolf object.
     private Wolf wolf;
+    // A hawk object.
     private Hawk hawk;
+    // A hunter object.
     private Hunter hunter;
     
     /**
@@ -82,16 +88,31 @@ public class Simulator extends Thread
         reset();
     }
     
+    /**
+     * Returns the suspended boolean.
+     * @return Suspended boolean.
+     */
     public boolean getSuspended() {
     	return suspended;
     }
     
+    /**
+     * Returns the Started boolean.
+     * @return Started boolean.
+     */
     public boolean getStarted() {
     	return started;
     }
     
+    /**
+     * Switches the Suspended boolean from false to true or from true to false.
+     */
     public void switchSuspended() {
-    	suspended = !suspended;
+    	if(suspended) {
+    		suspended = false;
+    	} else {
+    		suspended = true;
+    	}
     }
     
     /**
@@ -207,32 +228,67 @@ public class Simulator extends Thread
             }
         }
     }
+    
+    /**
+     * Returns The current simulator.
+     * @return This simulator.
+     */
     public Simulator getSimulator(){
     	return this;
     }
+    
+    /**
+     * Returns the SimulatorView.
+     * @return The SimulatorView in this Simulator.
+     */
     public SimulatorView getSimulatorView() {
     	return view;
     }
+    
+    /**
+     * Returns the Rabbit object.
+     * @return The Rabbit object.
+     */
     public Rabbit getRabbit() {
 		return rabbit;
 	}
 
+    /**
+     * Returns the Ferret object.
+     * @return The Ferret object.
+     */
 	public Ferret getFerret() {
 		return ferret;
 	}
 
+	/**
+	 * Returns the Snake object.
+	 * @return The Snake object.
+	 */
 	public Snake getSnake() {
 		return snake;
 	}
 
+	/**
+	 * Returns the Wolf object.
+	 * @return The Wolf object.
+	 */
 	public Wolf getWolf() {
 		return wolf;
 	}
 
+	/**
+	 * Returns the Hawk object.
+	 * @return The Hawk object.
+	 */
 	public Hawk getHawk() {
 		return hawk;
 	}
 
+	/**
+	 * Returns the Hunter object.
+	 * @return The Hunter object.
+	 */
 	public Hunter getHunter() {
 		return hunter;
 	}
