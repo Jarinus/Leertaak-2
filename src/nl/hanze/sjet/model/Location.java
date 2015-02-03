@@ -25,7 +25,7 @@ public class Location
     {
         this.row = row;
         this.col = col;
-        foodValue = (int) (3 + (3 * rand.nextDouble()));
+        foodValue = (10 + rand.nextInt(9));
     }
     
     /**

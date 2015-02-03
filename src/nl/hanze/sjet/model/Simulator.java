@@ -21,17 +21,17 @@ public class Simulator extends Thread
 	// Whether the thread was started or not.
 	private boolean started;
     // The probability that a wolf will be created in any given grid position.
-    private static final double WOLF_CREATION_PROBABILITY = 0.02;
+    private static final double WOLF_CREATION_PROBABILITY = 0.01;
     // The probability that a rabbit will be created in any given grid position.
-    private static final double RABBIT_CREATION_PROBABILITY = 0.1;
+    private static final double RABBIT_CREATION_PROBABILITY = 0.05;
     // The probability that a snake will be created in any given grid position.
-    private static final double SNAKE_CREATION_PROBABILITY = 0.04;
+    private static final double SNAKE_CREATION_PROBABILITY = 0.02;
     // The probability that a hawk will be created in any given grid position.
-    private static final double HAWK_CREATION_PROBABILITY = 0.05;
+    private static final double HAWK_CREATION_PROBABILITY = 0.025;
     // The probability that a ferret will be created in any given grid position.
-    private static final double FERRET_CREATION_PROBABILITY = 0.06;
+    private static final double FERRET_CREATION_PROBABILITY = 0.03;
     // The probability that a hunter will be crated in any given grid position.
-    private static final double HUNTER_CREATION_PROBABILITY = 0.01;
+    private static final double HUNTER_CREATION_PROBABILITY = 0.005;
 
     // List of animals in the field.
     private List<Actor> actors;

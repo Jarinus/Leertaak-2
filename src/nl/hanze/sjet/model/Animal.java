@@ -38,7 +38,7 @@ public abstract class Animal implements Actor
         alive = true;
         this.field = field;
         setLocation(location);
-    	setImmunity(rand.nextDouble() > 0.9);
+    	setImmunity(rand.nextDouble() >= 0.9);
     	stepsUntilDefecating = DEFAULT_STEPS_UNTIL_DEFECATING;
     }
     

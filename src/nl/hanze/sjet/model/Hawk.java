@@ -65,7 +65,7 @@ public class Hawk extends Animal {
         int births = breed();
         for(int b = 0; b < births && free.size() > 0; b++) {
             Location loc = free.remove(0);
-            Hawk young = new Hawk(false, field, loc);
+            Egg young = new Egg(this, field, loc);
             if(this.isImmune()) {
             	young.setImmunity(true);
             }
@@ -120,6 +120,7 @@ public class Hawk extends Animal {
      */
     protected void incrementAge()
     {
+    	foodLevel--;
         setAge(getAge() + 1);
         if(getAge() > maxAge) {
             setDead();

@@ -72,7 +72,7 @@ public class Ferret extends Animal {
 		for(int b = 0; b < births && free.size() > 0; b++) {
 			Location loc = free.remove(0);
 			Ferret young = new Ferret(false, field, loc);
-            if(this.isImmune()) {
+            if(isImmune()) {
             	young.setImmunity(true);
             }
 			newFerrets.add(young);
