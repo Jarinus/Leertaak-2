@@ -1,4 +1,5 @@
 package nl.hanze.sjet.model;
+
 /**
  * Represent a location in a rectangular grid.
  * 

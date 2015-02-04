@@ -1,5 +1,6 @@
 package nl.hanze.sjet.view;
 import java.awt.*;
+import java.awt.geom.Rectangle2D;
 
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
@@ -30,16 +31,13 @@ public class SimulatorView extends JFrame
 
     // Color used for objects that have no defined color.
     private static final Color UNKNOWN_COLOR = Color.gray;
-
-    private final String STEP_PREFIX = "Step: ";
-    private final String POPULATION_PREFIX = "Population: ";
-    private JLabel stepLabel, population;
     private FieldView fieldView;
     
     private JButton oneStepButton;
     private JButton runButton;
     private JButton pauseButton;
     private JButton resetButton;
+    private JButton switchDefecatingButton;
     
     // A map for storing colors for participants in the simulation
     @SuppressWarnings("rawtypes")
@@ -70,12 +68,14 @@ public class SimulatorView extends JFrame
     	runButton = buttonHandler.makeNewRunButton(new JButton("Run"));
     	pauseButton = buttonHandler.makeNewPauseButton(new JButton("Pause"));
     	resetButton = buttonHandler.makeNewResetButton(new JButton("Reset"));
+    	switchDefecatingButton = buttonHandler.makeNewSwitchDefecateButton(new JButton("Switch Defecation"));
     	
     	JPanel panel = new JPanel(new GridLayout(0, 1));
     	panel.add(oneStepButton);
     	panel.add(runButton);
     	panel.add(pauseButton);
     	panel.add(resetButton);
+    	panel.add(switchDefecatingButton);
     	
     	JPanel flow = new JPanel();
     	flow.add(panel);
@@ -84,8 +84,6 @@ public class SimulatorView extends JFrame
         colors = new LinkedHashMap<Class, Color>();
 
         setTitle("Fox and Rabbit Simulation");
-        stepLabel = new JLabel(STEP_PREFIX, JLabel.CENTER);
-        population = new JLabel(POPULATION_PREFIX, JLabel.CENTER);
         
         setLocation(100, 50);
         
@@ -93,14 +91,24 @@ public class SimulatorView extends JFrame
         
         JPanel simPanel = new JPanel(new BorderLayout(6, 6));
         simPanel.setBorder(new EtchedBorder());
-        simPanel.add(stepLabel, BorderLayout.NORTH);
-        simPanel.add(fieldView, BorderLayout.CENTER);
-        simPanel.add(population, BorderLayout.SOUTH);
+        simPanel.add(fieldView);
         
-        Container contents = getContentPane();
+        JTextArea text = new JTextArea();
+        text.setBackground(this.getBackground());
+        
+        JPanel textPanel = new JPanel();
+        textPanel.setBorder(BorderFactory.createEtchedBorder());
+        textPanel.add(text);
+        
+        JPanel contents = new JPanel();
+        contents.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         contents.setLayout(new BorderLayout(6, 6));
         contents.add(flow, BorderLayout.WEST);
         contents.add(simPanel, BorderLayout.CENTER);
+        contents.add(textPanel, BorderLayout.SOUTH);
+
+        Container container = getContentPane();
+        container.add(contents);
 
         setJMenuBar(menuBar);
     	setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -146,8 +154,6 @@ public class SimulatorView extends JFrame
         if(!isVisible()) {
             setVisible(true);
         }
-            
-        stepLabel.setText(STEP_PREFIX + step);
         stats.reset();
         
         fieldView.preparePaint();
@@ -165,8 +171,6 @@ public class SimulatorView extends JFrame
             }
         }
         stats.countFinished();
-
-        population.setText(POPULATION_PREFIX + stats.getPopulationDetails(field));
         fieldView.repaint();
     }
 
@@ -189,7 +193,7 @@ public class SimulatorView extends JFrame
      */
     private class FieldView extends JPanel
     {
-        private final int GRID_VIEW_SCALING_FACTOR = 6;
+        private final int GRID_VIEW_SCALING_FACTOR = 3;
 
         private int gridWidth, gridHeight;
         private int xScale, yScale;

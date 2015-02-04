@@ -21,6 +21,20 @@ public class ButtonHandler {
 		this.sim = sim;
 	}
 	
+	public JButton makeNewSwitchDefecateButton(JButton button) {
+		JButton newButton = button;
+		newButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(sim.getField().isDefecating()) {
+					sim.getField().setDefecating(false);
+				} else {
+					sim.getField().setDefecating(true);
+				}
+			}
+		});
+		return newButton;
+	}
+	
 	/**
 	 * 
 	 * @param button

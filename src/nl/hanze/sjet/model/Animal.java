@@ -37,6 +37,15 @@ public abstract class Animal implements Actor
     abstract public void act(List<Actor> newAnimals);
 
     /**
+     * Adds value to the grass at given row and column.
+     * @param row The row.
+     * @param col The column.
+     */
+    public void defecate(int row, int col) {
+    	field.addGrass(row, col);
+    }
+    
+    /**
      * Check whether the animal is alive or not.
      * @return true if the animal is still alive.
      */

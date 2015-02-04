@@ -23,9 +23,9 @@ public class Simulator extends Thread
 	// Whether the thread was started or not.
 	public boolean started;
     // The default width for the grid.
-    private static final int DEFAULT_WIDTH = 120;
+    private static final int DEFAULT_WIDTH = 150;
     // The default depth of the grid.
-    private static final int DEFAULT_DEPTH = 80;
+    private static final int DEFAULT_DEPTH = 60;
     // The probability that a fox will be created in any given grid position.
     private static final double FOX_CREATION_PROBABILITY = 0.02;
     // The probability that a rabbit will be created in any given grid position.
@@ -160,5 +160,9 @@ public class Simulator extends Thread
                 // else leave the location empty.
             }
         }
+    }
+    
+    public Field getField() {
+    	return field;
     }
 }

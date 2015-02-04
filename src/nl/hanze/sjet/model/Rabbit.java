@@ -53,17 +53,25 @@ public class Rabbit extends Animal
      */
     public void act(List<Actor> newRabbits)
     {
+    	Field field = getField();
         incrementAge();
         if(isAlive()) {
-            giveBirth(newRabbits);            
-            // Try to move into a free location.
-            Location newLocation = getField().freeAdjacentLocation(getLocation());
-            if(newLocation != null) {
-                setLocation(newLocation);
-            }
-            else {
-                // Overcrowding.
-                setDead();
+        	int row = getLocation().getRow(),
+        			col = getLocation().getCol();
+        	if(field.eatGrass(row, col)) {
+        		defecate(row, col);
+	            giveBirth(newRabbits);            
+	            // Try to move into a free location.
+	            Location newLocation = getField().freeAdjacentLocation(getLocation());
+	            if(newLocation != null) {
+	                setLocation(newLocation);
+	            }
+	            else {
+	                // Overcrowding.
+	                setDead();
+	            }
+            } else {
+            	setDead();
             }
         }
     }

@@ -42,7 +42,7 @@ public class FieldStats
         }
         for(Class key : counters.keySet()) {
             Counter info = counters.get(key);
-            buffer.append(info.getName());
+            buffer.append(info.getName().substring(20));
             buffer.append(": ");
             buffer.append(info.getCount());
             buffer.append(' ');

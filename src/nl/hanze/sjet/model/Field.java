@@ -20,6 +20,10 @@ public class Field
     private int depth, width;
     // Storage for the animals.
     private Object[][] field;
+    // Storage for the grass values.
+    private int[][] grass;
+    
+    private boolean defecating;
 
     /**
      * Represent a field of the given dimensions.
@@ -31,6 +35,13 @@ public class Field
         this.depth = depth;
         this.width = width;
         field = new Object[depth][width];
+        grass = new int[depth][width];
+        for(int row = 0; row < depth; row++) {
+        	for(int col = 0; col < width; col++) {
+        		grass[row][col] = 10 + rand.nextInt(6);
+        	}
+        }
+        setDefecating(true);
     }
     
     /**
@@ -41,8 +52,31 @@ public class Field
         for(int row = 0; row < depth; row++) {
             for(int col = 0; col < width; col++) {
                 field[row][col] = null;
+                if(grass[row][col] == 0) {
+                	grass[row][col] = 10 + rand.nextInt(6);
+                }
             }
         }
+    }
+    
+    /**
+     * Try to eat from the location.
+     * @param row The row
+     * @param col The column
+     * @return Whether it succeeded.
+     */
+    public boolean eatGrass(int row, int col) {
+    	if(grass[row][col] > 0) {
+    		grass[row][col]--;
+    		return true;
+    	}
+    	return false;
+    }
+    
+    public void addGrass(int row, int col) {
+    	if(defecating) {
+        	grass[row][col] += 0 + rand.nextInt(3);
+    	}
     }
     
     /**
@@ -64,7 +98,9 @@ public class Field
      */
     public void place(Object animal, int row, int col)
     {
-        place(animal, new Location(row, col));
+    	if(field[row][col] == null) {
+            place(animal, new Location(row, col));
+    	}
     }
     
     /**
@@ -203,4 +239,18 @@ public class Field
     {
         return width;
     }
+
+	/**
+	 * @return the defecating
+	 */
+	public boolean isDefecating() {
+		return defecating;
+	}
+
+	/**
+	 * @param defecating the defecating to set
+	 */
+	public void setDefecating(boolean defecating) {
+		this.defecating = defecating;
+	}
 }

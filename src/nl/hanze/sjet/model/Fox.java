@@ -67,6 +67,8 @@ public class Fox extends Animal
         incrementAge();
         incrementHunger();
         if(isAlive()) {
+        	int row = getLocation().getRow(), col = getLocation().getCol();
+        	defecate(row, col);
             giveBirth(newFoxes);            
             // Move towards a source of food if found.
             Location newLocation = findFood();
