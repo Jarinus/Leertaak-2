@@ -1,8 +1,11 @@
 package nl.hanze.sjet.controller;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
+
 import nl.hanze.sjet.model.Simulator;
 
 /**
@@ -12,6 +15,7 @@ import nl.hanze.sjet.model.Simulator;
  */
 public class ButtonHandler {
 	private Simulator sim;
+	private static final Color BUTTON_COLOR = new Color(220, 220, 220);
 	
 	/**
 	 * The constructor for the ButtonHandler
@@ -23,6 +27,7 @@ public class ButtonHandler {
 	
 	public JButton makeNewSwitchDefecationButton(JButton button) {
 		JButton newButton = button;
+		newButton.setBackground(BUTTON_COLOR);
 		newButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(sim.getField().isDefecating()) {
@@ -30,6 +35,7 @@ public class ButtonHandler {
 				} else {
 					sim.getField().setDefecating(true);
 				}
+				sim.getView().updateStatusText(!sim.suspended, sim.getField().isDefecating());
 			}
 		});
 		return newButton;
@@ -42,6 +48,7 @@ public class ButtonHandler {
 	 */
 	public JButton makeNewOneStepButton(JButton button) {
 		JButton newButton = button;
+		newButton.setBackground(BUTTON_COLOR);
 		newButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(sim.suspended || !sim.started) {
@@ -61,10 +68,13 @@ public class ButtonHandler {
 	 */
 	public JButton makeNewRunButton(JButton button) {
 		JButton newButton = button;
+		newButton.setBackground(BUTTON_COLOR);
 		newButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(!sim.started) {
 					sim.start();
+					sim.suspended = false;
+					sim.getView().updateStatusText(!sim.suspended, sim.getField().isDefecating());
 					return;
 				}
 				if(sim.suspended) {
@@ -72,6 +82,7 @@ public class ButtonHandler {
 					synchronized(sim.lock) {
 						sim.lock.notifyAll();
 					}
+					sim.getView().updateStatusText(!sim.suspended, sim.getField().isDefecating());
 				} else {
 					return;
 				}
@@ -87,10 +98,12 @@ public class ButtonHandler {
 	 */
 	public JButton makeNewPauseButton(JButton button) {
 		JButton newButton = button;
+		newButton.setBackground(BUTTON_COLOR);
 		newButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(!sim.suspended) {
 					sim.suspended = true;
+					sim.getView().updateStatusText(!sim.suspended, sim.getField().isDefecating());
 				}
 			}
         });
@@ -104,6 +117,7 @@ public class ButtonHandler {
 	 */
 	public JButton makeNewResetButton(JButton button) {
 		JButton newButton = button;
+		newButton.setBackground(BUTTON_COLOR);
 		newButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(sim.suspended) {

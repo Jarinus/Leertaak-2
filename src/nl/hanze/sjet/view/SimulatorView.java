@@ -1,9 +1,11 @@
 package nl.hanze.sjet.view;
 import java.awt.*;
+
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 
 import nl.hanze.sjet.controller.ButtonHandler;
+import nl.hanze.sjet.controller.MenuHandler;
 import nl.hanze.sjet.model.Field;
 import nl.hanze.sjet.model.FieldStats;
 import nl.hanze.sjet.model.Simulator;
@@ -36,6 +38,8 @@ public class SimulatorView extends JFrame
     private JButton pauseButton;
     private JButton resetButton;
     private JButton switchDefecationButton;
+    private JLabel status;
+    private Console console;
     
     // A map for storing colors for participants in the simulation
     @SuppressWarnings("rawtypes")
@@ -51,15 +55,7 @@ public class SimulatorView extends JFrame
     @SuppressWarnings("rawtypes")
 	public SimulatorView(Simulator sim, int height, int width)
     {
-    	JMenuBar menuBar = new JMenuBar();
-    	
-    	JMenu[] menus = {new JMenu("Menu 1"),
-    						new JMenu("Menu 2"),
-    						new JMenu("Help")};
-    	
-    	for(int i = 0; i < menus.length; i++) {
-    		menuBar.add(menus[i]);
-    	}
+    	Color backgroundColor = new Color(200, 200, 200);
     	
     	ButtonHandler buttonHandler = new ButtonHandler(sim);
     	oneStepButton = buttonHandler.makeNewOneStepButton(new JButton("One Step"));
@@ -69,6 +65,7 @@ public class SimulatorView extends JFrame
     	switchDefecationButton = buttonHandler.makeNewSwitchDefecationButton(new JButton("Switch Defecation"));
     	
     	JPanel panel = new JPanel(new GridLayout(0, 1));
+    	panel.setBackground(backgroundColor);
     	panel.add(oneStepButton);
     	panel.add(runButton);
     	panel.add(pauseButton);
@@ -76,47 +73,62 @@ public class SimulatorView extends JFrame
     	panel.add(switchDefecationButton);
     	
     	JPanel flow = new JPanel();
+    	flow.setBackground(backgroundColor);
     	flow.add(panel);
     	
         stats = new FieldStats();
         colors = new LinkedHashMap<Class, Color>();
 
-        setTitle("Fox and Rabbit Simulation");
+        setTitle("SJET: Environmental Behavior Simulation");
         
         fieldView = new FieldView(height, width);
         statView = new StatView();
+        statView.setBackground(backgroundColor);
+        console = new Console();
+        console.setBackground(backgroundColor);
+        
+        JPanel statusPanel = new JPanel();
+        statusPanel.setBackground(backgroundColor);
+    	status = new JLabel("");
+    	updateStatusText(false, true);
+        statusPanel.add(status);
         
         JPanel simPanel = new JPanel(new BorderLayout(6, 6));
-        simPanel.setBorder(new EtchedBorder());
-        simPanel.add(fieldView);
+        simPanel.setBackground(backgroundColor);
+        fieldView.setBorder(new EtchedBorder());
+        simPanel.add(statusPanel, BorderLayout.NORTH);
+        simPanel.add(fieldView, BorderLayout.CENTER);
+        simPanel.add(console, BorderLayout.SOUTH);
         
         JPanel statPanel = new JPanel();
-        //statPanel.setBorder(BorderFactory.createEtchedBorder());
+        statPanel.setBackground(backgroundColor);
         statPanel.add(statView);
         
-        JPanel textPanel = new JPanel();
-        JTextArea text = new JTextArea();
-        text.setBackground(this.getBackground());
-        textPanel.setBorder(BorderFactory.createEtchedBorder());
-        textPanel.add(text);
-        
         JPanel contents = new JPanel();
+        contents.setBackground(backgroundColor);
         contents.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         contents.setLayout(new BorderLayout(6, 6));
         contents.add(flow, BorderLayout.WEST);
         contents.add(simPanel, BorderLayout.CENTER);
-        contents.add(statPanel, BorderLayout.EAST);
-        contents.add(textPanel, BorderLayout.SOUTH);
+        
+        JPanel infoPanel = new JPanel(new BorderLayout(6, 6));
+        infoPanel.setBackground(backgroundColor);
+        infoPanel.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        infoPanel.add(new JLabel("Version 0.0"));
 
         Container container = getContentPane();
-        container.add(contents);
-
-        setJMenuBar(menuBar);
+        container.setBackground(backgroundColor);
+        container.add(contents, BorderLayout.WEST);
+        container.add(statPanel, BorderLayout.EAST);
+        container.add(infoPanel, BorderLayout.SOUTH);
+        
+        setJMenuBar(new MenuHandler());
     	setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
         setResizable(false);
         pack();
         setLocationRelativeTo(null);
+        setBackground(new Color(255, 255, 255));
     }
     
     /**
@@ -130,7 +142,10 @@ public class SimulatorView extends JFrame
         colors.put(animalClass, color);
         statView.setColor(animalClass, color);
     }
-
+    
+    public void updateStatusText(boolean running, boolean defecation) {
+    	status.setText("Running: " + running + " | Defecation: " + defecation);
+    }
     /**
      * @return The color to be used for a given class of animal.
      */
@@ -273,5 +288,9 @@ public class SimulatorView extends JFrame
                 }
             }
         }
+    }
+    
+    public Console getConsole() {
+    	return console;
     }
 }
