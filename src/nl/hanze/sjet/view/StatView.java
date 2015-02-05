@@ -37,19 +37,20 @@ public class StatView extends JPanel {
 			g.setColor(Color.gray);
 			g.fillArc(0, 0, getWidth(), getHeight(), 0, 360);
 		} else {
+			g.setColor(getBackground());
+			g.fillRect(0, 0, getWidth(), getHeight());
 			Map<Class, Integer> values = stats.getPopulationDetails();
 			if(values != null && values.size() > 0) {
 				double total = 0.0;
 				for(Class key : values.keySet()) {
 					total += values.get(key);
 				}
-				int lastAngle = 360;
+				int lastAngle = 90;
 				for(Class key : values.keySet()) {
 					double temp = (double) ((values.get(key) / total) * 360);
 					int angle = (int) temp;
-					System.out.println("Value " + values.get(key) + " divided by " + total + " creates: " + angle);
 					g.setColor(colors.get(key));
-					g.fillArc(0, 0, getWidth(), getHeight(), lastAngle, angle);
+					g.fillArc(0, 0, getWidth(), getHeight(), lastAngle, -angle);
 					lastAngle -= angle;
 				}
 			}

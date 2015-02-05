@@ -175,6 +175,7 @@ public class SimulatorView extends JFrame
         }
         stats.countFinished();
         statView.setStats(stats);
+        statView.repaint();
         fieldView.repaint();
     }
 
