@@ -28,6 +28,16 @@ public class FieldStats
         counters = new HashMap<Class, Counter>();
         countsValid = true;
     }
+    
+    @SuppressWarnings("rawtypes")
+	public HashMap<Class, Integer> getPopulationDetails() {
+    	HashMap<Class, Integer> populationData = new HashMap<Class, Integer>();
+    	for(Class key : counters.keySet()) {
+    		Counter info = counters.get(key);
+    		populationData.put(key, info.getCount());
+    	}
+    	return populationData;
+    }
 
     /**
      * Get details of what is in the field.

@@ -21,7 +21,7 @@ public class ButtonHandler {
 		this.sim = sim;
 	}
 	
-	public JButton makeNewSwitchDefecateButton(JButton button) {
+	public JButton makeNewSwitchDefecationButton(JButton button) {
 		JButton newButton = button;
 		newButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

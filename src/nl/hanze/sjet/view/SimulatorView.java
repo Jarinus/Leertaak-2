@@ -1,7 +1,5 @@
 package nl.hanze.sjet.view;
 import java.awt.*;
-import java.awt.geom.Rectangle2D;
-
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 
@@ -32,12 +30,12 @@ public class SimulatorView extends JFrame
     // Color used for objects that have no defined color.
     private static final Color UNKNOWN_COLOR = Color.gray;
     private FieldView fieldView;
-    
+    private StatView statView;
     private JButton oneStepButton;
     private JButton runButton;
     private JButton pauseButton;
     private JButton resetButton;
-    private JButton switchDefecatingButton;
+    private JButton switchDefecationButton;
     
     // A map for storing colors for participants in the simulation
     @SuppressWarnings("rawtypes")
@@ -68,14 +66,14 @@ public class SimulatorView extends JFrame
     	runButton = buttonHandler.makeNewRunButton(new JButton("Run"));
     	pauseButton = buttonHandler.makeNewPauseButton(new JButton("Pause"));
     	resetButton = buttonHandler.makeNewResetButton(new JButton("Reset"));
-    	switchDefecatingButton = buttonHandler.makeNewSwitchDefecateButton(new JButton("Switch Defecation"));
+    	switchDefecationButton = buttonHandler.makeNewSwitchDefecationButton(new JButton("Switch Defecation"));
     	
     	JPanel panel = new JPanel(new GridLayout(0, 1));
     	panel.add(oneStepButton);
     	panel.add(runButton);
     	panel.add(pauseButton);
     	panel.add(resetButton);
-    	panel.add(switchDefecatingButton);
+    	panel.add(switchDefecationButton);
     	
     	JPanel flow = new JPanel();
     	flow.add(panel);
@@ -85,18 +83,20 @@ public class SimulatorView extends JFrame
 
         setTitle("Fox and Rabbit Simulation");
         
-        setLocation(100, 50);
-        
         fieldView = new FieldView(height, width);
+        statView = new StatView();
         
         JPanel simPanel = new JPanel(new BorderLayout(6, 6));
         simPanel.setBorder(new EtchedBorder());
         simPanel.add(fieldView);
         
-        JTextArea text = new JTextArea();
-        text.setBackground(this.getBackground());
+        JPanel statPanel = new JPanel();
+        //statPanel.setBorder(BorderFactory.createEtchedBorder());
+        statPanel.add(statView);
         
         JPanel textPanel = new JPanel();
+        JTextArea text = new JTextArea();
+        text.setBackground(this.getBackground());
         textPanel.setBorder(BorderFactory.createEtchedBorder());
         textPanel.add(text);
         
@@ -105,6 +105,7 @@ public class SimulatorView extends JFrame
         contents.setLayout(new BorderLayout(6, 6));
         contents.add(flow, BorderLayout.WEST);
         contents.add(simPanel, BorderLayout.CENTER);
+        contents.add(statPanel, BorderLayout.EAST);
         contents.add(textPanel, BorderLayout.SOUTH);
 
         Container container = getContentPane();
@@ -115,6 +116,7 @@ public class SimulatorView extends JFrame
         setVisible(true);
         setResizable(false);
         pack();
+        setLocationRelativeTo(null);
     }
     
     /**
@@ -126,6 +128,7 @@ public class SimulatorView extends JFrame
 	public void setColor(Class animalClass, Color color)
     {
         colors.put(animalClass, color);
+        statView.setColor(animalClass, color);
     }
 
     /**
@@ -171,6 +174,7 @@ public class SimulatorView extends JFrame
             }
         }
         stats.countFinished();
+        statView.setStats(stats);
         fieldView.repaint();
     }
 
