@@ -4,23 +4,24 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
+import javax.swing.*;
 
 import nl.hanze.sjet.model.Fox;
 import nl.hanze.sjet.model.Rabbit;
 import nl.hanze.sjet.view.AboutFrame;
 import nl.hanze.sjet.view.EditingFrame;
+import nl.hanze.sjet.view.SimulatorView;
 
 @SuppressWarnings("serial")
 public class MenuHandler extends JMenuBar {
 	private static final Color MENU_COLOR = new Color(220, 220, 220);
-	
+	private static final String VERSION = "Version 0.0";
+	private SimulatorView simulatorView;
 	private JMenu animals;
 	private JMenuItem aRabbit;
 	private JMenuItem aFox;
-	private JMenuItem about;
+	private JMenu about;
+	private JMenuItem showAbout;
 	
 	public MenuHandler() {
 		setBackground(MENU_COLOR);
@@ -44,13 +45,17 @@ public class MenuHandler extends JMenuBar {
 		});
 		animals.add(aFox);
 		
-		about = new JMenuItem("About");
+		about = new JMenu("About");
 		about.setBackground(MENU_COLOR);
-		about.addActionListener(new ActionListener() {
+		
+		showAbout = new JMenuItem("Show About");
+		showAbout.setBackground(MENU_COLOR);
+		showAbout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new AboutFrame();
+				JOptionPane.showMessageDialog(simulatorView, "Sjet Simulator\n\n" + VERSION, "About", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
+		about.add(showAbout);
 		
 		this.add(animals);
 		this.add(about);

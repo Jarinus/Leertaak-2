@@ -15,16 +15,16 @@ public class Fox extends Animal
     // Characteristics shared by all foxes (class variables).
     
     // The age at which a fox can start to breed.
-    private static final int BREEDING_AGE = 15;
+    private static int BREEDING_AGE = 15;
     // The age to which a fox can live.
-    private static final int MAX_AGE = 150;
+    private static int MAX_AGE = 150;
     // The likelihood of a fox breeding.
-    private static final double BREEDING_PROBABILITY = 0.08;
+    private static double BREEDING_PROBABILITY = 0.08;
     // The maximum number of births.
-    private static final int MAX_LITTER_SIZE = 2;
+    private static int MAX_LITTER_SIZE = 2;
     // The food value of a single rabbit. In effect, this is the
     // number of steps a fox can go before it has to eat again.
-    private static final int RABBIT_FOOD_VALUE = 9;
+    private static int RABBIT_FOOD_VALUE = 9;
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
     
@@ -175,4 +175,74 @@ public class Fox extends Animal
     {
         return age >= BREEDING_AGE;
     }
+
+	/**
+	 * @return the breedingAge
+	 */
+	public static int getBreedingAge() {
+		return BREEDING_AGE;
+	}
+
+	/**
+	 * @return the maxAge
+	 */
+	public static int getMaxAge() {
+		return MAX_AGE;
+	}
+
+	/**
+	 * @return the breedingProbability
+	 */
+	public static double getBreedingProbability() {
+		return BREEDING_PROBABILITY;
+	}
+
+	/**
+	 * @return the maxLitterSize
+	 */
+	public static int getMaxLitterSize() {
+		return MAX_LITTER_SIZE;
+	}
+
+	/**
+	 * @return the rabbitFoodValue
+	 */
+	public static int getRabbitFoodValue() {
+		return RABBIT_FOOD_VALUE;
+	}
+
+	/**
+	 * @param bREEDING_AGE the bREEDING_AGE to set
+	 */
+	public static void setBREEDING_AGE(int bREEDING_AGE) {
+		BREEDING_AGE = bREEDING_AGE;
+	}
+
+	/**
+	 * @param mAX_AGE the mAX_AGE to set
+	 */
+	public static void setMAX_AGE(int mAX_AGE) {
+		MAX_AGE = mAX_AGE;
+	}
+
+	/**
+	 * @param bREEDING_PROBABILITY the bREEDING_PROBABILITY to set
+	 */
+	public static void setBREEDING_PROBABILITY(double bREEDING_PROBABILITY) {
+		BREEDING_PROBABILITY = bREEDING_PROBABILITY;
+	}
+
+	/**
+	 * @param mAX_LITTER_SIZE the mAX_LITTER_SIZE to set
+	 */
+	public static void setMAX_LITTER_SIZE(int mAX_LITTER_SIZE) {
+		MAX_LITTER_SIZE = mAX_LITTER_SIZE;
+	}
+
+	/**
+	 * @param rABBIT_FOOD_VALUE the rABBIT_FOOD_VALUE to set
+	 */
+	public static void setRABBIT_FOOD_VALUE(int rABBIT_FOOD_VALUE) {
+		RABBIT_FOOD_VALUE = rABBIT_FOOD_VALUE;
+	}
 }
