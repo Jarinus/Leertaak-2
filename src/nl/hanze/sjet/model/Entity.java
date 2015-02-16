@@ -7,7 +7,7 @@ import java.util.List;
  * @author David J. Barnes and Michael Kölling
  * @version 2011.07.31
  */
-public abstract class Animal implements Actor
+public abstract class Entity implements Actor
 {
     // Whether the animal is alive or not.
     private boolean alive;
@@ -22,7 +22,7 @@ public abstract class Animal implements Actor
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
-    public Animal(Field field, Location location)
+    public Entity(Field field, Location location)
     {
         alive = true;
         this.field = field;

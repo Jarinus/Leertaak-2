@@ -8,7 +8,6 @@ import javax.swing.*;
 
 import nl.hanze.sjet.model.Fox;
 import nl.hanze.sjet.model.Rabbit;
-import nl.hanze.sjet.view.AboutFrame;
 import nl.hanze.sjet.view.EditingFrame;
 import nl.hanze.sjet.view.SimulatorView;
 

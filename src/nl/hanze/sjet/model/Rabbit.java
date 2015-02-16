@@ -9,7 +9,7 @@ import java.util.Random;
  * @author David J. Barnes and Michael Kölling
  * @version 2011.07.31
  */
-public class Rabbit extends Animal
+public class Rabbit extends Entity
 {
     // Characteristics shared by all rabbits (class variables).
 

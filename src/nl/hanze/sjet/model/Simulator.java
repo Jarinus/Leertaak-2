@@ -111,9 +111,9 @@ public class Simulator extends Thread
         for(Iterator<Actor> it = actors.iterator(); it.hasNext(); ) {
             Actor actor = it.next();
             actor.act(newActors);
-            if(actor instanceof Animal) {
-                Animal animal = (Animal) actor;
-                if(!animal.isAlive()) {
+            if(actor instanceof Entity) {
+                Entity entity = (Entity) actor;
+                if(!entity.isAlive()) {
                     it.remove();
                 }
             }

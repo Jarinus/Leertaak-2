@@ -9,7 +9,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.regex.Pattern;
 
 @SuppressWarnings("serial")
 public class EditingFrame extends JFrame {
@@ -28,6 +27,7 @@ public class EditingFrame extends JFrame {
 	private ImageIcon images;
 	private ArrayList<Integer> defaultValues;
 	private double defaultBreedingProb;
+	@SuppressWarnings("rawtypes")
 	private Class animal;
 	private static final Color BACKGROUND_COLOR = new Color(200, 200, 200);
 	private static final Color BUTTON_COLOR = new Color(220, 220, 220);
@@ -138,7 +138,6 @@ public class EditingFrame extends JFrame {
 			maxLitterSize = Rabbit.getMaxLitterSize();
 			foodValue = 0;
 		}
-		//TODO add more animals here
 	}
 	
 	public void addDefaultValues(){
@@ -158,20 +157,10 @@ public class EditingFrame extends JFrame {
 		case "Fox":
 			images = new ImageIcon("Images/Fox.jpg");
 			break;
-		//TODO add more animals here
-		
 		}
 	}
 	
 	public void setValues(){
-		//if(
-		//(Pattern.matches("[a-zA-Z]+", maxAgeField.getText())) &&
-		//maxAgeField.getText().contains("^[0-9]+$")
-		//(Pattern.matches("[a-zA-z]+", breedingAgeField.getText())) &&
-		//(Pattern.matches("[a-zA-Z]+", breedingProbField.getText())) &&
-		//(Pattern.matches("[a-zA-Z]+", maxLitterSizeField.getText())) &&
-		//(Pattern.matches("[a-zA-Z]+", foodValueField.getText()))
-		//){
 		try{
 		switch(animal.getName().substring(20)){
 		case "Rabbit":
@@ -187,7 +176,6 @@ public class EditingFrame extends JFrame {
 			Fox.setMAX_LITTER_SIZE(Integer.parseInt(maxLitterSizeField.getText()));
 			Fox.setRABBIT_FOOD_VALUE(Integer.parseInt(foodValueField.getText()));
 			break;
-			//TODO add animals here.
 			}
 		}catch(NumberFormatException e){
 			System.err.println("Please type right format Int or Double");
@@ -195,10 +183,6 @@ public class EditingFrame extends JFrame {
 		}
 		
 		}
-		//else{
-		//	JOptionPane.showMessageDialog(this, "Sjet Simulator\n\n please use the right type", "Wrong Type Error", JOptionPane.INFORMATION_MESSAGE);
-		//}
-	//}
 	
 	public void setDefaultValues(){
 		maxAgeField.setText("" + defaultValues.get(0));
