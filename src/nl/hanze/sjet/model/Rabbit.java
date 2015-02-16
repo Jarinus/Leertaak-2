@@ -24,6 +24,11 @@ public class Rabbit extends Entity
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
     
+    public static final int DEF_BREEDING_AGE = 5;
+    public static final int DEF_MAX_AGE = 40;
+    public static final double DEF_BREEDING_PROBABILITY = 0.12;
+    public static final int DEF_MAX_LITTER_SIZE = 4;
+    
     // Individual characteristics (instance fields).
     
     // The rabbit's age.
@@ -53,6 +58,7 @@ public class Rabbit extends Entity
      */
     public void act(List<Actor> newRabbits)
     {
+    	//TODO implement sickness
     	Field field = getField();
         incrementAge();
         if(isAlive()) {

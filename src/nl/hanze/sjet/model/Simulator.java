@@ -29,7 +29,8 @@ public class Simulator extends Thread
     // The probability that a fox will be created in any given grid position.
     private static final double FOX_CREATION_PROBABILITY = 0.02;
     // The probability that a rabbit will be created in any given grid position.
-    private static final double RABBIT_CREATION_PROBABILITY = 0.08;    
+    private static final double RABBIT_CREATION_PROBABILITY = 0.08; 
+    private static final double HUNTER_CREATION_PROBABILITY = 0.015;
     // List of animals in the field.
     private List<Actor> actors;
     // The current state of the field.
@@ -71,6 +72,7 @@ public class Simulator extends Thread
         view = new SimulatorView(this, depth, width);
         view.setColor(Rabbit.class, Color.orange);
         view.setColor(Fox.class, Color.blue);
+        view.setColor(Hunter.class, Color.GRAY);
         // Setup a valid starting point.
         reset();
     }
@@ -139,7 +141,7 @@ public class Simulator extends Thread
     }
     
     /**
-     * Randomly populate the field with foxes and rabbits.
+     * Randomly populate the field with foxes, rabbits and hunters.
      */
     private void populate()
     {
@@ -156,6 +158,11 @@ public class Simulator extends Thread
                     Location location = new Location(row, col);
                     Rabbit rabbit = new Rabbit(true, field, location);
                     actors.add(rabbit);
+                }
+                else if(rand.nextDouble() <= HUNTER_CREATION_PROBABILITY){
+                	Location location = new Location(row, col);
+                	Hunter hunter = new Hunter(field, location);
+                	actors.add(hunter);
                 }
                 // else leave the location empty.
             }

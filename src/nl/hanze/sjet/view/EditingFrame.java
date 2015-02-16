@@ -25,10 +25,10 @@ public class EditingFrame extends JFrame {
 	private JTextField foodValueField;
 	private Container contents;
 	private ImageIcon images;
-	private ArrayList<Integer> defaultValues;
-	private double defaultBreedingProb;
+	
 	@SuppressWarnings("rawtypes")
 	private Class animal;
+	
 	private static final Color BACKGROUND_COLOR = new Color(200, 200, 200);
 	private static final Color BUTTON_COLOR = new Color(220, 220, 220);
 	
@@ -39,7 +39,6 @@ public class EditingFrame extends JFrame {
 		setTitle("Editing Frame: " + c.getName().substring(20));
 		setSize(300, 200);
 		getValues();
-		addDefaultValues();
 		setImage();
 		
 		JLabel image = new JLabel(images);
@@ -140,15 +139,6 @@ public class EditingFrame extends JFrame {
 		}
 	}
 	
-	public void addDefaultValues(){
-		defaultValues = new ArrayList<Integer>();
-		defaultValues.add(maxAge);
-		defaultValues.add(breedingAge);
-		defaultBreedingProb = breedingProb;
-		defaultValues.add(maxLitterSize);
-		defaultValues.add(foodValue);
-	}
-	
 	public void setImage(){
 		switch(animal.getName().substring(20)){
 		case "Rabbit": 
@@ -185,11 +175,21 @@ public class EditingFrame extends JFrame {
 		}
 	
 	public void setDefaultValues(){
-		maxAgeField.setText("" + defaultValues.get(0));
-		breedingAgeField.setText("" + defaultValues.get(1));
-		breedingProbField.setText("" + defaultBreedingProb);
-		maxLitterSizeField.setText("" + defaultValues.get(2));
-		foodValueField.setText("" + defaultValues.get(3));
+		switch(animal.getName().substring(20)){
+		case "Rabbit":
+			maxAgeField.setText("" + Rabbit.DEF_MAX_AGE);
+			breedingAgeField.setText("" + Rabbit.DEF_BREEDING_AGE);
+			breedingProbField.setText("" + Rabbit.DEF_BREEDING_PROBABILITY);
+			maxLitterSizeField.setText("" + Rabbit.DEF_MAX_LITTER_SIZE);
+			//foodValueField.setText("" + Rabbit.);
+		case "Fox":
+			maxAgeField.setText("" + Fox.DEF_MAX_AGE);
+			breedingAgeField.setText("" + Fox.DEF_BREEDING_AGE);
+			breedingProbField.setText("" + Fox.DEF_BREEDING_PROBABILITY);
+			maxLitterSizeField.setText("" + Fox.DEF_MAX_LITTER_SIZE);
+			foodValueField.setText("" + Fox.DEF_RABBIT_FOOD_VALUE);
+		}
+		
 	}
 	
 	public void setButtons(){

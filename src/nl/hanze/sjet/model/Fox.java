@@ -28,6 +28,12 @@ public class Fox extends Entity
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
     
+    public static final int DEF_BREEDING_AGE = 15;
+    public static final int DEF_MAX_AGE = 150;
+    public static final double DEF_BREEDING_PROBABILITY = 0.08;
+    public static final int DEF_MAX_LITTER_SIZE = 2;
+    public static final int DEF_RABBIT_FOOD_VALUE = 9;
+    
     // Individual characteristics (instance fields).
     // The fox's age.
     private int age;
@@ -64,6 +70,7 @@ public class Fox extends Entity
      */
     public void act(List<Actor> newFoxes)
     {
+    	//TODO implement sickness
         incrementAge();
         incrementHunger();
         if(isAlive()) {
