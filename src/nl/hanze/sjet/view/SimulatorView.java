@@ -8,6 +8,7 @@ import nl.hanze.sjet.controller.ButtonHandler;
 import nl.hanze.sjet.controller.MenuHandler;
 import nl.hanze.sjet.model.Field;
 import nl.hanze.sjet.model.FieldStats;
+import nl.hanze.sjet.model.Legenda;
 import nl.hanze.sjet.model.Simulator;
 
 import java.util.LinkedHashMap;
@@ -37,9 +38,12 @@ public class SimulatorView extends JFrame
     private JButton runButton;
     private JButton pauseButton;
     private JButton resetButton;
+    private JButton sicknessButton;
     private JButton switchDefecationButton;
     private JLabel status;
     private Console console;
+    private Legenda legenda;
+	private Color backgroundColor = new Color(200, 200, 200);
     
     // A map for storing colors for participants in the simulation
     @SuppressWarnings("rawtypes")
@@ -55,14 +59,21 @@ public class SimulatorView extends JFrame
     @SuppressWarnings("rawtypes")
 	public SimulatorView(Simulator sim, int height, int width)
     {
-    	Color backgroundColor = new Color(200, 200, 200);
+        fieldView = new FieldView(height, width);
+        statView = new StatView();
+        statView.setBackground(backgroundColor);
+        console = new Console();
+        console.setBackground(backgroundColor);
+        legenda = new Legenda();
+        console.setBackground(backgroundColor);
     	
-    	ButtonHandler buttonHandler = new ButtonHandler(sim);
+    	ButtonHandler buttonHandler = new ButtonHandler(sim, console);
     	oneStepButton = buttonHandler.makeNewOneStepButton(new JButton("One Step"));
     	runButton = buttonHandler.makeNewRunButton(new JButton("Run"));
     	pauseButton = buttonHandler.makeNewPauseButton(new JButton("Pause"));
     	resetButton = buttonHandler.makeNewResetButton(new JButton("Reset"));
     	switchDefecationButton = buttonHandler.makeNewSwitchDefecationButton(new JButton("Switch Defecation"));
+    	sicknessButton = buttonHandler.makeNewSicknessButton(new JButton("Start sickness"));
     	
     	JPanel panel = new JPanel(new GridLayout(0, 1));
     	panel.setBackground(backgroundColor);
@@ -71,6 +82,7 @@ public class SimulatorView extends JFrame
     	panel.add(pauseButton);
     	panel.add(resetButton);
     	panel.add(switchDefecationButton);
+    	panel.add(sicknessButton);
     	
     	JPanel flow = new JPanel();
     	flow.setBackground(backgroundColor);
@@ -80,12 +92,6 @@ public class SimulatorView extends JFrame
         colors = new LinkedHashMap<Class, Color>();
 
         setTitle("SJET: Environmental Behavior Simulation");
-        
-        fieldView = new FieldView(height, width);
-        statView = new StatView();
-        statView.setBackground(backgroundColor);
-        console = new Console();
-        console.setBackground(backgroundColor);
         
         JPanel statusPanel = new JPanel();
         statusPanel.setBackground(backgroundColor);
@@ -101,8 +107,10 @@ public class SimulatorView extends JFrame
         simPanel.add(console, BorderLayout.SOUTH);
         
         JPanel statPanel = new JPanel();
+        statPanel.setPreferredSize(new Dimension(200, 200));
         statPanel.setBackground(backgroundColor);
-        statPanel.add(statView);
+        statPanel.add(statView, BorderLayout.NORTH);
+        statPanel.add(legenda, BorderLayout.SOUTH);
         
         JPanel contents = new JPanel();
         contents.setBackground(backgroundColor);
@@ -119,7 +127,7 @@ public class SimulatorView extends JFrame
         Container container = getContentPane();
         container.setBackground(backgroundColor);
         container.add(contents, BorderLayout.WEST);
-        container.add(statPanel, BorderLayout.EAST);
+        container.add(statPanel, BorderLayout.CENTER);
         container.add(infoPanel, BorderLayout.SOUTH);
         
         setJMenuBar(new MenuHandler());

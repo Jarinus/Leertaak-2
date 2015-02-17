@@ -15,6 +15,8 @@ public abstract class Entity implements Actor
     private Field field;
     // The animal's position in the field.
     private Location location;
+    // Whether the entity is sick.
+    private boolean sick;
     
     /**
      * Create a new animal at location in field.
@@ -97,5 +99,22 @@ public abstract class Entity implements Actor
     protected Field getField()
     {
         return field;
+    }
+    
+    /**
+     * Makes the entity sick if the entity was not sick already.
+     */
+    public void makeSick() {
+    	if(!sick) {
+    		sick = true;
+    	}
+    }
+    
+    /**
+     * Return whether the entity is sick.
+     * @return Whether the entity is sick.
+     */
+    public boolean isSick() {
+    	return sick;
     }
 }

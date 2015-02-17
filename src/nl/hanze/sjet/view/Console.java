@@ -33,7 +33,6 @@ public class Console extends JPanel {
 		setBorder(BorderFactory.createEtchedBorder());
 		
 		textArea = new JTextArea(10, 150);
-		textArea.append("Console version 1.0");
 		textArea.setBackground(getBackground());
 		textArea.setEditable(false);
 		textArea.setLineWrap(true);
@@ -43,7 +42,11 @@ public class Console extends JPanel {
 	}
 	
 	public void write(String str) {
-		textArea.append(str + "\n");
+		textArea.append("\n[SIM]" + str);
 		textArea.setCaretPosition(textArea.getText().length());
+	}
+	
+	public void clear() {
+		textArea.setText(null);
 	}
 }
