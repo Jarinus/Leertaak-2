@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import nl.hanze.sjet.model.Chicken;
 import nl.hanze.sjet.model.Fox;
 import nl.hanze.sjet.model.Rabbit;
 import nl.hanze.sjet.view.EditingFrame;
@@ -19,6 +20,7 @@ public class MenuHandler extends JMenuBar {
 	private JMenu animals;
 	private JMenuItem aRabbit;
 	private JMenuItem aFox;
+	private JMenuItem aChicken;
 	private JMenu about;
 	private JMenuItem showAbout;
 	
@@ -43,6 +45,15 @@ public class MenuHandler extends JMenuBar {
 			}
 		});
 		animals.add(aFox);
+		
+		aChicken = new JMenuItem("Chicken");
+		aChicken.setBackground(MENU_COLOR);
+		aChicken.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				new EditingFrame(Chicken.class);
+			}
+		});
+		animals.add(aChicken);
 		
 		about = new JMenu("About");
 		about.setBackground(MENU_COLOR);

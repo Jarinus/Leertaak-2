@@ -9,7 +9,7 @@ public class Chicken extends Entity {
     // The age at which a chicken can lay eggs.
     private static int BREEDING_AGE = 5;
     // The age to which a chicken can live.
-    private static int MAX_AGE = 40;
+    private static int MAX_AGE = 25;
     // The likelihood of a chicken laying eggs.
     private static double BREEDING_PROBABILITY = 0.27;
     // The maximum number of eggs.
@@ -17,6 +17,10 @@ public class Chicken extends Entity {
     // A shared random number generator to control egg-laying.
     private static final Random rand = Randomizer.getRandom();
     
+    public static final int DEF_BREEDING_AGE = 5;
+    public static final int DEF_MAX_AGE = 25;
+    public static final double DEF_BREEDING_PROBABILITY = 0.27;
+    public static final int DEF_MAX_LITTER_SIZE = 2;
     
     // The chicken's age.
     private int age;
@@ -70,5 +74,61 @@ public class Chicken extends Entity {
 		if(age > MAX_AGE) {
 			setDead();
 		}
+	}
+
+	/**
+	 * @return the bREEDING_AGE
+	 */
+	public static int getBREEDING_AGE() {
+		return BREEDING_AGE;
+	}
+
+	/**
+	 * @param bREEDING_AGE the bREEDING_AGE to set
+	 */
+	public static void setBREEDING_AGE(int bREEDING_AGE) {
+		BREEDING_AGE = bREEDING_AGE;
+	}
+
+	/**
+	 * @return the mAX_AGE
+	 */
+	public static int getMAX_AGE() {
+		return MAX_AGE;
+	}
+
+	/**
+	 * @param mAX_AGE the mAX_AGE to set
+	 */
+	public static void setMAX_AGE(int mAX_AGE) {
+		MAX_AGE = mAX_AGE;
+	}
+
+	/**
+	 * @return the bREEDING_PROBABILITY
+	 */
+	public static double getBREEDING_PROBABILITY() {
+		return BREEDING_PROBABILITY;
+	}
+
+	/**
+	 * @param bREEDING_PROBABILITY the bREEDING_PROBABILITY to set
+	 */
+	public static void setBREEDING_PROBABILITY(double bREEDING_PROBABILITY) {
+		BREEDING_PROBABILITY = bREEDING_PROBABILITY;
+	}
+
+	/**
+	 * @return the mAX_LITTER_SIZE
+	 */
+	public static int getMAX_LITTER_SIZE() {
+		return MAX_LITTER_SIZE;
+	}
+
+	/**
+	 * @param mAX_LITTER_SIZE the mAX_LITTER_SIZE to set
+	 */
+	public static void setMAX_LITTER_SIZE(int mAX_LITTER_SIZE) {
+		MAX_LITTER_SIZE = mAX_LITTER_SIZE;
 	}
 }

@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.8" icons="true" always-add-relationships="true" generalizations="true" realizations="true" 
+  associations="true" dependencies="true" nesting-relationships="true">  
+  <class id="1" language="java" name="nl.hanze.sjet.controller.ButtonHandler" project="Leertaak-2" 
+    file="/Leertaak-2/src/nl/hanze/sjet/controller/ButtonHandler.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="315" width="274" x="444" y="747"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="nl.hanze.sjet.controller.MenuHandler" project="Leertaak-2" 
+    file="/Leertaak-2/src/nl/hanze/sjet/controller/MenuHandler.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="139" x="1260" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="nl.hanze.sjet.model.Simulator" project="Leertaak-2" 
+    file="/Leertaak-2/src/nl/hanze/sjet/model/Simulator.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="405" width="235" x="550" y="1102"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="nl.hanze.sjet.main.Main" project="Leertaak-2" 
+    file="/Leertaak-2/src/nl/hanze/sjet/main/Main.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="113" x="226" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="nl.hanze.sjet.main.Test" project="Leertaak-2" 
+    file="/Leertaak-2/src/nl/hanze/sjet/main/Test.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="113" x="564" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="6" language="java" name="nl.hanze.sjet.model.Actor" project="Leertaak-2" 
+    file="/Leertaak-2/src/nl/hanze/sjet/model/Actor.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="128" x="259" y="1655"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="7" language="java" name="nl.hanze.sjet.model.Chicken" project="Leertaak-2" 
+    file="/Leertaak-2/src/nl/hanze/sjet/model/Chicken.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="477" width="227" x="1794" y="1655"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="nl.hanze.sjet.model.Counter" project="Leertaak-2" 
+    file="/Leertaak-2/src/nl/hanze/sjet/model/Counter.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="107" x="2061" y="1655"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="nl.hanze.sjet.model.Egg" project="Leertaak-2" 
+    file="/Leertaak-2/src/nl/hanze/sjet/model/Egg.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="128" x="777" y="1655"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="nl.hanze.sjet.model.Entity" project="Leertaak-2" 
+    file="/Leertaak-2/src/nl/hanze/sjet/model/Entity.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="279" width="154" x="825" y="1102"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="nl.hanze.sjet.model.Field" project="Leertaak-2" 
+    file="/Leertaak-2/src/nl/hanze/sjet/model/Field.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="495" width="275" x="945" y="1655"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="nl.hanze.sjet.model.FieldStats" project="Leertaak-2" 
+    file="/Leertaak-2/src/nl/hanze/sjet/model/FieldStats.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="253" x="1608" y="1102"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="nl.hanze.sjet.model.Fox" project="Leertaak-2" 
+    file="/Leertaak-2/src/nl/hanze/sjet/model/Fox.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="621" width="227" x="1527" y="1655"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="nl.hanze.sjet.model.Hunter" project="Leertaak-2" 
+    file="/Leertaak-2/src/nl/hanze/sjet/model/Hunter.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="132" x="605" y="1655"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="nl.hanze.sjet.model.Location" project="Leertaak-2" 
+    file="/Leertaak-2/src/nl/hanze/sjet/model/Location.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="138" x="427" y="1655"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="nl.hanze.sjet.model.Rabbit" project="Leertaak-2" 
+    file="/Leertaak-2/src/nl/hanze/sjet/model/Rabbit.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="495" width="227" x="1260" y="1655"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="nl.hanze.sjet.model.Randomizer" project="Leertaak-2" 
+    file="/Leertaak-2/src/nl/hanze/sjet/model/Randomizer.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="130" x="903" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="nl.hanze.sjet.view.Console" project="Leertaak-2" 
+    file="/Leertaak-2/src/nl/hanze/sjet/view/Console.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="123" x="387" y="1102"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="nl.hanze.sjet.view.EditingFrame" project="Leertaak-2" 
+    file="/Leertaak-2/src/nl/hanze/sjet/view/EditingFrame.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="513" width="308" x="1260" y="1102"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="nl.hanze.sjet.view.Legenda.ColoredRectangle" project="Leertaak-2" 
+    file="/Leertaak-2/src/nl/hanze/sjet/view/Legenda.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="178" x="41" y="1655"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="nl.hanze.sjet.view.Legenda" project="Leertaak-2" 
+    file="/Leertaak-2/src/nl/hanze/sjet/view/Legenda.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="87" x="296" y="747"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="nl.hanze.sjet.view.Legenda.LegendaItem" project="Leertaak-2" 
+    file="/Leertaak-2/src/nl/hanze/sjet/view/Legenda.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="150" x="55" y="1102"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="nl.hanze.sjet.view.SimulatorView" project="Leertaak-2" 
+    file="/Leertaak-2/src/nl/hanze/sjet/view/SimulatorView.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="405" width="275" x="739" y="302"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="nl.hanze.sjet.view.SimulatorView.FieldView" project="Leertaak-2" 
+    file="/Leertaak-2/src/nl/hanze/sjet/view/SimulatorView.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="297" width="215" x="41" y="747"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" name="nl.hanze.sjet.view.StatView" project="Leertaak-2" 
+    file="/Leertaak-2/src/nl/hanze/sjet/view/StatView.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="178" x="1040" y="747"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <dependency id="26">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="20"/>  
+  </dependency>  
+  <nesting id="27">    
+    <bendpoint x="235" y="1102"/>    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="20"/>  
+  </nesting>  
+  <dependency id="28">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="13"/>  
+  </dependency>  
+  <association id="29">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="30" name="field"/>      
+      <multiplicity id="31" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="32">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="33" name="counters"/>      
+      <multiplicity id="34" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="35">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="10"/>  
+  </generalization>  
+  <nesting id="36">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="24"/>  
+  </nesting>  
+  <realization id="37">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="6"/>  
+  </realization>  
+  <association id="38">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="39" name="actors"/>      
+      <multiplicity id="40" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="41">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="42" name="field"/>      
+      <multiplicity id="43" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="44">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="45">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="7"/>  
+  </dependency>  
+  <generalization id="46">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="10"/>  
+  </generalization>  
+  <dependency id="47">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="18"/>  
+  </dependency>  
+  <association id="48">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="49" name="simulatorView"/>      
+      <multiplicity id="50" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="51">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="10"/>  
+  </generalization>  
+  <dependency id="52">    
+    <bendpoint x="1269" y="302"/>    
+    <bendpoint x="1269" y="747"/>    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="19"/>  
+  </dependency>  
+  <association id="53">    
+    <bendpoint x="748" y="747"/>    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="54" name="view"/>      
+      <multiplicity id="55" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="56">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="57" name="location"/>      
+      <multiplicity id="58" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="59">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="16"/>  
+  </dependency>  
+  <association id="60">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="61" name="statView"/>      
+      <multiplicity id="62" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="63">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="10"/>  
+  </generalization>  
+  <generalization id="64">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="10"/>  
+  </generalization>  
+  <association id="65">    
+    <bendpoint x="413" y="747"/>    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="66" name="console"/>      
+      <multiplicity id="67" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="68">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="69" name="legenda"/>      
+      <multiplicity id="70" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="71">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="72" name="sim"/>      
+      <multiplicity id="73" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="74">    
+    <bendpoint x="1248" y="747"/>    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="75" name="stats"/>      
+      <multiplicity id="76" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="77">    
+    <end type="SOURCE" refId="25" navigable="false">      
+      <attribute id="78" name="stats"/>      
+      <multiplicity id="79" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="80">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="81" name="fieldView"/>      
+      <multiplicity id="82" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="83">    
+    <bendpoint x="1009" y="747"/>    
+    <bendpoint x="1009" y="1102"/>    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="11"/>  
+  </dependency>  
+  <nesting id="84">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="22"/>  
+  </nesting>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

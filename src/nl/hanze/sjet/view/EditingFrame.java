@@ -2,6 +2,7 @@ package nl.hanze.sjet.view;
 
 import javax.swing.*;
 
+import nl.hanze.sjet.model.Chicken;
 import nl.hanze.sjet.model.Fox;
 import nl.hanze.sjet.model.Rabbit;
 
@@ -136,6 +137,13 @@ public class EditingFrame extends JFrame {
 			maxLitterSize = Rabbit.getMaxLitterSize();
 			foodValue = 0;
 		}
+		if(animal.getName() == "nl.hanze.sjet.model.Chicken");{
+			maxAge = Chicken.getMAX_AGE();
+			breedingAge = Chicken.getBREEDING_AGE();
+			breedingProb = Chicken.getBREEDING_PROBABILITY();
+			maxLitterSize = Chicken.getMAX_LITTER_SIZE();
+			foodValue = 0;
+		}
 	}
 	
 	public void setImage(){
@@ -145,6 +153,9 @@ public class EditingFrame extends JFrame {
 			break;
 		case "Fox":
 			images = new ImageIcon("Images/Fox.jpg");
+			break;
+		case "Chicken":
+			images = new ImageIcon("Images/Chicken.jpg");
 			break;
 		}
 	}
@@ -164,6 +175,12 @@ public class EditingFrame extends JFrame {
 			Fox.setBREEDING_PROBABILITY(Double.parseDouble(breedingProbField.getText()));
 			Fox.setMAX_LITTER_SIZE(Integer.parseInt(maxLitterSizeField.getText()));
 			Fox.setRABBIT_FOOD_VALUE(Integer.parseInt(foodValueField.getText()));
+			break;
+		case "Chicken":
+			Chicken.setMAX_AGE(Integer.parseInt(maxAgeField.getText()));
+			Chicken.setBREEDING_AGE(Integer.parseInt(breedingAgeField.getText()));
+			Chicken.setBREEDING_PROBABILITY(Double.parseDouble(breedingProbField.getText()));
+			Chicken.setMAX_LITTER_SIZE(Integer.parseInt(maxLitterSizeField.getText()));
 			break;
 			}
 		}catch(NumberFormatException e){
@@ -187,6 +204,12 @@ public class EditingFrame extends JFrame {
 			breedingProbField.setText("" + Fox.DEF_BREEDING_PROBABILITY);
 			maxLitterSizeField.setText("" + Fox.DEF_MAX_LITTER_SIZE);
 			foodValueField.setText("" + Fox.DEF_RABBIT_FOOD_VALUE);
+		case "Chicken":
+			maxAgeField.setText("" + Chicken.DEF_MAX_AGE);
+			breedingAgeField.setText("" + Chicken.DEF_BREEDING_AGE);
+			breedingProbField.setText("" + Chicken.DEF_BREEDING_PROBABILITY);
+			maxLitterSizeField.setText("" + Chicken.DEF_MAX_LITTER_SIZE);
+			break;
 		}
 		
 	}

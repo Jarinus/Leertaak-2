@@ -26,9 +26,9 @@ public class Simulator extends Thread
 	// Whether a sickness was started or not.
 	public boolean sickness;
     // The default width for the grid.
-    private static final int DEFAULT_WIDTH = 250;
+    private static final int DEFAULT_WIDTH = 180;
     // The default depth of the grid.
-    private static final int DEFAULT_DEPTH = 80;
+    private static final int DEFAULT_DEPTH = 60;
     // The probability that a fox will be created in any given grid position.
     private static final double FOX_CREATION_PROBABILITY = 0.02,
     							RABBIT_CREATION_PROBABILITY = 0.08,
