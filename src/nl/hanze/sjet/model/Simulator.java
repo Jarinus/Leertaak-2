@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.awt.*;
+
 import nl.hanze.sjet.view.SimulatorView;
 
 /**
@@ -22,15 +23,17 @@ public class Simulator extends Thread
 	public boolean suspended;
 	// Whether the thread was started or not.
 	public boolean started;
+	// Whether a sickness was started or not.
+	public boolean sickness;
     // The default width for the grid.
-    private static final int DEFAULT_WIDTH = 150;
+    private static final int DEFAULT_WIDTH = 250;
     // The default depth of the grid.
-    private static final int DEFAULT_DEPTH = 60;
+    private static final int DEFAULT_DEPTH = 80;
     // The probability that a fox will be created in any given grid position.
-    private static final double FOX_CREATION_PROBABILITY = 0.02;
-    // The probability that a rabbit will be created in any given grid position.
-    private static final double RABBIT_CREATION_PROBABILITY = 0.08; 
-    private static final double HUNTER_CREATION_PROBABILITY = 0.015;
+    private static final double FOX_CREATION_PROBABILITY = 0.02,
+    							RABBIT_CREATION_PROBABILITY = 0.08,
+    							HUNTER_CREATION_PROBABILITY = 0.015,
+    							CHICKEN_CREATION_PROBABILITY = 0.05;
     // List of animals in the field.
     private List<Actor> actors;
     // The current state of the field.
@@ -63,6 +66,7 @@ public class Simulator extends Thread
         }
         
         started = false;
+        sickness = false;
         suspended = true;
         
         actors = new ArrayList<Actor>();
@@ -72,7 +76,9 @@ public class Simulator extends Thread
         view = new SimulatorView(this, depth, width);
         view.setColor(Rabbit.class, Color.orange);
         view.setColor(Fox.class, Color.blue);
-        view.setColor(Hunter.class, Color.GRAY);
+        view.setColor(Hunter.class, Color.red);
+        view.setColor(Chicken.class, Color.magenta);
+        view.setColor(Egg.class, Color.pink);
         // Setup a valid starting point.
         reset();
     }
@@ -106,6 +112,11 @@ public class Simulator extends Thread
     public void simulateOneStep()
     {
         step++;
+        
+        int amountOfSickAnimals = 0;
+        if(sickness) {
+        	amountOfSickAnimals += 20;
+        }
 
         // Provide space for newborn animals.
         List<Actor> newActors = new ArrayList<Actor>();        
@@ -115,6 +126,9 @@ public class Simulator extends Thread
             actor.act(newActors);
             if(actor instanceof Entity) {
                 Entity entity = (Entity) actor;
+                if(amountOfSickAnimals > 0 && !(entity instanceof Hunter)) {
+                	entity.makeSick();
+                }
                 if(!entity.isAlive()) {
                     it.remove();
                 }
@@ -125,6 +139,8 @@ public class Simulator extends Thread
         actors.addAll(newActors);
 
         view.showStatus(step, field);
+        
+        sickness = false;
     }
         
     /**
@@ -163,6 +179,11 @@ public class Simulator extends Thread
                 	Location location = new Location(row, col);
                 	Hunter hunter = new Hunter(field, location);
                 	actors.add(hunter);
+                }
+                else if(rand.nextDouble() <= CHICKEN_CREATION_PROBABILITY){
+                	Location location = new Location(row, col);
+                	Chicken chicken = new Chicken(true, field, location);
+                	actors.add(chicken);
                 }
                 // else leave the location empty.
             }

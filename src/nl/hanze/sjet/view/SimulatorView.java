@@ -8,7 +8,6 @@ import nl.hanze.sjet.controller.ButtonHandler;
 import nl.hanze.sjet.controller.MenuHandler;
 import nl.hanze.sjet.model.Field;
 import nl.hanze.sjet.model.FieldStats;
-import nl.hanze.sjet.model.Legenda;
 import nl.hanze.sjet.model.Simulator;
 
 import java.util.LinkedHashMap;
@@ -41,7 +40,7 @@ public class SimulatorView extends JFrame
     private JButton sicknessButton;
     private JButton switchDefecationButton;
     private JLabel status;
-    private Console console;
+    public Console console;
     private Legenda legenda;
 	private Color backgroundColor = new Color(200, 200, 200);
     
@@ -67,7 +66,7 @@ public class SimulatorView extends JFrame
         legenda = new Legenda();
         console.setBackground(backgroundColor);
     	
-    	ButtonHandler buttonHandler = new ButtonHandler(sim, console);
+    	ButtonHandler buttonHandler = new ButtonHandler(sim);
     	oneStepButton = buttonHandler.makeNewOneStepButton(new JButton("One Step"));
     	runButton = buttonHandler.makeNewRunButton(new JButton("Run"));
     	pauseButton = buttonHandler.makeNewPauseButton(new JButton("Pause"));
@@ -187,12 +186,13 @@ public class SimulatorView extends JFrame
         for(int row = 0; row < field.getDepth(); row++) {
             for(int col = 0; col < field.getWidth(); col++) {
                 Object animal = field.getObjectAt(row, col);
+                int grassIntensity = field.getGrassIntensity(row, col);
                 if(animal != null) {
                     stats.incrementCount(animal.getClass());
-                    fieldView.drawMark(col, row, getColor(animal.getClass()));
+                    fieldView.drawMark(col, row, greenShading(grassIntensity, getColor(animal.getClass())));
                 }
                 else {
-                    fieldView.drawMark(col, row, EMPTY_COLOR);
+                    fieldView.drawMark(col, row, greenShading(grassIntensity, EMPTY_COLOR));
                 }
             }
         }
@@ -300,5 +300,16 @@ public class SimulatorView extends JFrame
     
     public Console getConsole() {
     	return console;
+    }
+    
+    public Color greenShading(int grassIntensity, Color color) {
+    	if(grassIntensity > 10) {
+    		grassIntensity = 10;
+    	}
+    	Color grass = new Color(0, grassIntensity * 25, 0, 255);
+    	int red = (int) ((color.getRed() * 2) + grass.getRed()) / 3,
+    		green = (int) ((color.getGreen() * 2) + grass.getGreen()) / 3,
+    		blue = (int) ((color.getBlue() * 2) + grass.getBlue()) / 3;
+    	return (new Color(red, green, blue, 255));
     }
 }

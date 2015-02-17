@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 import nl.hanze.sjet.model.Simulator;
-import nl.hanze.sjet.view.Console;
 
 /**
  * 
@@ -16,7 +15,6 @@ import nl.hanze.sjet.view.Console;
  */
 public class ButtonHandler {
 	private Simulator sim;
-	private Console console;
 
 	private static final String MESSAGE_RUN = "The simulation was started.",
 								MESSAGE_PAUSE = "The simulation was paused.",
@@ -31,9 +29,8 @@ public class ButtonHandler {
 	 * The constructor for the ButtonHandler
 	 * @param sim The Simulator used.
 	 */
-	public ButtonHandler(Simulator sim, Console console) {
+	public ButtonHandler(Simulator sim) {
 		this.sim = sim;
-		this.console = console;
 	}
 	
 	public JButton makeNewSicknessButton(JButton button) {
@@ -42,7 +39,7 @@ public class ButtonHandler {
 		newButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				sim.sickness = true;
-				console.write(MESSAGE_SICKNESS);
+				sim.getView().console.write(MESSAGE_SICKNESS);
 			}
 		});
 		return newButton;
@@ -60,10 +57,10 @@ public class ButtonHandler {
 			public void actionPerformed(ActionEvent e) {
 				if(sim.getField().isDefecating()) {
 					sim.getField().setDefecating(false);
-					console.write(MESSAGE_DEFECATION_OFF);
+					sim.getView().console.write(MESSAGE_DEFECATION_OFF);
 				} else {
 					sim.getField().setDefecating(true);
-					console.write(MESSAGE_DEFECATION_ON);
+					sim.getView().console.write(MESSAGE_DEFECATION_ON);
 				}
 				sim.getView().updateStatusText(!sim.suspended, sim.getField().isDefecating());
 			}
@@ -105,7 +102,7 @@ public class ButtonHandler {
 					sim.start();
 					sim.suspended = false;
 					sim.getView().updateStatusText(!sim.suspended, sim.getField().isDefecating());
-					console.write(MESSAGE_RUN);
+					sim.getView().console.write(MESSAGE_RUN);
 					return;
 				}
 				if(sim.suspended) {
@@ -113,7 +110,7 @@ public class ButtonHandler {
 					synchronized(sim.lock) {
 						sim.lock.notifyAll();
 					}
-					console.write(MESSAGE_RESUME);
+					sim.getView().console.write(MESSAGE_RESUME);
 					sim.getView().updateStatusText(!sim.suspended, sim.getField().isDefecating());
 				} else {
 					return;
@@ -136,7 +133,7 @@ public class ButtonHandler {
 				if(!sim.suspended) {
 					sim.suspended = true;
 					sim.getView().updateStatusText(!sim.suspended, sim.getField().isDefecating());
-					console.write(MESSAGE_PAUSE);
+					sim.getView().console.write(MESSAGE_PAUSE);
 				}
 			}
         });
@@ -154,8 +151,8 @@ public class ButtonHandler {
 		newButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(sim.suspended) {
+					sim.getView().console.clear();
 					sim.reset();
-					console.clear();
 				} else {
 					return;
 				}

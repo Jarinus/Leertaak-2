@@ -75,7 +75,7 @@ public class Field
     
     public void addGrass(int row, int col) {
     	if(defecating) {
-        	grass[row][col] += 0 + rand.nextInt(3);
+    		grass[row][col] += 0 + rand.nextInt(2);
     	}
     }
     
@@ -134,6 +134,10 @@ public class Field
     public Object getObjectAt(int row, int col)
     {
         return field[row][col];
+    }
+    
+    public int getGrassIntensity(int row, int col) {
+    	return grass[row][col];
     }
     
     /**

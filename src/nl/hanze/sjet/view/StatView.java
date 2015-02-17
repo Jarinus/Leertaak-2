@@ -46,12 +46,18 @@ public class StatView extends JPanel {
 					total += values.get(key);
 				}
 				int lastAngle = 90;
+				int totalAngle = 0;
 				for(Class key : values.keySet()) {
 					double temp = (double) ((values.get(key) / total) * 360);
 					int angle = (int) temp;
+					totalAngle += angle;
 					g.setColor(colors.get(key));
 					g.fillArc(0, 0, getWidth(), getHeight(), lastAngle, -angle);
 					lastAngle -= angle;
+				}
+				if(totalAngle < 360) {
+					g.setColor(Color.orange);
+					g.fillArc(0, 0, getWidth(), getHeight(), lastAngle, 360 - totalAngle);
 				}
 			}
 		}

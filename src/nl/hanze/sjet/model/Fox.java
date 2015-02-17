@@ -19,7 +19,7 @@ public class Fox extends Entity
     // The age to which a fox can live.
     private static int MAX_AGE = 150;
     // The likelihood of a fox breeding.
-    private static double BREEDING_PROBABILITY = 0.08;
+    private static double BREEDING_PROBABILITY = 0.15;
     // The maximum number of births.
     private static int MAX_LITTER_SIZE = 2;
     // The food value of a single rabbit. In effect, this is the
@@ -30,7 +30,7 @@ public class Fox extends Entity
     
     public static final int DEF_BREEDING_AGE = 15;
     public static final int DEF_MAX_AGE = 150;
-    public static final double DEF_BREEDING_PROBABILITY = 0.08;
+    public static final double DEF_BREEDING_PROBABILITY = 0.12;
     public static final int DEF_MAX_LITTER_SIZE = 2;
     public static final int DEF_RABBIT_FOOD_VALUE = 9;
     
@@ -88,8 +88,13 @@ public class Fox extends Entity
                 setLocation(newLocation);
             }
             else {
-                // Overcrowding.
-                setDead();
+            	Location loc = getField().randomAdjacentLocation(getLocation());
+            	Object obj = getField().getObjectAt(loc);
+            	if(obj instanceof Entity && !(obj instanceof Hunter)) {
+            		Entity entity = (Entity) obj;
+            		entity.setDead();
+            	}
+            	setLocation(loc);
             }
         }
     }
@@ -133,6 +138,14 @@ public class Fox extends Entity
                 Rabbit rabbit = (Rabbit) animal;
                 if(rabbit.isAlive()) { 
                     rabbit.setDead();
+                    foodLevel = RABBIT_FOOD_VALUE;
+                    // Remove the dead rabbit from the field.
+                    return where;
+                }
+            } else if(animal instanceof Chicken) {
+                Chicken chicken = (Chicken) animal;
+                if(chicken.isAlive()) { 
+                    chicken.setDead();
                     foodLevel = RABBIT_FOOD_VALUE;
                     // Remove the dead rabbit from the field.
                     return where;

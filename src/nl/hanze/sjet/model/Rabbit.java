@@ -16,18 +16,18 @@ public class Rabbit extends Entity
     // The age at which a rabbit can start to breed.
     private static int BREEDING_AGE = 5;
     // The age to which a rabbit can live.
-    private static int MAX_AGE = 40;
+    private static int MAX_AGE = 20;
     // The likelihood of a rabbit breeding.
-    private static double BREEDING_PROBABILITY = 0.12;
+    private static double BREEDING_PROBABILITY = 0.08;
     // The maximum number of births.
     private static int MAX_LITTER_SIZE = 4;
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
     
-    public static final int DEF_BREEDING_AGE = 5;
-    public static final int DEF_MAX_AGE = 40;
-    public static final double DEF_BREEDING_PROBABILITY = 0.12;
-    public static final int DEF_MAX_LITTER_SIZE = 4;
+    public final static int DEF_BREEDING_AGE = 5;
+    public final static int DEF_MAX_AGE = 20;
+    public final static double DEF_BREEDING_PROBABILITY = 0.08;
+    public final static int DEF_MAX_LITTER_SIZE = 4;
     
     // Individual characteristics (instance fields).
     

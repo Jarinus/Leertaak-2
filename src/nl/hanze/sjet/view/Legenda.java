@@ -1,4 +1,4 @@
-package nl.hanze.sjet.model;
+package nl.hanze.sjet.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -12,13 +12,17 @@ import javax.swing.JPanel;
 public class Legenda extends JPanel {
 	public Legenda() {
 		setBackground(getBackground());
-		LegendaItem li = new LegendaItem(Color.blue, "Fox");
-		LegendaItem li2 = new LegendaItem(Color.green, "Snake");
-		LegendaItem li3 = new LegendaItem(Color.yellow, "Rat");
+		LegendaItem li = new LegendaItem(Color.red, "Hunter");
+		LegendaItem li2 = new LegendaItem(Color.blue, "Fox");
+		LegendaItem li3 = new LegendaItem(Color.orange, "Rabbit");
+		LegendaItem li4 = new LegendaItem(Color.magenta, "Chicken");
+		LegendaItem li5 = new LegendaItem(Color.pink, "Egg");
 		JPanel panel = new JPanel(new GridLayout(0, 1));
 		panel.add(li);
 		panel.add(li2);
 		panel.add(li3);
+		panel.add(li4);
+		panel.add(li5);
 		add(panel, BorderLayout.WEST);
 	}
 	
