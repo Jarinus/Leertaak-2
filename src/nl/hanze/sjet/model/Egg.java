@@ -7,7 +7,7 @@ public class Egg extends Entity {
 	
 	public Egg(Field field, Location location) {
 		super(field, location);
-		stepsUntilHatch = 5;
+		stepsUntilHatch = 10;
 	}
 
 	@Override
@@ -20,6 +20,9 @@ public class Egg extends Entity {
 			setDead();
 			if(field != null && loc != null) {
 			Chicken chicken = new Chicken(false, field, loc);
+			if(isSick()) {
+				chicken.makeSick();
+			}
 			newAnimals.add(chicken);
 			}
 			newAnimals.remove(this);

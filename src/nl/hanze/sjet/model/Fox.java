@@ -19,7 +19,7 @@ public class Fox extends Entity
     // The age to which a fox can live.
     private static int MAX_AGE = 150;
     // The likelihood of a fox breeding.
-    private static double BREEDING_PROBABILITY = 0.15;
+    private static double BREEDING_PROBABILITY = 0.12;
     // The maximum number of births.
     private static int MAX_LITTER_SIZE = 2;
     // The food value of a single rabbit. In effect, this is the
@@ -70,10 +70,15 @@ public class Fox extends Entity
      */
     public void act(List<Actor> newFoxes)
     {
-    	//TODO implement sickness
         incrementAge();
         incrementHunger();
+        incrementSickness();
         if(isAlive()) {
+        	if(isSick()) {
+        		spreadSickness();
+        		setDead();
+        		return;
+        	}
         	int row = getLocation().getRow(), col = getLocation().getCol();
         	defecate(row, col);
             giveBirth(newFoxes);            

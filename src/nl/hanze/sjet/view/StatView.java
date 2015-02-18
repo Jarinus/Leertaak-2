@@ -41,10 +41,7 @@ public class StatView extends JPanel {
 			g.fillRect(0, 0, getWidth(), getHeight());
 			Map<Class, Integer> values = stats.getPopulationDetails();
 			if(values != null && values.size() > 0) {
-				double total = 0.0;
-				for(Class key : values.keySet()) {
-					total += values.get(key);
-				}
+				double total = 10800.0;
 				int lastAngle = 90;
 				int totalAngle = 0;
 				for(Class key : values.keySet()) {
@@ -55,9 +52,9 @@ public class StatView extends JPanel {
 					g.fillArc(0, 0, getWidth(), getHeight(), lastAngle, -angle);
 					lastAngle -= angle;
 				}
-				if(totalAngle < 360) {
-					g.setColor(Color.orange);
-					g.fillArc(0, 0, getWidth(), getHeight(), lastAngle, 360 - totalAngle);
+				if(totalAngle != 360) {
+					g.setColor(getBackground());
+					g.fillArc(0, 0, getWidth(), getHeight(), lastAngle, -(360 - totalAngle));
 				}
 			}
 		}

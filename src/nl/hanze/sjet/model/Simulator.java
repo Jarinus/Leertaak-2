@@ -32,7 +32,7 @@ public class Simulator extends Thread
     // The probability that a fox will be created in any given grid position.
     private static final double FOX_CREATION_PROBABILITY = 0.02,
     							RABBIT_CREATION_PROBABILITY = 0.08,
-    							HUNTER_CREATION_PROBABILITY = 0.015,
+    							HUNTER_CREATION_PROBABILITY = 0.014,
     							CHICKEN_CREATION_PROBABILITY = 0.05;
     // List of animals in the field.
     private List<Actor> actors;
@@ -112,22 +112,23 @@ public class Simulator extends Thread
     public void simulateOneStep()
     {
         step++;
-        
-        int amountOfSickAnimals = 0;
-        if(sickness) {
-        	amountOfSickAnimals += 20;
-        }
 
         // Provide space for newborn animals.
         List<Actor> newActors = new ArrayList<Actor>();        
         // Let all rabbits act.
         for(Iterator<Actor> it = actors.iterator(); it.hasNext(); ) {
             Actor actor = it.next();
+            if(!sickness) {
+            	if(actor instanceof Entity) {
+            		Entity entity = (Entity)actor;
+            		entity.cure();
+            	}
+            }
             actor.act(newActors);
             if(actor instanceof Entity) {
                 Entity entity = (Entity) actor;
-                if(amountOfSickAnimals > 0 && !(entity instanceof Hunter)) {
-                	entity.makeSick();
+                if(sickness) {
+                	entity.tryToMakeSick();
                 }
                 if(!entity.isAlive()) {
                     it.remove();
@@ -135,12 +136,12 @@ public class Simulator extends Thread
             }
         }
                
+        field.decreaseGrass();
+        
         // Add the newly born foxes and rabbits to the main lists.
         actors.addAll(newActors);
 
         view.showStatus(step, field);
-        
-        sickness = false;
     }
         
     /**

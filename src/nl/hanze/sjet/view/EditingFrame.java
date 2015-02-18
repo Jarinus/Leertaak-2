@@ -186,7 +186,9 @@ public class EditingFrame extends JFrame {
 		}catch(NumberFormatException e){
 			System.err.println("Please type right format Int or Double");
 			JOptionPane.showMessageDialog(this, "Sjet Simulator\n\n Please use a number", "Wrong Type Error", JOptionPane.INFORMATION_MESSAGE);
+			return;
 		}
+		dispose();
 		
 		}
 	
@@ -234,7 +236,6 @@ public class EditingFrame extends JFrame {
 		submitBut.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent E){
 				setValues();
-				dispose();
 			}
 		});
 		

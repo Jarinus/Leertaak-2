@@ -44,6 +44,16 @@ public class Field
         setDefecating(true);
     }
     
+    public void decreaseGrass() {
+        for(int row = 0; row < depth; row++) {
+            for(int col = 0; col < width; col++) {
+            	if(rand.nextDouble() < 0.005) {
+            		grass[row][col]--;
+            	}
+            }
+        }
+    }
+    
     /**
      * Empty the field.
      */
@@ -52,9 +62,7 @@ public class Field
         for(int row = 0; row < depth; row++) {
             for(int col = 0; col < width; col++) {
                 field[row][col] = null;
-                if(grass[row][col] == 0) {
-                	grass[row][col] = 10 + rand.nextInt(6);
-                }
+                grass[row][col] = 10 + rand.nextInt(6);
             }
         }
     }

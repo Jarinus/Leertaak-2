@@ -121,7 +121,7 @@ public class SimulatorView extends JFrame
         JPanel infoPanel = new JPanel(new BorderLayout(6, 6));
         infoPanel.setBackground(backgroundColor);
         infoPanel.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
-        infoPanel.add(new JLabel("Version 0.0"));
+        infoPanel.add(new JLabel("Version 1.5"));
 
         Container container = getContentPane();
         container.setBackground(backgroundColor);
@@ -303,13 +303,15 @@ public class SimulatorView extends JFrame
     }
     
     public Color greenShading(int grassIntensity, Color color) {
-    	if(grassIntensity > 10) {
-    		grassIntensity = 10;
+    	Color grass = null;
+    	if(grassIntensity > 0) {
+    		grass = new Color(0, 255, 0);
+    	} else {
+    		grass = Color.white;
     	}
-    	Color grass = new Color(0, grassIntensity * 25, 0, 255);
     	int red = (int) ((color.getRed() * 2) + grass.getRed()) / 3,
     		green = (int) ((color.getGreen() * 2) + grass.getGreen()) / 3,
     		blue = (int) ((color.getBlue() * 2) + grass.getBlue()) / 3;
-    	return (new Color(red, green, blue, 255));
+    	return (new Color(red, green, blue));
     }
 }

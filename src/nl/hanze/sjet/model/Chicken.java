@@ -35,7 +35,13 @@ public class Chicken extends Entity {
 
 	public void act(List<Actor> newChickens) {
 		incrementAge();
+        incrementSickness();
 		if(isAlive()) {
+        	if(isSick()) {
+        		spreadSickness();
+        		setDead();
+        		return;
+        	}
         	int row = getLocation().getRow(), col = getLocation().getCol();
         	defecate(row, col);
 			if(rand.nextDouble() <= BREEDING_PROBABILITY) {

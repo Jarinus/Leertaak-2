@@ -58,10 +58,15 @@ public class Rabbit extends Entity
      */
     public void act(List<Actor> newRabbits)
     {
-    	//TODO implement sickness
     	Field field = getField();
         incrementAge();
+        incrementSickness();
         if(isAlive()) {
+        	if(isSick()) {
+        		spreadSickness();
+        		setDead();
+        		return;
+        	}
         	int row = getLocation().getRow(),
         			col = getLocation().getCol();
         	if(field.eatGrass(row, col)) {

@@ -1,5 +1,6 @@
 package nl.hanze.sjet.model;
 import java.util.List;
+import java.util.Random;
 
 /**
  * A class representing shared characteristics of animals.
@@ -18,6 +19,12 @@ public abstract class Entity implements Actor
     // Whether the entity is sick.
     private boolean sick;
     
+    private static final Random rand = Randomizer.getRandom();
+    
+    private static final double SICKNESS_CHANCE = 0.025;
+    
+    private int stepsUntilDead;
+    
     /**
      * Create a new animal at location in field.
      * 
@@ -29,6 +36,7 @@ public abstract class Entity implements Actor
         alive = true;
         this.field = field;
         setLocation(location);
+        stepsUntilDead = -1;
     }
     
     /**
@@ -56,6 +64,11 @@ public abstract class Entity implements Actor
         return alive;
     }
 
+    public void cure() {
+    	stepsUntilDead = -1;
+    	sick = false;
+    }
+    
     /**
      * Indicate that the animal is no longer alive.
      * It is removed from the field.
@@ -101,11 +114,38 @@ public abstract class Entity implements Actor
         return field;
     }
     
+    protected void spreadSickness() {
+    	List<Location> adjacent = field.adjacentLocations(location);
+    	for(Location loc : adjacent) {
+    		Object obj = field.getObjectAt(loc);
+    		if(obj instanceof Entity) {
+    			Entity entity = (Entity) obj;
+    			entity.makeSick();
+    		}
+    	}
+    }
+    
+   protected void incrementSickness() {
+	   if(sick) {
+		   stepsUntilDead--;
+		   if(stepsUntilDead == 0) {
+			   setDead();
+		   }
+	   }
+   }
+   
+   public void tryToMakeSick() {
+	   if(rand.nextDouble() < SICKNESS_CHANCE) {
+		   makeSick();
+	   }
+   }
+    
     /**
      * Makes the entity sick if the entity was not sick already.
      */
     public void makeSick() {
     	if(!sick) {
+    		stepsUntilDead = 10;
     		sick = true;
     	}
     }

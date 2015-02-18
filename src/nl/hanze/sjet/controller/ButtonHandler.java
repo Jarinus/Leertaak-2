@@ -20,7 +20,8 @@ public class ButtonHandler {
 								MESSAGE_PAUSE = "The simulation was paused.",
 								MESSAGE_DEFECATION_ON = "Defecation was turned on.",
 								MESSAGE_DEFECATION_OFF = "Defecation was turned off.",
-								MESSAGE_SICKNESS = "A sickness was added to the simulation.",
+								MESSAGE_SICKNESS_ON = "A sickness was added to the simulation.",
+								MESSAGE_SICKNESS_OFF = "The sickness has stopped appearing.",
 								MESSAGE_RESUME = "The simulation was resumed.";
 	
 	private static final Color BUTTON_COLOR = new Color(220, 220, 220);
@@ -38,8 +39,13 @@ public class ButtonHandler {
 		newButton.setBackground(BUTTON_COLOR);
 		newButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				sim.sickness = true;
-				sim.getView().console.write(MESSAGE_SICKNESS);
+				if(!sim.sickness) {
+					sim.sickness = true;
+					sim.getView().console.write(MESSAGE_SICKNESS_ON);
+				} else {
+					sim.sickness = false;
+					sim.getView().console.write(MESSAGE_SICKNESS_OFF);
+				}
 			}
 		});
 		return newButton;
