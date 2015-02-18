@@ -165,13 +165,13 @@ public class EditingFrame extends JFrame {
 	public void setImage(){
 		switch(animal.getName().substring(20)){
 		case "Rabbit": 
-			images = new ImageIcon("Images/Rabbit.jpg");
+			images = new ImageIcon("bin/nl/hanze/sjet/images/Rabbit.jpg");
 			break;
 		case "Fox":
-			images = new ImageIcon("Images/Fox.jpg");
+			images = new ImageIcon("bin/nl/hanze/sjet/images/Fox.jpg");
 			break;
 		case "Chicken":
-			images = new ImageIcon("Images/Chicken.jpg");
+			images = new ImageIcon("bin/nl/hanze/sjet/images/Chicken.jpg");
 			break;
 		}
 	}

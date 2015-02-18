@@ -140,6 +140,22 @@ public class Rabbit extends Entity
     {
         return age >= BREEDING_AGE;
     }
+    /**
+     * 
+     * @return returns boolean that tests if age is bigger than breeding age
+     */
+    public boolean getCanBreed(){
+    	 return age >= BREEDING_AGE;
+    }
+    /**
+     * is a public duplicate of increment age
+     */
+    public void incrementAgeTester(){
+        age++;
+        if(age > MAX_AGE) {
+            setDead();
+        }
+    }
 
 	/**
 	 * @return the breedingAge
