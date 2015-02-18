@@ -1,9 +1,7 @@
-package nl.hanze.sjet.main;
+package nl.hanze.sjet.junit;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-import java.util.List;
 import org.junit.Before;
 import nl.hanze.sjet.model.Entity;
 import nl.hanze.sjet.model.Field;
@@ -20,12 +18,10 @@ public class Test {
     private Location loc;
     private Location loc2;
     private Location loc3;
-    private Location loc4;
     
     private Rabbit rabbit;
     private Rabbit rabbit2;
     private Fox fox;
-    private Fox fox2; 
 
     @Before
     public void setUp() {
@@ -35,11 +31,9 @@ public class Test {
              loc = new Location(1,1);
              loc2 = new Location(2,2);
              loc3 = new Location(1,2);
-             loc4 = new Location(2,1);
              rabbit = new Rabbit(true, field, loc);
              rabbit2 = new Rabbit(true, field, loc2);
              fox = new Fox(true, field, loc3);
-             fox2 = new Fox(true, field, loc4);
     }
     
     @org.junit.Test
