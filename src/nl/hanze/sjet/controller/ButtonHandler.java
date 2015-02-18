@@ -14,8 +14,9 @@ import nl.hanze.sjet.model.Simulator;
  * @version 03-02-2015
  */
 public class ButtonHandler {
+	//the simulator object
 	private Simulator sim;
-
+	//The messages for the console in the simulator
 	private static final String MESSAGE_RUN = "The simulation was started.",
 								MESSAGE_PAUSE = "The simulation was paused.",
 								MESSAGE_DEFECATION_ON = "Defecation was turned on.",
@@ -23,7 +24,7 @@ public class ButtonHandler {
 								MESSAGE_SICKNESS_ON = "A sickness was added to the simulation.",
 								MESSAGE_SICKNESS_OFF = "The sickness has stopped appearing.",
 								MESSAGE_RESUME = "The simulation was resumed.";
-	
+	// the button color for the simulator
 	private static final Color BUTTON_COLOR = new Color(220, 220, 220);
 	
 	/**
@@ -34,6 +35,11 @@ public class ButtonHandler {
 		this.sim = sim;
 	}
 	
+	/**
+	 * add Action listener to sickness button
+	 * @param button
+	 * @return
+	 */
 	public JButton makeNewSicknessButton(JButton button) {
 		JButton newButton = button;
 		newButton.setBackground(BUTTON_COLOR);
@@ -52,7 +58,7 @@ public class ButtonHandler {
 	}
 	
 	/**
-	 * 
+	 * add Action listener to defecation button
 	 * @param button
 	 * @return
 	 */
@@ -75,7 +81,7 @@ public class ButtonHandler {
 	}
 	
 	/**
-	 * 
+	 * add Action Listener to make one step button
 	 * @param button
 	 * @return
 	 */
@@ -95,7 +101,7 @@ public class ButtonHandler {
 	}
 	
 	/**
-	 * 
+	 * add Action listener to run button
 	 * @param button
 	 * @return
 	 */
@@ -127,7 +133,7 @@ public class ButtonHandler {
 	}
 	
 	/**
-	 * 
+	 * add Action Listener to pause button
 	 * @param button
 	 * @return
 	 */
@@ -147,7 +153,7 @@ public class ButtonHandler {
 	}
 	
 	/**
-	 * 
+	 * add Action listener to reset button 
 	 * @param button
 	 * @return
 	 */

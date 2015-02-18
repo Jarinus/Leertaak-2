@@ -10,8 +10,12 @@ import javax.swing.JTextArea;
 
 @SuppressWarnings("serial")
 public class Console extends JPanel {
+	//The JTextArea object.
 	private JTextArea textArea;
 	
+	/**
+	 * The constructor for Console.
+	 */
 	public Console() {
 		setLayout(new GridBagLayout());
 		
@@ -40,12 +44,18 @@ public class Console extends JPanel {
 		textArea.setCaretPosition(textArea.getText().length());
 		add(textArea, gbc);
 	}
-	
+	/**
+	 * Writes a line in the Console.
+	 * @param str
+	 */
 	public void write(String str) {
 		textArea.append("\n[SIM]" + str);
 		textArea.setCaretPosition(textArea.getText().length());
 	}
 	
+	/**
+	 * Clears the console.
+	 */
 	public void clear() {
 		textArea.setText(null);
 	}

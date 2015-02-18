@@ -43,7 +43,9 @@ public class Field
         }
         setDefecating(true);
     }
-    
+    /**
+     * There is a chance of 1 on 200 that the grass on that specific location is gone
+     */
     public void decreaseGrass() {
         for(int row = 0; row < depth; row++) {
             for(int col = 0; col < width; col++) {
@@ -80,7 +82,11 @@ public class Field
     	}
     	return false;
     }
-    
+    /**
+     * Adds grass to the Location
+     * @param row
+     * @param col
+     */
     public void addGrass(int row, int col) {
     	if(defecating) {
     		grass[row][col] += 0 + rand.nextInt(2);
@@ -143,7 +149,12 @@ public class Field
     {
         return field[row][col];
     }
-    
+    /**
+     * returns the grass intensity of that location
+     * @param row
+     * @param col
+     * @return
+     */
     public int getGrassIntensity(int row, int col) {
     	return grass[row][col];
     }

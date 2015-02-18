@@ -14,16 +14,26 @@ import nl.hanze.sjet.view.SimulatorView;
 
 @SuppressWarnings("serial")
 public class MenuHandler extends JMenuBar {
+	//The color for the Menu
 	private static final Color MENU_COLOR = new Color(220, 220, 220);
-	private static final String VERSION = "Version 0.0";
+	//The version number of the simulator
+	private static final String VERSION = "Version 1.5";
+	//the object SimulatorView
 	private SimulatorView simulatorView;
+	// The JMenu 
 	private JMenu animals;
+	//The menu items for JMenu animals
 	private JMenuItem aRabbit;
 	private JMenuItem aFox;
 	private JMenuItem aChicken;
+	//The JMenu about
 	private JMenu about;
+	//JMenuItem for about
 	private JMenuItem showAbout;
 	
+	/**
+	 * MenuHandler constructor
+	 */
 	public MenuHandler() {
 		setBackground(MENU_COLOR);
 		animals = new JMenu("Animals");
@@ -62,7 +72,7 @@ public class MenuHandler extends JMenuBar {
 		showAbout.setBackground(MENU_COLOR);
 		showAbout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(simulatorView, "Sjet Simulator\n\n" + VERSION, "About", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(simulatorView, "SJET Simulator\n\n" + VERSION, "About", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 		about.add(showAbout);

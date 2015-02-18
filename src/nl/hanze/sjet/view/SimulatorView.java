@@ -31,17 +31,24 @@ public class SimulatorView extends JFrame
 
     // Color used for objects that have no defined color.
     private static final Color UNKNOWN_COLOR = Color.gray;
+    //The FieldView Object
     private FieldView fieldView;
+    //The StatView object
     private StatView statView;
+    //The buttons for the frame
     private JButton oneStepButton;
     private JButton runButton;
     private JButton pauseButton;
     private JButton resetButton;
     private JButton sicknessButton;
     private JButton switchDefecationButton;
+    //The status label for the frame.
     private JLabel status;
+    //The Console Object.
     public Console console;
+    //The Legend Object
     private Legenda legenda;
+    //The background Color
 	private Color backgroundColor = new Color(200, 200, 200);
     
     // A map for storing colors for participants in the simulation
@@ -149,7 +156,11 @@ public class SimulatorView extends JFrame
         colors.put(animalClass, color);
         statView.setColor(animalClass, color);
     }
-    
+    /**
+     * Updates the status text
+     * @param running
+     * @param defecation
+     */
     public void updateStatusText(boolean running, boolean defecation) {
     	status.setText("Running: " + running + " | Defecation: " + defecation);
     }
@@ -297,11 +308,19 @@ public class SimulatorView extends JFrame
             }
         }
     }
-    
+    /**
+     * 
+     * @return Returns the console.
+     */
     public Console getConsole() {
     	return console;
     }
-    
+    /**
+     * The Green shading for the field is made.
+     * @param grassIntensity
+     * @param color
+     * @return
+     */
     public Color greenShading(int grassIntensity, Color color) {
     	Color grass = null;
     	if(grassIntensity > 0) {

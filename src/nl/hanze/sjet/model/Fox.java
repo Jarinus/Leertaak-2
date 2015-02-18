@@ -27,7 +27,7 @@ public class Fox extends Entity
     private static int RABBIT_FOOD_VALUE = 9;
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
-    
+    //The default variables for Fox.
     public static final int DEF_BREEDING_AGE = 15;
     public static final int DEF_MAX_AGE = 150;
     public static final double DEF_BREEDING_PROBABILITY = 0.12;

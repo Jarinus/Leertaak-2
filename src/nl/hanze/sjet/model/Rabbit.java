@@ -23,7 +23,7 @@ public class Rabbit extends Entity
     private static int MAX_LITTER_SIZE = 4;
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
-    
+    //The default variables of Rabbit
     public final static int DEF_BREEDING_AGE = 5;
     public final static int DEF_MAX_AGE = 20;
     public final static double DEF_BREEDING_PROBABILITY = 0.08;

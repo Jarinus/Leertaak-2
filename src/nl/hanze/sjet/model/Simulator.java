@@ -190,11 +190,17 @@ public class Simulator extends Thread
             }
         }
     }
-    
+    /**
+     * returns the field.
+     * @return Field
+     */
     public Field getField() {
     	return field;
     }
-    
+    /**
+     * 
+     * @return SimulatorView
+     */
     public SimulatorView getView() {
     	return view;
     }

@@ -17,6 +17,7 @@ public class Chicken extends Entity {
     // A shared random number generator to control egg-laying.
     private static final Random rand = Randomizer.getRandom();
     
+    //The Default variables for chicken 
     public static final int DEF_BREEDING_AGE = 5;
     public static final int DEF_MAX_AGE = 25;
     public static final double DEF_BREEDING_PROBABILITY = 0.27;
@@ -25,6 +26,12 @@ public class Chicken extends Entity {
     // The chicken's age.
     private int age;
     
+    /**
+     * Constructor Chicken
+     * @param randomAge
+     * @param field
+     * @param location
+     */
 	public Chicken(boolean randomAge, Field field, Location location) {
 		super(field, location);
 		age = 0;
@@ -33,6 +40,10 @@ public class Chicken extends Entity {
 		}
 	}
 
+	/**
+	 * act method
+	 * @param List<Actor> newChicken
+	 */
 	public void act(List<Actor> newChickens) {
 		incrementAge();
         incrementSickness();
@@ -60,6 +71,10 @@ public class Chicken extends Entity {
 		}
 	}
 	
+	/**
+	 * Method that lets the chickens lay eggs
+	 * @param newChickens
+	 */
 	private void layEggs(List<Actor> newChickens) {
         int births = 0;
         if(canLayEggs() && rand.nextDouble() <= BREEDING_PROBABILITY) {
@@ -71,10 +86,16 @@ public class Chicken extends Entity {
         }
 	}
 	
+	/**
+	 * Check if the Chicken can lay eggs 
+	 * @return Whether the age is above the breeding age.
+	 */
 	private boolean canLayEggs() {
 		return age >= BREEDING_AGE;
 	}
-	
+	/**
+	 * Increment age of Chicken.
+	 */
 	private void incrementAge() {
 		age++;
 		if(age > MAX_AGE) {

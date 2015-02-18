@@ -5,13 +5,19 @@ import java.util.List;
 
 public class Hunter extends Entity {
 	
-	
+	/**
+	 * The constructor for Hunter.
+	 * @param field
+	 * @param location
+	 */
 	public Hunter(Field field, Location location){
 		super(field, location);
 		
 	}
 	
-
+	/**
+	 * The act method for Hunter.
+	 */
 	@Override
 	public void act(List<Actor> newAnimals) {
 		if(isAlive()){
@@ -35,7 +41,11 @@ public class Hunter extends Entity {
 			}
 		}
 	}
-
+	
+	/**
+	 * The method that finds a prey for the hunter and kill it.
+	 * @return
+	 */
 	public Location findPrey(){
 		Field field = getField();
 		List<Location> adjacent = field.adjacentLocations(getLocation());

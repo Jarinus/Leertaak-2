@@ -10,6 +10,9 @@ import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class Legenda extends JPanel {
+	/**
+	 * The Constructor for the Legend Object.
+	 */
 	public Legenda() {
 		setBackground(getBackground());
 		LegendaItem li = new LegendaItem(Color.red, "Hunter");
@@ -25,7 +28,9 @@ public class Legenda extends JPanel {
 		panel.add(li5);
 		add(panel, BorderLayout.WEST);
 	}
-	
+	/**
+	 * Makes a legend item for the panel
+	 */
 	public class LegendaItem extends JPanel {
 		public LegendaItem(Color color, String name) {
 			setBackground(getBackground());
@@ -35,6 +40,9 @@ public class Legenda extends JPanel {
 		}
 	}
 	
+	/**
+	 * Makes the color for Legend item.
+	 */
 	public class ColoredRectangle extends JPanel {
 		Color color;
 		

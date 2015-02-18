@@ -21,8 +21,9 @@ public abstract class Entity implements Actor
     
     private static final Random rand = Randomizer.getRandom();
     
+    // The chance for an animal to get sick
     private static final double SICKNESS_CHANCE = 0.025;
-    
+    // The amount of steps that an animal makes until his dead
     private int stepsUntilDead;
     
     /**
@@ -64,6 +65,9 @@ public abstract class Entity implements Actor
         return alive;
     }
 
+    /**
+     * Method that cures the Sickness
+     */
     public void cure() {
     	stepsUntilDead = -1;
     	sick = false;
@@ -113,7 +117,9 @@ public abstract class Entity implements Actor
     {
         return field;
     }
-    
+    /**
+     *  Method that spreads the sickness if an animal is sick
+     */
     protected void spreadSickness() {
     	List<Location> adjacent = field.adjacentLocations(location);
     	for(Location loc : adjacent) {
@@ -124,8 +130,11 @@ public abstract class Entity implements Actor
     		}
     	}
     }
-    
-   protected void incrementSickness() {
+    /**
+     * The steps until dead decreases with this method
+     * to make the animal die faster
+     */
+    protected void incrementSickness() {
 	   if(sick) {
 		   stepsUntilDead--;
 		   if(stepsUntilDead == 0) {
@@ -133,8 +142,10 @@ public abstract class Entity implements Actor
 		   }
 	   }
    }
-   
-   public void tryToMakeSick() {
+   /**
+    * This method tries to make the animal sick
+    */
+    public void tryToMakeSick() {
 	   if(rand.nextDouble() < SICKNESS_CHANCE) {
 		   makeSick();
 	   }

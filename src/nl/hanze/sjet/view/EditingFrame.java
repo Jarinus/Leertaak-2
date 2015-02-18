@@ -12,26 +12,37 @@ import java.awt.event.ActionListener;
 
 @SuppressWarnings("serial")
 public class EditingFrame extends JFrame {
+	//The animal variables.
 	private int maxAge, breedingAge, maxLitterSize, foodValue;
 	private double breedingProb;
-	private static final int NUMBER_OF_COLUMNS = 12; 
+	//the number of columns for the JtextFields.
+	private static final int NUMBER_OF_COLUMNS = 12;
+	//The Buttons for the Frame
 	private JButton cancel;
 	private JButton defaultBut;
 	private JButton submitBut;
+	//The TextFields for the Frame.
 	private JTextField maxAgeField;
 	private JTextField breedingAgeField;
 	private JTextField breedingProbField;
 	private JTextField maxLitterSizeField;
 	private JTextField foodValueField;
+	//The Container for the frame 
 	private Container contents;
+	//The Image object for the images in the frame.
 	private ImageIcon images;
-	
+	//The animal class for the type of animal.
 	@SuppressWarnings("rawtypes")
 	private Class animal;
 	
+	//The Button and the Backgroundcolor.
 	private static final Color BACKGROUND_COLOR = new Color(200, 200, 200);
 	private static final Color BUTTON_COLOR = new Color(220, 220, 220);
 	
+	/**
+	 * Makes the Editing frame for the type of animal.
+	 * @param c
+	 */
 	@SuppressWarnings("rawtypes")
 	public EditingFrame(Class c) {
 		animal = c;
@@ -121,6 +132,9 @@ public class EditingFrame extends JFrame {
 		pack();
 	}
 	
+	/**
+	 * gets the variables from the type of animal selected.
+	 */
 	public void getValues(){
 		if(animal.getName() == "nl.hanze.sjet.model.Fox"){
 			//Fox fox = (Fox) animal.cast(Fox.class);
@@ -145,7 +159,9 @@ public class EditingFrame extends JFrame {
 			foodValue = 0;
 		}
 	}
-	
+	/**
+	 * sets the image to the frame of the tpe of animal selected.
+	 */
 	public void setImage(){
 		switch(animal.getName().substring(20)){
 		case "Rabbit": 
@@ -159,7 +175,10 @@ public class EditingFrame extends JFrame {
 			break;
 		}
 	}
-	
+	/**
+	 * sets the values of the animals with the new variables.
+	 * throws a NumberFormatException if a false char is typed.
+	 */
 	public void setValues(){
 		try{
 		switch(animal.getName().substring(20)){
@@ -191,7 +210,9 @@ public class EditingFrame extends JFrame {
 		dispose();
 		
 		}
-	
+	/**
+	 * sets the default variables for the type of animal selected. 
+	 */
 	public void setDefaultValues(){
 		switch(animal.getName().substring(20)){
 		case "Rabbit":
@@ -215,7 +236,9 @@ public class EditingFrame extends JFrame {
 		}
 		
 	}
-	
+	/**
+	 * sets the Action Listeners for the buttons in the frame.
+	 */
 	public void setButtons(){
 		
 		cancel.addActionListener(new ActionListener(){

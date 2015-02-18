@@ -28,7 +28,10 @@ public class FieldStats
         counters = new HashMap<Class, Counter>();
         countsValid = true;
     }
-    
+    /**
+     *
+     * @return Returns the population details for the circle diagram
+     */
     @SuppressWarnings("rawtypes")
 	public HashMap<Class, Integer> getPopulationDetails() {
     	HashMap<Class, Integer> populationData = new HashMap<Class, Integer>();
